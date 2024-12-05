@@ -1,0 +1,2121 @@
+<HTML>
+<HEAD>
+<TITLE>OpenWebRX+ Home Page</TITLE>
+<META NAME="VIEWPORT" CONTENT="width=device-width, initial-scale=1">
+
+<!-- Google tag (gtag.js) -->
+<SCRIPT ASYNC SRC="https://www.googletagmanager.com/gtag/js?id=G-WZ3N8DWMCY"></SCRIPT>
+<SCRIPT>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WZ3N8DWMCY');
+</SCRIPT>
+
+<STYLE>
+  :root
+  {
+    /* light theme */
+    --bg-body: #FFF8F0;
+    --bg-btn: #D0E0D0;
+    --bg-admin: #FFF0F0;
+    --border-admin: #FF8080;
+    --fg-text: #000000;
+    --fg-link: #000080;
+    --fg-heading: #C04040;
+    --fg-pre: #000040;
+    --fg-code: #000060;
+  }
+
+  @media (prefers-color-scheme: dark)
+  {
+    :root
+    {
+      /* dark theme */
+      --bg-body: #262840;
+      --bg-btn: #3E6294;
+      --bg-admin: #2d3a61;
+      --border-admin: #3E6294;
+      --fg-text: #FFFFDF;
+      --fg-link: #7ad3fc;
+      --fg-heading: #BAF0B4;
+      --fg-pre: #A1D99E;
+      --fg-code: #ffff9f;
+    }
+    img
+    {
+      filter: brightness(.8) contrast(1.2);
+    }
+  }
+
+  BODY
+  {
+    font-family:       Calibri,Arial,Helvetica,Geneva;
+    background-color:  var(--bg-body);
+    color:             var(--fg-text);
+    margin-left:       5%;
+    margin-right:      5%;
+  }
+
+  A:LINK      {color: var(--fg-link);}
+  A:VISITED   {color: var(--fg-link);}
+  A:ACTIVE    {color: var(--fg-link);}
+  H1,H2,H3,H4 {color: var(--fg-heading);}
+  PRE         {color: var(--fg-pre); margin-left: 5%;}
+  P,TD        {text-align: justify; line-height: 1.5;}
+  LI,TH       {line-height: 1.5;}
+
+  .Section
+  {
+    margin-bottom: 0px;
+  }
+
+  .Button
+  {
+    border:           1px solid currentColor;
+    text-justify:     none;
+    text-align:       center;
+    font-weight:      bold;
+    padding-left:     5px;
+    padding-right:    5px;
+    white-space:      nowrap;
+    background-color: var(--bg-btn);
+    color:            var(--fg-text);
+  }
+
+  .Code
+  {
+    text-justify:     none;
+    text-align:       center;
+    font-family:      monospace;
+    color:            var(--fg-code);
+  }
+
+  .Admin
+  {
+    background-color: var(--bg-admin);
+    border:           3px dotted var(--border-admin);
+    padding:          10px;
+  }
+
+  @media print
+  {
+    .NoPrint { visibility: hidden; }
+  }
+</STYLE>
+
+</HEAD>
+</BODY>
+
+<CENTER>
+<H1>OpenWebRX+</H1>
+<H2>A Better Online SDR Radio</H2>
+<A HREF="#Install">Installation</A>&nbsp;|&nbsp;
+<A HREF="#Docs">Documentation</A>&nbsp;|&nbsp;
+<A HREF="#FAQ">FAQ</A>
+</CENTER>
+
+<P>
+This document is about
+<A HREF="https://luarvique.github.io/ppa/">OpenWebRX+</A>,
+an improved and extended version of the original
+<A HREF="https://www.openwebrx.de/">OpenWebRX</A>
+web-based SDR radio. Since the original project is missing such 
+necessary features as noise reduction, tuning steps, and support for 
+many digital modes, I have decided to fork it and add the features
+considered necessary, interesting, or simply widely requested by the 
+public.
+</P>
+<P>
+Please note that the following document covers <B>both</B> the original 
+OpenWebRX and the extended OpenWebRX+. Features specific to OpenWebRX+
+are marked so.
+</P>
+
+<CENTER><IMG WIDTH="50%" SRC="gfx/Receiver.png"></CENTER>
+
+<A NAME="Install"><H2>How to Get OpenWebRX+</H2></A>
+<UL>
+
+<LI><P><A HREF="https://luarvique.github.io/ppa/">Binary packages</A>
+for the latest Ubuntu and Debian Linux can be installed from
+<A HREF="https://luarvique.github.io/ppa/">this package repository</A>.
+Please, carefully read
+<A HREF="https://luarvique.github.io/ppa/">the instructions</A>
+there before trying to install. The correct installation should 
+completely and cleanly replace the original OpenWebRX packages, if
+they are installed on your system.
+</P>
+
+<LI><P><A HREF="https://github.com/luarvique/">The source code</A>
+is available from my Github account. Most development happens in the
+<I>"master"</I> branches of the relevant repos, such as <I>csdr</I>, 
+<I>pycsdr</I>, <I>owrx_connector</I>, and <I>openwebrx</I>. Some 
+packages are reused from the <I>"master"</I> branches of the original 
+OpenWebRX repos without changes.</P>
+
+<LI><P><A HREF="https://t.me/openwebrx">News and announcements</A>
+are posted to a Telegram channel.
+<A HREF="https://t.me/openwebrx_chat">The support and discussion</A>
+occurs in a Telegram chat.
+</P>
+
+</UL>
+
+<A NAME="TOC"><H2>Table of Contents</H2></A>
+<UL>
+<LI><A HREF="#Docs"><B>How to Use OpenWebRX+</B></A>
+<UL>
+  <LI><A HREF="#HOW-DISPLAY">Main Display</A>
+  <LI><A HREF="#HOW-CONTROLS">Main Controls</A>
+  <LI><A HREF="#HOW-MOUSE">Using Mouse and Touch</A>
+  <LI><A HREF="#HOW-KEYBOARD">Using Keyboard</A>
+  <LI><A HREF="#HOW-SCANNER">Frequency Scanner</A>
+  <LI><A HREF="#HOW-CHAT">Built-in Chat</A>
+</UL>
+<LI><A HREF="#HOW-MAP"><B>Map Display</B></A>
+<UL>
+  <LI><A HREF="#HOW-MAP-LOCATORS">Locators</A>
+  <LI><A HREF="#HOW-MAP-MARKERS">Markers</A>
+  <LI><A HREF="#HOW-MAP-RECEIVERS">Other Online Receivers</A>
+  <LI><A HREF="#HOW-MAP-STATIONS">Shortwave Stations</A>
+  <LI><A HREF="#HOW-MAP-REPEATERS">Repeaters</A>
+</UL>
+<LI><A HREF="#UsageScenarios"><B>Usage Scenarios</B></A>
+<UL>
+  <LI><A HREF="#HOW-FM">Listening to FM Broadcasts</A>
+  <LI><A HREF="#HOW-HDR">HDRadio: Digital FM in America</A>
+  <LI><A HREF="#HOW-DAB">DAB: Digital FM in Europe</A>
+  <LI><A HREF="#HOW-AM">Listening to AM Broadcasts</A>
+  <LI><A HREF="#HOW-SWL">Shortwave Listening (SWL)</A>
+  <LI><A HREF="#HOW-CB">Listening to Citizens Band (CB)</A>
+  <LI><A HREF="#HOW-HAM">Listening to HAM Bands</A>
+  <LI><A HREF="#HOW-CW">Listening to Morse Code (CW)</A>
+  <LI><A HREF="#HOW-RTTY">Receiving Teletype (RTTY)</A>
+  <LI><A HREF="#HOW-SSTV">Receiving SSTV Images</A>
+  <LI><A HREF="#HOW-FAX">Receiving Fax Images</A>
+  <LI><A HREF="#HOW-PAGER">Monitoring Pager Messages (POCSAG)</A>
+  <LI><A HREF="#HOW-ISM">Monitoring Wireless Devices (ISM)</A>
+  <LI><A HREF="#HOW-APRS">Tracking Packet Radio (APRS)</A>
+  <LI><A HREF="#HOW-AIS">Tracking Ships (AIS)</A>
+  <LI><A HREF="#HOW-ADSB">Tracking Airplanes (ADS-B)</A>
+</UL>
+<LI><A HREF="#AdminFeatures"><B>Administrator Features</B></A>
+<UL>
+  <LI><A HREF="#HOW-BACKGROUND">Background Decoding</A>
+  <LI><A HREF="#HOW-SCHEDULED">Scheduled Decoding</A>
+  <LI><A HREF="#HOW-REPORTING">Reporting Decoded Data</A>
+  <LI><A HREF="#HOW-CONFIG-MAP">Configuring Map</A>
+  <LI><A HREF="#HOW-CONFIG-SHORTWAVE">Configuring Shortwave Schedules</A>
+  <LI><A HREF="#HOW-CONFIG-REPEATERS">Configuring Repeaters</A>
+  <LI><A HREF="#HOW-LIMITS">Limiting Receiver Use</A>
+  <LI><A HREF="#HOW-USERS">Monitoring Receiver Use</A>
+  <LI><A HREF="#HOW-MQTT">Advanced MQTT Reporting</A>
+  <LI><A HREF="#HOW-PLUGINS">JavaScript Plugins</A>
+</UL>
+<LI><A HREF="#FAQ"><B>Frequently Asked Questions</B></A>
+</UL>
+
+<A NAME="Docs"><H2>How to Use OpenWebRX+</H2></A>
+<P>
+Since OpenWebRX is a server designed to share SDR resources among 
+multiple users, its operation is somewhat different from regular SDR 
+applications. This section explains the basics of OpenWebRX usage, 
+including the main display and controls.
+</P>
+
+<A NAME="HOW-DISPLAY"><H3>Main Display</H3></A>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Display.png"></CENTER>
+<OL>
+
+<LI><P>
+The <B>scrolling waterfall</B> shows the band activity in your currently 
+selected SDR profile. The waterfall colors represent signal levels at 
+each frequency, with brighter colors corresponding to stronger signals. 
+Thus, a strong, healthy, ongoing signal will look like a bright vertical 
+stripe at the waterfall. Different signal modulations produce 
+differently shaped stripes. See
+<A HREF="https://www.sigidwiki.com/wiki/Signal_Identification_Guide">Signal Identification Guide</A>
+for examples.
+</P>
+
+<LI><P>
+The <B>frequency scale</B> shows the actual frequencies, as well as the 
+currently tuned frequency, represented with the yellow caret. This is 
+the frequency you are currently <B>listening</B> to. The numbers at the 
+caret sides stand for the current filter bounds. You can change these 
+bounds by dragging the caret sides.
+</P>
+
+<LI><P>
+The <B>spectrum display</B>, found in OpenWebRX+, shows the 
+<B>current</B> signal level at each frequency, as opposed to the 
+historic level shown by the waterfall. The spectrum display has a little 
+bit of latency, to make sure that short signals still leave their mark 
+on the spectrum.
+</P>
+
+<LI><P>
+The <B>step-tuning buttons</B> let you tune up and down the frequency 
+scale by left-clicking them. With the "side-stepping" feature enabled, 
+you can also right-click these buttons to step outside your currently 
+selected profile.
+</P>
+
+<LI><P>
+The <B>bookmarks</B> let you quickly tune to previously bookmarked 
+frequencies. There are three types of bookmarks in OpenWebRX:
+<UL>
+<LI>
+<B>Green</B> bookmarks represent frequencies defined by the band plan. 
+These bookmarks are not editable, other than by modifying the band plan.
+<LI>
+<B>Yellow</B> bookmarks are saved on the OpenWebRX server and can be 
+edited by the administrator.
+<LI>
+<B>Blue</B> bookmarks are saved in your web browser and can thus be 
+created and edited by you.
+</UL>
+</P>
+
+<LI><P>
+The <B>receiver information</B> is shown by clicking the icon at the 
+top-left page corner. This information is filled in by the 
+administrator and includes receiver's name, location and the hardware 
+description.
+</P>
+
+<LI><P>
+The <SPAN CLASS="Button">Status</SPAN> button toggles the <B>status 
+bar</B> shown at the bottom of the receiver web page.
+</P>
+
+<LI><P>
+The <SPAN CLASS="Button">Chat</SPAN> button toggles the <B>log and chat 
+panel</B> shown at the bottom of the receiver web page. If the 
+administrator has chosen to disable chat functionality, this button will 
+turn into <SPAN CLASS="Button">Log</SPAN>, opening the non-interactive 
+log panel instead.
+</P>
+
+<LI><P>
+The <SPAN CLASS="Button">Receiver</SPAN> button toggles the <B>main 
+control panel</B> for the receiver.
+</P>
+
+<LI><P>
+The <SPAN CLASS="Button">Map</SPAN> button opens the <B>map page</B> 
+showing radio stations, repeaters, other online receivers, and position 
+reports from various sources, such as airplanes, ships, and HAM 
+operators.
+</P>
+
+<LI><P>
+The <SPAN CLASS="Button">Files</SPAN> button opens the <B>file browser 
+page</B> with the most recently received SSTV images, faxes, and other 
+data.
+</P>
+
+<LI><P>
+The <SPAN CLASS="Button">Settings</SPAN> button opens the password 
+protected <B>settings page</B> for configuring OpenWebRX. Normally, only 
+server adminstrator needs to access the server settings.
+</P>
+
+<LI><P>
+The <B>status bar</B> at the bottom of receiver's page displays the 
+current status of the server and its connection to your web browser. 
+Various panels show network throughput, server CPU load and temperature, 
+audio sampling rate, and so on.
+</P>
+
+</OL>
+
+<A NAME="HOW-CONTROLS"><H3>Main Controls</H3></A>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Controls.png"></CENTER>
+<OL>
+
+<LI><P>
+This is the <B>currently tuned frequency</B> of the receiver. You can 
+change it by clicking on the waterfall, the bookmarks, or by entering it 
+directly into this field. <B>The frequency can only be changed within 
+the current profile bounds.</B>
+</P>
+
+<LI><P>
+Click this button to <B>bookmark</B> your current frequency. The new 
+bookmark will be stored locally in your browser and appear as a blue 
+marker above the waterfall.
+</P>
+
+<LI><P>
+This is the <B>current profile</B>, including the SDR device name 
+("RSPdx"). OpenWebRX supports multiple SDR devices with multiple 
+profiles for each device. When selecting a new profile, remember that it 
+will change for <B>all users of the same SDR device</B>, so be 
+considerate when you see somebody else using the server.
+</P>
+
+<LI><P>
+This is the list of all available <B>audio modulation modes</B>, with 
+the current mode highlighted in yellow. Select a new mode by clicking 
+corresponding button, but keep in mind that not all modes can be 
+applicable. It helps to know what each modulation looks like on the 
+waterfall. Consult the
+<A HREF="https://www.sigidwiki.com/wiki/Signal_Identification_Guide">Signal Identification Guide</A>
+if unsure.
+</P>
+
+<LI><P>
+This button will light up if a <B>digital decoder is active</B>. Click 
+it to toggle digital decoding off.
+</P>
+
+<LI><P>
+This is the <B>current digital decoding mode</B>, if active. You can 
+select a new digital decoding mode from the list here, but keep in mind 
+that not all modes can be applicable. It helps to know what each digital 
+mode looks like on the waterfall. Consult the
+<A HREF="https://www.sigidwiki.com/wiki/Signal_Identification_Guide">Signal Identification Guide</A>
+if unsure.
+</P>
+
+<LI><P>
+Use this slider to control <B>audio volume</B>. Click the speaker button 
+to mute or unmute audio.
+</P>
+
+<LI><P>
+Use this slider to set the <B>squelch threshold</B>. Left-click the
+<SPAN CLASS="Button">SQ</SPAN> button to toggle squelch on and off. When 
+the squelch is on, any audio that is below the selected squelch 
+threshold will be muted.
+</P>
+<P>
+Right-clicking the <SPAN CLASS="Button">SQ</SPAN> button toggles the 
+frequency scanner, making <SPAN CLASS="Button">SQ</SPAN> button glow 
+green. The scanner will automatically check all bookmarked frequencies 
+for signals that are above the squelch threshold and tune to them. Once 
+a signal disappears, the scanner will continue checking bookmarks for 
+more signals.
+</P>
+
+<LI><P>
+Use this slider to set the <B>noise reduction threshold</B>. Click the
+<SPAN CLASS="Button">NR</SPAN> button to toggle noise reduction on and 
+off. The noise reduction algorithm works on the spectral subtraction 
+principle. It will remove any frequencies that are below the selected 
+threshold from the audio, reducing the background noise. Remember that 
+excessive use of noise reduction may distort or muffle the useful sounds 
+though.
+</P>
+
+<LI><P>
+The <B>tuning step</B> selector lets you choose the frequency tuning 
+granularity. For example, if 1kHz step is selected, the frequency will 
+always tune in 1kHz increments. Different profiles may assume different 
+default tuning steps, such as 5kHz for shortwave broadcasters or 500Hz 
+for HAM operators using SSB modulation. Click the adjacent button to
+reset tuning step to its default value for the current profile.
+</P>
+
+<LI><P>
+This slider sets the signal level for the <B>"hottest" waterfall 
+color</B> (usually red). Set it higher when looking at strong signals, 
+lower when looking at weak signals.
+</P>
+<P>
+Left-click the adjacent button to make a one-time automatic adjustment 
+of the waterfall colors. Right-click the button to toggle continuous 
+automatic adjustment of the waterfall colors.
+</P>
+
+<LI><P>
+This slider sets the signal level for the <B>"coldest" waterfall 
+color</B> (usually blue). Set it higher when looking at strong signals, 
+lower when looking at weak signals.
+</P>
+<P>
+Left-click the adjacent button to reset waterfall colors to their 
+default values.
+</P>
+
+<LI><P>
+This drop-down list lets you choose one of the <B>user interface 
+themes</B>. Clicking the adjacent button resets user interface to the 
+default theme.
+</P>
+
+<LI><P>
+This slider controls the <B>user interface opacity</B>, making panels 
+more or less visible on top of the waterfall. Click the adjacent button 
+to reset user interface to the full opacity.
+</P>
+
+<LI><P>
+The four zoom buttons let you <B>zoom waterfall</B> in and out. Zooming 
+always happens around the currently tuned frequency, keeping it on 
+display.
+</P>
+
+<LI><P>
+The clock at the bottom of the main panel shows the <B>current Universal 
+Coordinated Time (UTC)</B>. Most of the OpenWebRX user interface 
+operates in UTC, so this clock is shown for easier reference.
+</P>
+
+<LI><P>
+Click the <SPAN CLASS="Button">REC</SPAN> button to start <B>recording 
+audio</B> at any moment. The button will glow red, indicating ongoing 
+recording. Once you click the <SPAN CLASS="Button">REC</SPAN> button 
+again, it will stop recording and save the recorded audio to a file.
+</P>
+
+<LI><P>
+The bar at the bottom indicates the <B>current signal level</B>. It will 
+change color based on what OpenWebRX considers signal overload. There is 
+also a numeric readout, showing the exact value in decibels.
+</P>
+
+<LI><P>
+This button toggles the <B>live spectrum display</B> above the 
+waterfall. When using it, keep in mind that the spectrum display may 
+make your web browser use a lot of processor power.
+</P>
+
+</OL>
+
+<A NAME="HOW-MOUSE"><H3>Using Mouse and Touch</H3></A>
+<P>
+OpenWebRX requires the use of the right mouse button. <B>On devices with 
+a single mouse button</B> (such as Apple computers), the right mouse 
+button is simulated by holding the <SPAN CLASS="Button">CONTROL</SPAN> 
+key with a mouse click.
+</P>
+<P>
+<B>On touch-based devices</B>, such as smartphones and tablets, the 
+right mouse button is simulated by holding the spot with your finger for 
+a little bit longer than unusal.
+</P>
+<P>
+The <B>mouse scroll wheel</B> operates in two modes: <B>normal</B> and 
+<B>modified</B> (with the right mouse button, the wheel button, or the 
+<SPAN CLASS="Button">SHIFT</SPAN> key pressed):
+</P>
+<UL>
+<LI><P><B>In the waterfall:</B><BR>
+Normal wheel spin tunes frequency, modified wheel spin changes zoom 
+factor. This behavior can be reversed with a checkbox found in the 
+receiver panel.
+</P>
+<LI><P><B>In the frequency scale:</B><BR>
+Both normal and modified wheel spins tune frequency.
+</P>
+<LI><P><B>At the bandpass filter (yellow caret):</B><BR>
+Normal wheel spin shifts filter left or right, modified wheel spin makes 
+filter wider or narrower.
+</P>
+</UL>
+
+<A NAME="HOW-KEYBOARD"><H3>Using Keyboard</H3></A>
+<P>
+OpenWebRX+ includes keyboard shortcuts for accessing the most common 
+interface functions. To see the complete list of shortcuts, press the
+<SPAN CLASS="Button">?</SPAN> key, which opens the following panel:
+</P>
+
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Keys.png"></CENTER>
+
+<A NAME="HOW-SCANNER"><H3>Frequency Scanner</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Radio_scanner"><I>What is a scanner?</I></A>
+</DIV>
+<P>
+The OpenWebRX+ includes a frequency scanner that can monitor currently 
+shown bookmarks for activity. When the scanner detects a signal at one 
+of the bookmarked frequencies, it will tune to that frequency. Once that 
+frequency goes quiet, the scanner goes back to monitoring all shown 
+bookmarks. In order to use the scanner, do the following:
+</P>
+<UL>
+<LI>
+Choose a profile with some bookmarked frequencies you are interested in.
+<LI><P>
+Tune to an empty part of the waterfall and left-click the
+<SPAN CLASS="Button">SQ</SPAN> button in order to set the squelch level.
+</P>
+<LI><P>
+Right-click the <SPAN CLASS="Button">SQ</SPAN> button to start scanning.
+The <SPAN CLASS="Button">SQ</SPAN> button will glow green indicating 
+that the scanner is on. Mobile device users can simply hold the button
+down for a longer time to simulate the right-click.
+</P>
+<LI><P>
+Once done, right-click the <SPAN CLASS="Button">SQ</SPAN> button again
+to disable the scanner.
+</P>
+</UL>
+<P>
+Please, keep in mind that <B>the scanner will not work on digital voice 
+channels</B>, since they tend to keep signal on even if there is no 
+actual traffic on a channel.
+</P>
+
+<A NAME="HOW-CHAT"><H3>Built-In Chat</H3></A>
+<P>
+OpenWebRX+ includes a simple chat that lets connected users talk to each 
+other. The chat panel opens by pressing the <SPAN CLASS="Button">Chat</SPAN>
+button at the top of the receiver web page.
+</P>
+<P>
+When you send your first chat message by entering it at the bottom of 
+the chat window, OpenWebRX+ will assign you a random nickname, shown to 
+other users next to your messages. To <B>change your name</B>, enter 
+your new nickname at the left of the message input.
+</P>
+<P>
+The server administrator can disable chat functionality via the 
+settings. When disabled, the <SPAN CLASS="Button">Chat</SPAN> button 
+turns into the <SPAN CLASS="Button">Log</SPAN> button, with the log 
+panel not accepting any input from users.
+</P>
+
+<A NAME="HOW-MAP"><H2>Map Display</H2></A>
+<P>
+OpenWebRX has a map display showing the received data, such as ship
+and airplane locations, APRS reports, and digital HAM messages. You can 
+reveal the map by clicking the <SPAN CLASS="Button">Map</SPAN> button
+at the top of the browser window.
+</P>
+<P>
+OpenWebRX+ offers <B>two map types: <I>Google Maps</I> and a collection 
+of free maps</B> based on the <I>Leaflet</I> library. The very popular 
+<I>OpenStreetMap</I> is a part of that collection. You can switch 
+between map types by clicking the <SPAN CLASS="Button">Map</SPAN> button 
+at the top of the browser window.
+</P>
+
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map.png"></CENTER>
+
+<P>
+The above image shows OpenWebRX+ <I>Google Maps</I> interface. Aside 
+from the regular navigation controls, this interface presents a toolbox 
+at the left side with toggle switches for different kinds of data. New 
+switches will appear as OpenWebRX receives new kinds of data, such as 
+ship or aircraft positions for example.
+</P>
+<P>
+The large red marker indicates the receiver location. Colored "locator" 
+squares represent origins of digital HAM transmissions, such as FT8, 
+FT4, or WSPR reports, with each elemental color representing either 
+frequency (when <I>"By Band"</I> selected) or mode (when <I>"By 
+Mode"</I> selected). Individual colors can be clicked on and off in
+the toolbox.
+</P>
+
+<A NAME="HOW-MAP-LOCATORS"><H3>Locators</H3></A>
+<P>
+By clicking on a colored locator square, you can see all the reports 
+received from its location, as shown below. The information bubble also
+indicates locator's name
+(using <A HREF="https://en.wikipedia.org/wiki/Maidenhead_Locator_System"><I>Maidenhead System</I></A>),
+its distance from the receiver, and the time last report has been 
+received from this locator.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-Locator.png"></CENTER>
+
+<A NAME="HOW-MAP-MARKERS"><H3>Markers</H3></A>
+<P>
+By clicking on a marker, you can see marker-specific information, such 
+as APRS weather report shown below. The information bubble also 
+indicates marker's name (e.g. HAM callsign), its distance from the 
+receiver, and the last time information has been received about this 
+marker. When relevant, OpenWebRX+ will also indicate the path infomation 
+travelled, as seen at the bottom of the information bubble.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-Marker.png"></CENTER>
+
+<A NAME="HOW-MAP-RECEIVERS"><H3>Other Online Receivers</H3></A>
+<P>
+OpenWebRX+ will periodically query
+<A HREF="https://www.receiverbook.de/">ReceiverBook</A>,
+<A HREF="http://kiwisdr.com/">KiwiSDR</A>, and
+<A HREF="http://websdr.org/">WebSDR.org</A>
+sites for other online SDR receivers. These receivers are indicated on 
+the map with <B>&tridot;</B> markers, as shown below. Red markers stand 
+for KiwiSDR receivers, green markers correspond to OpenWebRX receivers, 
+while blue markers designate the original WebSDR receivers. Clicking on 
+a marker brings up the general information about the receiver, along 
+with a link to receiver's web page.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-Receivers.png"></CENTER>
+
+<A NAME="HOW-MAP-STATIONS"><H3>Shortwave Stations</H3></A>
+<P>
+Once a day, OpenWebRX+ queries the
+<A HREF="http://www.eibispace.de/">EiBi</A>
+database for shortwave broadcast schedules. Currently broadcasting 
+stations are indicated with <B>&#9041;</B> markers on the map, as shown 
+above. Clicking on a station brings up its schedule, with frequencies 
+and broadcast times. OpenWebRX+ will tune to clicked frequencies, as 
+long as they are <B>within the profile</B> you are listening to.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-Stations.png"></CENTER>
+
+<A NAME="HOW-MAP-REPEATERS"><H3>Repeaters</H3></A>
+<P>
+Once a day, OpenWebRX+ queries
+<A HREF="https://www.repeaterbook.com/">RepeaterBook.com</A>
+for the list of repeaters closest to the receiver location. These 
+repeaters are indicated with <B>&bowtie;</B> markers on the map, as 
+shown below.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-Repeaters.png"></CENTER>
+
+<A NAME="UsageScenarios"><H2>Usage Scenarios</H2></A>
+<P>
+In this section, we will go over some common things you can use 
+OpenWebRX for, such as listening to broadcast radio, HAM operators, and 
+tracking ships and aircraft.
+</P>
+
+<A NAME="HOW-FM"><H3 CLASS="Section">Listening to FM Broadcasts</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/FM_broadcasting"><I>What is FM broadcasting?</I></A>
+</DIV>
+<P>
+The FM broadcasts generally occur between 76MHz and 108MHz. Each 
+broadcaster is allocated 100kHz of spectrum, unless they are in the US 
+where 200kHz is allocated to each station. FM broadcasts may reach 
+distances up to 100km, limited by the horizon line. If you live in the 
+US, the closest FM stations can be found via the
+<A HREF="https://radio-locator.com/">Radio Locator</A>
+website.
+</P>
+<P>
+In order to listen to FM broadcasts in OpenWebRX, select a profile 
+containing above frequencies, press the <SPAN CLASS="Button">WFM</SPAN> 
+button at the receiver panel, and tune to one of the signals. Please 
+note that OpenWebRX only plays <B>mono sound</B>, so there will not be 
+any stereo.
+</P>
+<P>
+OpenWebRX also allows to <B>decode textual RDS information</B> sent 
+within FM broadcasts, such as station name, program name and type, and 
+so on. If enabled, this information shows up in a box at the bottom of
+the waterfall.
+</P>
+<P CLASS="Admin">
+Since <B>RDS data is encoded slightly differently in the US</B>, 
+compared to Europe, you may want to go to <I>"Settings | Demodulation 
+and Decoding | Miscellaneous"</I> and change the <I>"Decode USA-specific 
+RDS information from WFM broadcasts"</I> option to reflect your receiver 
+location.
+</P>
+
+<A NAME="HOW-HDR"><H3 CLASS="Section">HDRadio: Digital FM in America</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/HD_Radio"><I>What is HDRadio?</I></A>
+</DIV>
+<P>
+Many American FM broadcasters are now using a form of digital radio 
+known as <I>HDRadio</I> or <I>NRSC5</I>. The HDRadio signal, showing up 
+as two thick "columns" around the traditional WFM signal, adds up to 
+four digital channels to each analog FM broadcast.
+</P>
+<P>
+<B>HDRadio decoding requires a lot of CPU power and will not work on 
+slower computers, or wide profiles.</B> In order to listen to the 
+HDRadio in OpenWebRX+, tune to the "enhanced" WFM signal and click on 
+the <SPAN CLASS="Button">HDR</SPAN> button. Once the decoder syncs with 
+the signal, the station information and the channel selector should show 
+up at the bottom of the waterfall.
+</P>
+
+<A NAME="HOW-HDR"><H3 CLASS="Section">DAB: Digital FM in Europe</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Digital_Audio_Broadcasting"><I>What is DAB?</I></A>
+</DIV>
+<P>
+Where American broadcasters use HDRadio, European FM broadcasters use a 
+different digital standard known as <I>DAB</I>. Each DAB multiplex 
+signal essentially occupies a single old analog TV channel and transmits 
+many individual radio station signals at once.
+</P>
+<P>
+<B>DAB decoding requires a lot of CPU power and will not work on slower 
+computers, or wide profiles.</B> In order to listen to DAB in OpenWebRX, 
+tune to the DAB signal and click on the <SPAN CLASS="Button">DAB</SPAN> 
+button. Once the decoder syncs with the signal, the station information 
+and the station selector should show up at the bottom of the waterfall.
+</P>
+
+<A NAME="HOW-AM"><H3 CLASS="Section">Listening to AM Broadcasts</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/AM_broadcasting"><I>What is AM broadcasting?</I></A>
+</DIV>
+<P>
+By "AM", people generally mean radio broadcasts occurring in the LW and 
+MW bands, between 100kHz and 1800kHz. Each station is allocated 10kHz of 
+the spectrum. During the day, AM broadcasts may reach up to 200km, but 
+this distance greatly increases during the night. If you live in the US, 
+the closest AM stations can be found via the
+<A HREF="https://radio-locator.com/">Radio Locator</A>
+website.
+</P>
+<P>
+In order to listen to AM broadcasts in OpenWebRX, select a profile 
+containing above frequencies, press the <SPAN CLASS="Button">AM</SPAN> 
+button at the receiver panel, and tune to one of the signals. If the 
+signal you are interested in is obscured by adjacent signals, try using 
+the <SPAN CLASS="Button">SAM</SPAN> button instead. It has the same 
+effect as <SPAN CLASS="Button">AM</SPAN>, but uses a different algorithm 
+more resistant to interference.
+</P>
+
+<A NAME="HOW-SWL"><H3 CLASS="Section">Shortwave Listening (SWL)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Shortwave_listening"><I>What is SWL?</I></A>
+</DIV>
+<P>
+"Shortwave" describes
+<A HREF="https://en.wikipedia.org/wiki/Shortwave_bands">multiple bands</A>
+between 1800kHz and 30MHz used by radio broadcasters, amateurs, and 
+professionals alike. The SWL activity generally refers to shortwave 
+broadcast listening though, with brodcasters easily reaching across 
+thousands of kilometers using AM modulation. Global shortwave broadcast 
+schedules can be found at the
+<A HREF="https://short-wave.info/">Shortwave Info</A> and
+<A HREF="https://shortwaveschedule.com/">Shortwave Schedule</A>
+websites.
+</P>
+<P>
+In order to listen to shortwave broadcasts in OpenWebRX, select a 
+profile containing the shortwave band you are interested in, press the 
+<SPAN CLASS="Button">AM</SPAN> button at the receiver panel, and tune to 
+one of the signals. If the signal is obscured by adjacent signals, try 
+using the <SPAN CLASS="Button">SAM</SPAN> button instead. It has the 
+same effect as <SPAN CLASS="Button">AM</SPAN>, but uses a different 
+algorithm more resistant to interference.
+</P>
+<P>
+Some shortwave broadcasters have started to use
+<A HREF="https://en.wikipedia.org/wiki/Digital_Radio_Mondiale">Digital Radio Mondiale (DRM)</A>
+for their broadcasts. If you see a clearly digital signal at a shortwave 
+band, try tuning to it, pressing the <SPAN CLASS="Button">DRM</SPAN> 
+button, and waiting 30-40 seconds for the decoder to sync. DRM 
+broadcasts are somewhat rare at the moment though.
+</P>
+<P>
+Once a day, OpenWebRX+ queries the
+<A HREF="http://www.eibispace.de/">EiBi</A>
+database for shortwave broadcast schedules. Currently broadcasting 
+stations are indicated with <B>&#9041;</B> markers on the map and
+with bookmarks in the main receiver window. 
+</P>
+
+<A NAME="HOW-CB"><H3 CLASS="Section">Listening to Citizens Band (CB)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Citizens_band_radio"><I>What is CB?</I></A>
+</DIV>
+<P>
+Citizens Band (CB) generally covers a swath of spectrum between 27MHz 
+and 28MHz, where individuals can communicate without a license, as long 
+as they adhere to a few rules. The exact boundaries of the CB band 
+change from country to country. It sits adjacent to the 10m amateur 
+band.
+</P>
+<P>
+In most places, the CB band is divided into 40 channels (CB1 to CB40), 
+spaced at 10kHz. OpenWebRX+ provides default bookmarks for these 
+channels. While all analog voice modes (AM, FM, LSB, USB) were 
+originally allowed on CB, the US users generally prefer AM at lower 
+channels and LSB at upper channels. In the UK, where AM has been
+banned until recently, FM is the most common CB mode.
+</P>
+<P>
+In order to listen to CB in OpenWebRX, select a profile containing the 
+CB band and tune to one of the signals by clicking on the waterfall or 
+a bookmark. You may then have to press
+<SPAN CLASS="Button">AM</SPAN>, <SPAN CLASS="Button">FM</SPAN>,
+<SPAN CLASS="Button">LSB</SPAN>, or <SPAN CLASS="Button">USB</SPAN>
+button at the receiver panel, depending on the modulation type used by 
+the transmission you are listening to.
+</P>
+
+<A NAME="HOW-HAM"><H3 CLASS="Section">Listening to HAM Bands</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Amateur_radio_operator"><I>What is HAM?</I></A>
+</DIV>
+<P>
+The amateur radio operators (HAMs) are found at 160m, 80m, 40m, 20m, and 
+a few
+<A HREF="https://en.wikipedia.org/wiki/Shortwave_bands">other shortwave bands</A>.
+All kinds of activities happen at these bands, from Morse code, to 
+voice, to digital transmissions.
+</P>
+<P>
+Each amateur band is usually broken into three parts:
+</P>
+<UL>
+<LI>The bottom part is used for the Morse code transmissions, also 
+known as "telegraph" or CW.
+<LI><P>
+Right above the Morse code, there is a bunch of digital transmissions in 
+different formats, such as RTTY, FT8, FT4, and so on. A lot of these 
+formats operate at fixed frequencies, which are included into OpenWebRX 
+band plan and thus show up as green bookmarks.
+</P>
+<LI><P>
+The rest of a band is allocated for the voice (or "telephone") 
+transmissions using LSB or USB modulation, with some AM sprinkled in. 
+The LSB modulation is used below 20m, while USB is used at 20m and 
+above.
+</P>
+</UL>
+<P>
+In order to listen to amateur radio operators in OpenWebRX, select a 
+profile containing the HAM band you are interested in, press the
+<SPAN CLASS="Button">LSB</SPAN> or <SPAN CLASS="Button">USB</SPAN>
+button at the receiver panel and tune to one of the signals. While most 
+amateur transmissions occur at 1kHz boundaries, you may have to tune 
+more precisely to get cleaner sound.
+</P>
+
+<A NAME="HOW-CW"><H3 CLASS="Section">Listening to Morse Code (CW)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Continuous_wave"><I>What is CW?</I></A>
+</DIV>
+<P>
+Most Morse code (CW) transmissions occur at the lower end of amateur 
+radio bands, such as 3500-3600kHz, 7000-7100kHz, 14000-14100kHz, and 
+so on. To engage the CW mode in OpenWebRX, press the
+<SPAN CLASS="Button">CW</SPAN> button at the receiver panel. In this 
+mode, the bandpass filter shrinks to 700-900Hz range for better 
+selectivity. Also, when in CW mode, OpenWebRX+ will tune <B>800Hz 
+below</B> clicked carrier frequency, to make sure that the carrier is 
+always heard.
+</P>
+<P>
+For those who do not understand Morse code, OpenWebRX+ offers 
+<B>automated CW decoding</B>, enabled by selecting the <I>"CW 
+Decoder"</I> digital mode. The CW decoder presents you with a zoomed 
+secondary waterfall that may contain multiple CW signals. Once you click 
+on a CW signal you are interested in, the decoded text will show up 
+below the secondary waterfall, with unrecognized characters shown as
+underscores.
+</P>
+<P CLASS="Admin">
+You can also make the CW decoder <B>show the original dits and dahs</B> 
+it is decoding. To do that, go to <I>"Settings | Demodulation and 
+Decoding | Miscellaneous"</I> and enable the <I>"Show CW codes (dits / 
+dahs) when decoding CW"</I> option.
+</P>
+
+<A NAME="HOW-RTTY"><H3 CLASS="Section">Receiving Teletype (RTTY)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/RTTY"><I>What is RTTY?</I></A>
+</DIV>
+<P>
+A teletype transmission consists of two carrier signals, where one 
+signal designates "spaces" (or zeros), while the other signal designates 
+"marks" (or ones). Five bits in a row make a character, encoded with 
+Baudot code. Hence, there are three important parameters describing 
+an RTTY transmission:
+</P>
+<UL>
+<LI><P><B>Bandwidth (Hz)</B><BR>
+This is the distance, in hertz, between two carrier signals. Common 
+bandwidths are 85Hz, 170Hz, 450Hz, and 650Hz.
+</P>
+<LI><P><B>Bitrate (baud)</B><BR>
+This is the transmission speed, determining how many bits per second are 
+being sent. Common bitrates are 45bd, 45.45bd, 50bd, 75bd, and 100bd.
+</P>
+<LI><P><B>Reverse</B><BR>
+The "reverse" option, when applied, flips the meanings of "space" and 
+"mark" frequencies.
+</P>
+</UL>
+<P>
+OpenWebRX+ comes with three different RTTY settings, selected via 
+digital mode drop-down list:
+</P> 
+<UL>
+<LI><P><B>RTTY-170 (45)</B><BR>
+This is the mode commonly used by HAM operators, with 170Hz bandwidth 
+and 45bd bitrate. You can find transmissions in this mode just above 
+Morse code transmissions on most HAM HF bands.
+</P>
+<LI><P><B>RTTY-450 (50N)</B><BR>
+This mode is used by the German weather service, most often found at the 
+10100kHz frequency. OpenWebRX+ includes default (yellow) bookmarks for 
+this and other German weather RTTY frequencies. This mode uses 450Hz 
+bandwidth and 50bd bitrate, with "mark" and "space" frequencies 
+reversed.
+</P>
+<LI><P><B>RTTY-85 (50N)</B><BR>
+This mode is often used at the LF and VLF bands, where available 
+bandwidth is limited. It has 85Hz bandwidth and 50bd bitrate, with 
+"mark" and "space" frequencies reversed.
+</P>
+</UL>
+<P>
+In order to receive a teletype transmission in OpenWebRX+, press the 
+<SPAN CLASS="Button">USB</SPAN> button at the receiver panel and tune to 
+an RTTY transmission, which looks like two signals close together. Then 
+select one of the RTTY decoders described above. It will present you 
+with a zoomed secondary waterfall that may contain multiple RTTY 
+signals. Once you click on an RTTY signal you are interested in, the 
+decoded text will show up below the secondary waterfall, with 
+unrecognized characters shown as underscores.
+</P>
+
+<A NAME="HOW-SSTV"><H3 CLASS="Section">Receiving SSTV Images</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/SSTV"><I>What is SSTV?</I></A>
+</DIV>
+<P>
+The slow scan television (SSTV) protocol lets radio amateurs exchange 
+small static images over airwaves. Most SSTV frequencies are listed in 
+the OpenWebRX+ band plan and will thus show up as green bookmarks. In 
+order to reliably receive SSTV images in OpenWebRX+, do the following:
+</P>
+<OL>
+<LI><P>
+Select <I>"SSTV"</I> digital mode and tune <B>exactly</B> 1900Hz below 
+the SSTV carrier frequency, or use any of the provided SSTV bookmarks.
+</P>
+<LI><P>
+Wait until the next SSTV transmission starts. OpenWebRX+ <B>will not</B> 
+receive partial SSTV transmissions since it needs to obtain the image 
+format information from the transmission header.
+</P>
+<LI><P>
+The received SSTV images will show up in a separate panel on top of the 
+waterfall display. Click on an image to download it to your computer or 
+mobile device.
+</P>
+</OL>
+<P>
+The only SSTV formats currently supported by OpenWebRX+ are Robot36, 
+Robot72, Martin1, Martin2, Scottie1, Scottie2, and ScottieDX. Other SSTV 
+formats, including digital SSTV, will not be received.
+</P>
+
+<A NAME="HOW-FAX"><H3 CLASS="Section">Receiving Fax Images</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Radiofax"><I>What is radio fax?</I></A>
+</DIV>
+<P>
+Today, the HF radio fax protocol is mainly used to broadcast weather 
+maps and related information to vessels at sea. The US National Weather 
+Service regularly publishes
+<A HREF="https://www.weather.gov/media/marine/rfax.pdf">weather fax schedules</A>
+you can use to tune to a nearby fax broadcast. Also, OpenWebRX+ provides 
+default (yellow) bookmarks for most known weather fax frequencies. In 
+order to reliably receive a fax in OpenWebRX+, do the following:
+</P>
+<OL>
+<LI><P>
+Select <I>"FAX"</I> digital mode and tune <B>exactly</B> 1900Hz below 
+the fax carrier frequency, or use any of the provided fax bookmarks.
+</P>
+<LI><P>
+Wait until the next fax transmission starts. OpenWebRX+ <B>will not</B>
+receive partial fax transmissions since it needs to obtain the image 
+format information from the transmission header.
+</P>
+<LI><P>
+The received fax images will show up in a separate panel on top of the 
+waterfall display. Click on an image to download it to your computer or 
+mobile device.
+</P>
+</OL>
+<DIV CLASS="Admin">
+<P>
+The fax decoder inside OpenWebRX+ supports <B>120LPM transmissions in 
+IOC576 and IOC288 formats</B>. As an <B>administrator</B>, you have some 
+control over fax decoding. Following options are available in 
+<I>"Settings | General | Demodulation and Decoding | Fax 
+Transmissions"</I>:
+</P>
+<UL>
+<LI><P><B>Transmission speed</B><BR>
+The transmission speed controls how many fax lines per minute the 
+decoder is going expect. The most common value is 120LPM. Do not
+change it unless you are absolutely sure you need a different one.
+</P>
+<LI><P><B>Post-process received images to reduce noise</B><BR>
+When enabled, this option makes fax decoder post-process received images 
+for better contrast. Some grayscale gradients may get lost as result 
+though.
+</P>
+<LI><P><B>Receive color images</B><BR>
+This experimental option should allow OpenWebRX+ receive color faxes. It 
+has not been tested due to lack of samples though.
+</P>
+<LI><P><B>Use amplitude modulation</B><BR>
+This experimental option lets OpenWebRX+ receive faxes encoded using AM 
+mode, rather than usual USB. So far, it has not been tested due to lack 
+of samples.
+</P>
+</UL>
+</DIV>
+
+<A NAME="HOW-PAGER"><H3 CLASS="Section">Monitoring Pager Messages (POCSAG)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Pager"><I>What is a pager?</I></A>
+</DIV>
+<P>
+While mostly an outdated technology, wireless pagers are still in use at 
+hospitals, businesses, and for automated reporting. Pager traffic is 
+commonly found at 150-165MHz, as well as other VHF and UHF bands. 
+OpenWebRX+ can decode both
+<A HREF="https://en.wikipedia.org/wiki/Radio-paging_code_No._1">POCSAG</A> and
+<A HREF="https://en.wikipedia.org/wiki/FLEX_(protocol)">FLEX</A>
+paging protocols at different speeds. 
+</P>
+<P>
+Keep in mind that <B>your local laws may prohibit you from listening to 
+the pager traffic</B>. Please, check before you do!
+</P>
+<P>
+In order to monitor pager messages in OpenWebRX+, select <I>"Page"</I> 
+digital mode and tune to the exact middle of a pager signal. You will 
+see decoded pager messages in a separate panel on top of the waterfall 
+display.
+</P>
+<P CLASS="Admin">
+A lot of pager messages carry numeric or binary data. As an 
+<B>administrator</B>, you can choose to ignore these unreadable messages 
+by going to <I>"Settings | General | Demodulation and Decoding | 
+Miscelaneous"</I> and enabling the <I>"Filter out empty, numeric, or 
+unreadable pager messages"</I> option.
+</P>
+
+<A NAME="HOW-ISM"><H3 CLASS="Section">Monitoring Wireless Devices (ISM)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/ISM_radio_band"><I>What is ISM?</I></A>
+</DIV>
+<P>
+Many modern wireless devices, such as weather stations, security 
+sensors, tire pressure sensors, car keys, etc., use radio frequencies to 
+communicate. These devices are normally found in 433-435MHz, 902-928MHz, 
+and some other bands. In order to monitor smart device transmissions in 
+OpenWebRX+, do the following:
+</P>
+<OL>
+<LI><P>
+Look around ISM frequencies for signals that may be produced by wireless 
+devices.
+</P>
+<LI><P>
+Once you see any suspicious signals, tune near them and select the 
+<I>"ISM"</I> digital mode. The ISM decoder will monitor and display a 
+wide swath of spectrum around your tuned frequency.
+</P>
+<LI><P>
+Wait until the signals reappear. If the ISM decoder is able to 
+understand them, the decoded data will appear in a separate panel on top 
+of the waterfall display.
+</P>
+</OL>
+<P>
+If you are unable to decode any ISM signals or do not see any on the 
+waterfall, <B>try testing the decoder with your wireless car keys</B>. 
+It is important to know their signalling frequency though.
+</P>
+
+<A NAME="HOW-APRS"><H3 CLASS="Section">Tracking Packet Radio (APRS)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Automatic_Packet_Reporting_System"><I>What is APRS?</I></A>
+</DIV>
+<P>
+The <I>Automatic Packet Reporting System (APRS)</I> lets HAM operators 
+exchange digital data, messages, and share their locations with the 
+world. The APRS uses 144.39MHz frequency in the North America, 144.8MHz 
+in Europe. Please note that the OpenWebRX bandplan only has European 
+APRS frequency enabled. <B>If your receiver is in the North America, 
+edit the bandplan to switch to the 144.39MHz frequency.</B>
+</P>
+<P>
+In order to monitor APRS traffic in OpenWebRX, select <I>"Packet"</I> 
+digital mode and tune to one of the above frequencies. You will see 
+decoded APRS messages in a separate panel on top of the waterfall 
+display. Moreover, the sources of these messages will pop up at the 
+map, shown by clicking the <SPAN CLASS="Button">Map</SPAN> button.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-APRS.png"></CENTER>
+<P>
+OpenWebRX+ bandplan includes one more APRS entry, at 145.825MHz. This is 
+the <I>International Space Station (ISS)</I> frequency. Several times a 
+day, as ISS flies above the receiver location, you can expect to see 
+APRS reports from really far away at this frequency. These reports are 
+retransmitted by the APRS repeater located at the ISS.
+</P>
+
+<A NAME="HOW-AIS"><H3 CLASS="Section">Tracking Ships (AIS)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Automatic_identification_system"><I>What is AIS?</I></A>
+</DIV>
+<P>
+Modern vessels report their locations using a VHF radio system known as 
+AIS. If your OpenWebRX+ receiver is located near a large enough body of 
+water, it may be able to receive AIS position reports and display them 
+at the map.
+</P>
+<P>
+AIS operates at two maritime band frequencies, 161.975MHz and 
+162.025MHz. Once you select a profile containing these frequencies, you 
+will see them marked with green bookmarks, since they are part of the 
+band plan. Click on an AIS bookmark and a secondary waterfall should 
+appear, together with the information panel showing received position 
+reports.
+</P>
+<P>
+Now, if you click on the <SPAN CLASS="Button">Map</SPAN> button, you 
+should see ship locations on the map. Clicking on a ship pops up a 
+bubble showing some basic information about that ship.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-AIS.png"></CENTER>
+<P>
+AIS identifies every vessel with a unique number known as MMSI. 
+OpenWebRX+ shows these MMSI numbers, hyperlinking them to the
+<A HREF="https://www.vesselfinder.com/">Vessel Finder</A>
+website, where you can find photos and other facts about each vessel.
+</P>
+
+<A NAME="HOW-ADSB"><H3 CLASS="Section">Tracking Airplanes (ADS-B)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast"><I>What is ADS-B?</I></A>
+</DIV>
+<P>
+Airplanes periodically report their positions in the air using the ADS-B 
+system, at 1090MHz and 978MHz frequencies. OpenWebRX+ can listen to 
+these frequencies and display received flight information to you.
+</P>
+<P>
+To receive ADS-B transmissions, select a profile containing one of the
+ADS-B frequencies. Since these transmissions require 2MHz of bandwidth, 
+the profile must have at least 1MHz of bandwidth at each side of the 
+ADS-B frequency.
+</P>
+<P>
+Standard ADS-B frequencies are part of the OpenWebRX+ band plan and thus 
+marked with green bookmarks. Once you click on an ADS-B bookmark, a 
+panel will appear showing the reported aircraft with their flight data.
+</P>
+<P>
+If you click on the <SPAN CLASS="Button">Map</SPAN> button, you should 
+see aircraft locations on the map. Clicking on an airplane pops up a 
+bubble showing some basic information about that airplane.
+</P>
+<P>
+Aircraft are identified with several different IDs, including flight ID, 
+aircraft tail number, and ICAO code (aka Mode-S transponder code). 
+OpenWebRX+ will hyperlink received IDs to the
+<A HREF="https://www.flightaware.com/">FlightAware</A>
+website, where you can find airplane photos and other facts about each 
+flight.
+</P>
+
+<A NAME="AdminFeatures"><H2>Administrator Features</H2></A>
+<P>
+This section discusses administering an OpenWebRX server and how it can 
+be used besides providing public access to radio waves.
+</P>
+
+<A NAME="HOW-BACKGROUND"><H3>Background Decoding</H3></A>
+<P>
+As a <B>server administrator</B>, you can make OpenWebRX server 
+<B>automatically decode radio transmissions</B> when someone is 
+listening to a profile with these transmissions. This feature can be 
+used to receive SSTV images, faxes, monitor digital HAM traffic, track 
+airplanes, and so forth.
+</P>
+<P>
+To start with background decoding, go to <I>"Settings | Background 
+Decoding"</I>, check the <I>"Enable background decoding services"</I> 
+option, and select transmission modes you would like to receive and 
+decode automatically. Make sure you only select the ones you really 
+need, since running too many background decoders will slow your server 
+down, a lot.
+</P>
+<P>
+Now, go to an SDR device you want to use for background decoding, let us 
+say <I>"Settings | SDR Devices and Profiles | &lt;Device&gt;"</I>, and 
+add the <I>"Run background services on this device"</I> option. Once you 
+have added this option, make sure it is enabled.
+</P>
+<P>
+At this point, every time someone connects and listens to a 
+<I>&lt;Device&gt;</I> profile, OpenWebRX will <B>automatically decode 
+all enabled signal types at frequencies marked with green bookmarks</B>, 
+i.e. everything that is part of the band plan. If the decoded data is an 
+image or a message log, these will be saved to the <I>/tmp</I> folder 
+and shown once you click the <SPAN CLASS="Button">Files</SPAN> button. 
+Location reports, such as FT8, WSPR, APRS, and others, will show up on 
+the map, when you click the <SPAN CLASS="Button">Map</SPAN> button.
+</P>
+<P>
+In order to enable background decoding at a frequency that is <B>not</B> 
+part of the band plan (<B>no</B> green bookmark), you will have to add 
+that frequency to the band plan by editing the following file:
+</P>
+<PRE>/etc/openwebrx/bands.json</PRE>
+<P>
+Prior to editing this file, make sure you <B>create a backup copy</B>, 
+in case something goes wrong. Unfortunately, there is no way to edit the
+band plan via web-based settings at the moment. After editing and saving 
+the file, restart OpenWebRX as follows and make sure there is a green 
+bookmark at the frequency you added:
+</P>
+<PRE>sudo systemctl restart openwebrx</PRE>
+
+<A NAME="HOW-SCHEDULED"><H3>Scheduled Decoding</H3></A>
+<P>
+In the <A HREF="#HOW-BACKGROUND">previous section</A>, we discussed how 
+OpenWebRX can decode radio transmissions automatically, while someone is 
+using it. In this section, we are going to <B>make OpenWebRX run the 
+radio and receive signals on its own</B>, when nobody is using it.
+</P>
+<P>
+Start with an SDR device where you previously enabled background 
+services by going to <I>"Settings | SDR Devices and Profiles | 
+&lt;Device&gt;"</I>. Add the <I>"Scheduler"</I> option to this device
+and find the newly added scheduler selector among other settings.
+It is going to offer you two different schedule models:
+</P>
+<UL>
+<LI><P><B>Daylight Scheduler</B><BR>
+The daylight scheduler lets you select three profiles to run on the 
+device during the day, the night, and the "greyline" period (i.e. dawn 
+and dusk). Since radio waves propagation depends on the time of a day, 
+this scheme provides easy to configure, yet functional schedule.
+</P>
+<LI><P><B>Static Scheduler</B><BR>
+The static scheduler lets you define your own schedule of as many 
+entries as you like, with minute precision. While such a schedule is 
+more difficult to add, it gives you flexibility to switch through 
+several different profiles each hour.
+</P>
+</UL>
+<P>
+Once you have your schedule added and saved, <B>OpenWebRX will switch 
+device between scheduled profiles, as long as nobody is using this 
+device</B>. Once all the users disconnect, OpenWebRX will return the SDR 
+device to its currently scheduled profile. It will also run any 
+applicable background decoders you enabled earlier, reporting received 
+data to the map or saving it to the file storage.
+</P>
+
+<A NAME="HOW-REPORTING"><H3>Reporting Decoded Data</H3></A>
+<P>
+In the
+<A HREF="#HOW-BACKGROUND">two</A> <A HREF="#HOW-SCHEDULED">previous</A>
+sections, we discussed how OpenWebRX can be configured to automatically 
+decode various radio transmissions. In this section, we are going to 
+discuss sending the decoded data to online services, such as
+<A HREF="https://aprs.fi/">APRS-IS</A>,
+<A HREF="https://pskreporter.info/">PSKReporter</A>,
+<A HREF="https://wsprnet.org/">WSPRnet</A>, or
+<A HREF="https://mqtt.org/">MQTT</A>.
+To configure online reporting, go to the <I>"Settings | Spotting and 
+Reporting"</I> settings page. There are three sections there, for the 
+three types of data OpenWebRX can report:
+</P>
+<UL>
+
+<LI><P><B>APRS-IS</B><BR>
+The received APRS position reports can be sent to the
+<A HREF="https://www.aprs2.net/">APRS-IS network</A>.
+In order to do that, fill in your APRS callsign and the nearest server 
+address. You may also need to provide APRS-IS network password. Finally, 
+check the <I>"Send received APRS data to APRS-IS"</I> option. The 
+reported data will show up at the
+<A HREF="https://aprs.fi/">APRS.fi map</A>.
+Please, note that 
+<A HREF="https://aprs.fi/">APRS.fi</A>
+does not show multiply reported spots, so some of your reports may not 
+show there.
+</P>
+<P>
+If you would also like to report your <B>receiver position</B> to 
+APRS-IS, check the <I>"Send the receiver position to the APRS-IS 
+network"</I> option and fill in information about your receiver and 
+antenna specifics.
+</P>
+<P>
+Please, note that <B>only one decoder can send data to the APRS-IS 
+network</B> using the same callsign. Thus, if you have more than one 
+APRS decoder running (for example, at 144.39MHz and 145.825MHz), some of 
+your reports will not make it through. To fix this issue, <B>disable all 
+but one APRS frequency</B> in the bandplan file.
+</P>
+
+<LI><P><B>PSKReporter</B><BR>
+OpenWebRX can report FT8, FT4, JT9, JT65, FST4, JS8, Q65, WSPR, FST4W, 
+and MSK144 transmissions to the
+<A HREF="https://pskreporter.info/">PSKReporter</A>
+website. All you need to do is check the <I>"Enable sending spots to 
+pskreporter.info"</I> option and fill callsign field with a unique name. 
+It <B>does not</B> have to be your official HAM callsign, but most 
+people who have HAM callsigns use them here. The reported data will show 
+up at the
+<A HREF="https://pskreporter.info/pskmap">PSKReporter map</A>.
+You may also want to describe your antenna in the antenna information 
+field, so that other people know how you received the data you are 
+reporting.
+</P>
+
+<LI><P><B>WSPRnet</B><BR>
+The
+<A HREF="https://wsprnet.org/">WSPRnet</A>
+website only accepts WSPR and FST4W reports. To enable it, check the 
+<I>"Enable sending spots to wsprnet.org"</I> option and enter your 
+unique name into the callsign field. It <B>does not</B> have to be your 
+official HAM callsign, but most people who have HAM callsigns use them 
+here. The reported data will show up at the
+<A HREF="http://www.wsprnet.org/drupal/wsprnet/map">WSPRnet map</A>.
+</P>
+
+<LI><P><B>MQTT</B><BR>
+The
+<A HREF="https://mqtt.org/">MQTT</A>
+is a protocol for reporting IOT events to multiple remote subscribers. 
+In order to use MQTT, you will need to have an MQTT broker, such as
+<A HREF="https://mosquitto.org/">Mosquitto</A>.
+Once you have a broker, enable MQTT reporting by checking the <I>"Enable 
+publishing reports to MQTT"</I> option and entering your broker address 
+into the appropriate field. You may also have to enter your client ID, 
+username, and password. By default, OpenWebRX+ reports all its events 
+under the <I>"openwebrx"</I> topic, but that can be changed by entering 
+your own topic name into the <I>"MQTT topic"</I> field.
+</P>
+
+</UL>
+
+<A NAME="HOW-CONFIG-MAP"><H3>Configuring Map</H3></A>
+<P>
+OpenWebRX+ offers <B>two map options: <I>Google Maps</I> and a 
+collection of free maps</B> based on the <I>Leaflet</I> library. The 
+very popular <I>OpenStreetMap</I> is part of that collection.
+</P>
+<P>
+The <I>Google Maps</I> implementation is more detailed and polished, but 
+it may require you to register your credit card with Google to receive 
+an API key. Google may then charge your credit card if you exceed a 
+certain limit of the <I>Google Maps</I> accesses.
+</P>
+<P>
+The <I>OpenStreetMap</I> and other maps included with the <I>Leaflet</I> 
+are less detailed, but they are totally free. Also, the <I>Leaflet</I> 
+implementation includes some extra layers for weather, maritime 
+annotations, and so forth.
+</P>
+<P>
+<B>In order to configure the default map</B>, go to <I>"Settings
+| General | Map | Map Type"</I> and select the map you would like to 
+show to the users by default. Remember that a user can always switch 
+maps by clicking on the <SPAN CLASS="Button">Map</SPAN> button. Other 
+map-related options available from the same settings section are:
+</P>
+<UL>
+<LI><P><B>Google Maps API Key</B><BR>
+This is where you enter the <I>Google Maps</I> API key you received from 
+Google. Leave this field empty if you have no API key. A lot of times,
+<I>Google Maps</I> will work anyway, for some reason.
+</P>
+<LI><P><B>OpenWeatherMap API Key</B><BR>
+If you would like to see global weather on <I>Leaflet</I> maps, consider 
+getting an <I>OpenWeatherMap</I> API key and entering it here. These 
+keys are free, for limited amount of functionality. Without this key, 
+OpenWebRX+ will only be able to show you US weather, obtained from 
+<I>WeatherRadar</I>.
+</P>
+<LI><P><B>Map Retention Time</B><BR>
+This is the time, in seconds, the received location reports stay visible 
+on the map. A location report will start getting dimmer once it becomes 
+older than half of the retention time. Once it reaches the retention 
+time, a location report will disappear from the map.
+</P>
+<LI><P><B>Callsign Database URL</B><BR>
+This is the web site used to look up reported HAM callsigns when you 
+click them on the map. The <I>"{}"</I> characters will be replaced with 
+the actual callsign. Two common choices here are
+<A HREF="https://www.qrz.com/">qrz.com</A> and
+<A HREF="https://www.qrzcq.com/">qrzcq.com</A>.
+</P>
+<LI><P><B>Vessel Database URL</B><BR>
+This is the web site used to look up vessel MMSI numbers when you click 
+them on the map. The <I>"{}"</I> characters will be replaced with the 
+actual MMSI number.
+</P>
+<LI><P><B>Flight Database URL</B><BR>
+This is the web site used to look up airline flight IDs when you click 
+them on the map. The <I>"{}"</I> characters will be replaced with the 
+actual flight ID.
+</P>
+<LI><P><B>Aircraft Database URL</B><BR>
+This is the web site used to look up aircraft Mode-S IDs when you click 
+them on the map. The <I>"{}"</I> characters will be replaced with the 
+actual Mode-S ID.
+</P>
+</UL>
+
+<A NAME="HOW-CONFIG-SHORTWAVE"><H3>Configuring Shortwave Schedules</H3></A>
+<P>
+Once a day, OpenWebRX+ queries the
+<A HREF="http://www.eibispace.de/">EiBi</A>
+database for shortwave broadcast schedules. Currently broadcasting 
+stations are indicated with <B>&#9041;</B> markers on the map and with 
+bookmarks in the main receiver window.
+</P>
+<P>
+You can make OpenWebRX+ create <B>bookmarks for currently broadcasting 
+shortwave stations</B> by setting their maximum range from the receiver 
+via <I>"Settings | General | Display | Shortwave Bookmarks Range"</I>. 
+OpenWebRX+ will only create bookmarks for shortwave stations located 
+within that range.
+</P>
+<P>
+You can also <B>restrict shortwave bookmarks to just a few profiles</B> 
+(such as 49m / 41m / etc):
+</P>
+<OL>
+<LI><P>
+Disable global shortwave bookmarks by setting <I>"Settings | General | 
+Display | Shortwave Bookmarks Range"</I> to zero.
+</P>
+<LI><P>
+Go to <I>"Settings | SDR Devices and Profiles | &lt;Device&gt; | 
+&lt;Profile&gt;"</I> and add an option called <I>"Shortwave Bookmarks 
+Range"</I> by clicking on <SPAN CLASS="Button">Add</SPAN>.
+</P>
+<LI><P>
+Set the newly added option to the maximum range from the receiver 
+where you would like to see shortwave bookmarks and save profile 
+settings by clicking on <SPAN CLASS="Button">Apply and Save</SPAN>.
+</P>
+</OL>
+<P>
+It is important to note that the shortwave stations will only show 
+correctly if you <B>set the correct receiver location</B> in 
+<I>"Settings | General | Receiver Information | Receiver Location"</I>. 
+It is also important to remember that since OpenWebRX+ queries
+<A HREF="http://www.eibispace.de/">EiBi</A>
+once a day, the <B>up-to-date information may not be available 
+immediately</B> after setting the receiver location.
+</P>
+
+<A NAME="HOW-CONFIG-REPEATERS"><H3>Configuring Repeaters</H3></A>
+<P>
+Once a day, OpenWebRX+ queries
+<A HREF="https://www.repeaterbook.com/">RepeaterBook.com</A>
+for the list of repeaters closest to the receiver location. These 
+repeaters are shown with <B>&bowtie;</B> markers on the map and
+with bookmarks in the main receiver window.
+</P>
+<P>
+You can make OpenWebRX+ create repeater bookmarks by setting their 
+maximum distance from the receiver in <I>"Settings | General | Display | 
+Repeater Bookmarks Range"</I>. <B>OpenWebRX+ will only create bookmarks 
+for repeaters located within the preset maximum distance.</B>
+</P>
+<P>
+You can also restrict repeater bookmarks to just a few profiles (such as 
+VHF / UHF):
+</P>
+<OL>
+<LI><P>
+Disable global repeater bookmarks by setting <I>"Settings | General | 
+Display | Repeater Bookmarks Range"</I> to zero.
+</P>
+<LI><P>
+Go to <I>"Settings | SDR Devices and Profiles | &lt;Device&gt; | 
+&lt;Profile&gt;"</I> and add an option called <I>"Repeater Bookmarks 
+Range"</I> by clicking on <SPAN CLASS="Button">Add</SPAN>.
+</P>
+<LI><P>
+Set the newly added option to the maximum distance from the receiver 
+where you would like to see repeaters and save profile settings by 
+clicking on <SPAN CLASS="Button">Apply and Save</SPAN>.
+</P>
+</OL>
+<P>
+It is important to note that <B>the repeaters will only show correctly 
+if you set the correct receiver location</B> in <I>"Settings | General | 
+Receiver Information | Receiver Location"</I>. It is also important to 
+remember that since OpenWebRX+ queries the 
+<A HREF="https://www.repeaterbook.com/">RepeaterBook.com</A>
+once a day, the <B>up-to-date repeater information may not be available 
+immediately after setting the receiver location</B>.
+</P>
+
+<A NAME="HOW-LIMITS"><H3>Limiting Receiver Use</H3></A>
+<P>
+As a <B>server administrator</B>, you may have legal or technical 
+reasons to <B>restrict</B> your OpenWebRX server use by the public. 
+Always check what radio frequencies and modes you are allowed to listen 
+to at your location. <B>Do not</B> offer prohibited frequencies and 
+modes to the public. Following restrictions are available in the 
+<I>"Settings | General | Receiver Limits"</I>:
+</P>
+<UL>
+<LI><P><B>Maximum Number of Clients</B><BR>
+This setting determines how many people can connect to your OpenWebRX 
+server at once. Anyone trying to connect to a "full" server will be 
+shown an error message and refused service.
+</P>
+<LI><P><B>Maximum Number of Files</B><BR>
+This setting determines how many SSTV images, faxes, and other files 
+received from the air OpenWebRX+ is allowed to keep before it starts 
+deleting oldest files. The received files can be seen by pressing the 
+<SPAN CLASS="Button">Files</SPAN> button at the top of the receiver web 
+page.
+</P>
+<LI><P><B>Session Timeout</B><BR>
+This value, in seconds, determines how long a user is allowed to use the 
+OpenWebRX+ receiver. Reloading receiver's web page restarts the time 
+though, so the timeout is mostly there for people who leave their 
+computers with the OpenWebRX+ page open.
+</P>
+<LI><P><B>Usage Policy URL</B><BR>
+This web page is shown to a user once their session times out. The 
+default page explains why there is a timeout and lets users find other 
+online receivers to listen to.
+</P>
+<LI><P><B>Allow users to chat with each other</B><BR>
+Disable this option if you want to disable the built-in chat facility. 
+When disabled, the chat panel turns into the log panel that does not 
+accept any input.
+</P>
+<LI><P><B>Allow users to record received audio</B><BR>
+Disable this option if you do not want your users to record any audio 
+they are listening to. When disabled, the <SPAN CLASS="Button">REC</SPAN>
+button will disappear from the user interface. Please, do keep in mind 
+that this <B>does not</B> prevent your users from recording their audio 
+by some other means.
+</P>
+<LI><P><B>Allow users to change center frequency</B><BR>
+Enable this option if you would like to let your OpenWebRX+ users
+"side-step" their current profile by right-clicking the round arrow 
+buttons. Since this change will occur to all the users listening to the 
+same profile, it makes sense to disable it on the servers with many 
+people listening to the same profiles.
+</P>
+<LI><P><B>Magic Key</B><BR>
+When the magic key string is filled in (i.e. not empty), OpenWebRX+ will 
+only allow side-stepping profiles to people who know the magic key and 
+provide it as follows:
+<PRE>http://openwebrx.receiver.org:8073/#<B>key=&lt;magic-key&gt;</B></PRE>
+</P>
+</UL>
+
+<A NAME="HOW-USERS"><H3>Monitoring Receiver Use</H3></A>
+<P>
+OpenWebRX+ <B>lets its administrator monitor connections</B> to the 
+server and <B>ban abusive users</B>. Please, note that since the main 
+goal of the OpenWebRX project is to provide free, open online radio, 
+this facility should be used with extreme care. If you want to have a 
+truly private OpenWebRX server, consider closing it to public access 
+instead.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/ClientMonitor.png"></CENTER>
+<P>
+In order to see currently connected clients, click on the
+<SPAN CLASS="Button">Settings</SPAN> button and scroll to the bottom of 
+the page, until you see the <I>"Clients"</I> display, as shown above. 
+There, you will be able to <SPAN CLASS="Button">ban</SPAN> client's IP 
+address for a selected amount of time, or
+<SPAN CLASS="Button">unban</SPAN> previously banned addresses. A banned 
+client will still be able to see the map and files, but won't be able to 
+access the receiver itself.
+</P>
+<P>
+You can also <B>broadcast a message</B> to all currently connected 
+clients by entering it into the input field and clicking the
+<SPAN CLASS="Button">send</SPAN> button. Your message will show up in 
+clients' log / chat panels.
+</P>
+<P>
+<B>If you are running OpenWebRX+ behind NGINX</B>, you may not be able 
+to see clients' IP addresses unless you edit this file:
+<PRE>/etc/nginx/sites-enabled/openwebrx</PRE>
+and add the following line to the <B>location section</B>:
+<PRE>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</PRE>
+</P>
+
+<A NAME="HOW-MQTT"><H3>Advanced MQTT Reporting</H3></A>
+<P>
+As <A HREF="#HOW-REPORTING">discussed earlier</A>, OpenWebRX can report 
+received data to an <A HREF="https://mqtt.org/">MQTT broker</A>. The 
+data for each mode is sent under the <I>"openwebrx/&lt;mode&gt;"</I> 
+topic. For example, FT8 data is reported as <I>"openwebrx/FT8"</I>. A 
+typical report will look as follows:
+</P>
+<PRE>
+{
+  "mode":      "FT8",
+  "timestamp": 1722482895000,
+  "freq":      7074985, 
+  "msg":       "CQ YV6BXN FK60",
+  "callsign":  "YV6BXN",
+  "locator":   "FK60"
+}
+</PRE>
+<P>
+The common fields present in most reports are:
+</P>
+<UL>
+<LI><B>mode</B><BR>
+Mode used to receive the data.
+<LI><B>freq</B><BR>
+Frequency where the data has been received, in hertz.
+<LI><B>timestamp</B><BR>
+Reception time, in milliseconds since the Unix epoch.
+</UL>
+
+<H4>Reporting Server Startup and Shutdown</H4>
+<P>
+In addition to reporting received data, OpenWebRX+ uses MQTT to report 
+SDR device changes and other internal events. For example, when an 
+OpenWebRX+ server starts up or shuts down, it sends the following event 
+under the <I>"openwebrx/RX"</I> topic:
+</P>
+<PRE>
+{
+  "mode":      "RX",
+  "timestamp": 1722737506393,
+  "version":   "v1.2.64", 
+  "state":     "ServerStarted"
+}
+</PRE>
+<P>
+The <I>"state"</I> parameter can be either <I>"ServerStarted"</I> or
+<I>"ServerStopped"</I>.
+</P>
+
+<H4>Reporting SDR Device Changes</H4>
+<P>
+OpenWebRX+ reports SDR device changes under the <I>"openwebrx/RX"</I> 
+topic that can be used by various automation scripts. Thus, an SDR 
+profile change will be reported as follows:
+</P>
+<PRE>
+{
+  "mode":       "RX",
+  "timestamp":  1722483751451,
+  "source_id":  "rspdx", 
+  "source":     "RSPdx",
+  "profile_id": "air-1",
+  "profile":    "Air Band 118-120", 
+  "freq":       118900000,
+  "samplerate": 2000000
+}
+</PRE>
+<P>
+The most important fields in the above event are:
+</P>
+<UL>
+<LI><B>source_id</B><BR>
+SDR device where profile is being changed. Also see <I>"source"</I> for 
+a human-readable device name.
+<LI><B>profile_id</B><BR>
+The new profile. Also see <I>"profile"</I> for a human-readable profile 
+name.
+<LI><B>frequency</B><BR>
+The center frequency of the new profile, in hertz.
+<LI><B>samplerate</B><BR>
+The width of the new profile, in hertz.
+</UL>
+<P>
+When an SDR device starts or stops operating, a state change event is
+sent to MQTT:
+</P>
+<PRE>
+{
+  "mode":      "RX",
+  "timestamp": 1722483751451,
+  "source_id": "rspdx", 
+  "source":    "RSPdx",
+  "state":     "Running"
+}
+</PRE>
+<P>
+As seen above, the state change event is very similar to a profile 
+change, but carries SDR state instead of profile information.
+</P>
+
+<H4>Reporting User Activity</H4>
+<P>
+OpenWebRX+ reports user activities under the <I>"openwebrx/CLIENT"</I> 
+topic. Thus, a user connecting or disconnecting from the server will be 
+reported as follows:
+</P>
+<PRE>
+{
+  "mode":      "CLIENT",
+  "timestamp": 1722738356255, 
+  "ip":        "::ffff:101.23.45.67",
+  "state":     "Connected",
+  "banned":    false
+}
+</PRE>
+<P>
+The <I>"state"</I> parameter can be either <I>"Connected"</I> or 
+<I>"Disconnected"</I>. When a user sends a chat message, that message is 
+similarly reported under the <I>"openwebrx/CLIENT"</I> topic:
+</P>
+<PRE>
+{
+  "mode":      "CLIENT", 
+  "timestamp": 1722738521609,
+  "ip":        "::ffff:101.23.45.67",
+  "name":      "Nickname",
+  "message":   "The message text.",
+  "state":     "ChatMessage",
+  "banned":    false
+}
+</PRE>
+
+<A NAME="HOW-PLUGINS"><H3>JavaScript Plugins</H3></A>
+<P>
+Stanislav Lechev (LZ2SLL) has developed a
+<A HREF="https://0xaf.github.io/openwebrxplus-plugins/">JavaScript plugins framework</A>
+for OpenWebRX+. There is a bunch of plugins available from his
+<A HREF="https://github.com/0xAF/openwebrxplus-plugins">GitHub repository</A>.
+JavaScript plugins operate in a browser at the client side, rather 
+than the server side, and allow to customize user interface. In order 
+to enable JavaScript plugins, rename the following file:
+</P>
+<PRE>htdocs/plugins/receiver/init.js.sample</PRE>
+<P>
+into <I>init.js</I> and edit it to enable or disable individual plugins. 
+The plugins themselves are stored in the following folders:
+</P>
+<UL>
+<LI><P><B>htdocs/plugins/receiver</B><BR>
+Plugins placed into this folder will be loaded into the main receiver 
+page.
+</P>
+<LI><P><B>htdocs/plugins/map</B><BR>
+Plugins placed into this folder will be loaded into the map view page.
+</P>
+</UL>
+
+<A NAME="FAQ"><H2>Frequently Asked Questions</H2></A>
+<P>
+This section attempts to answer some common questions asked by OpenWebRX 
+users. Please, consult with it before seeking help in online forums or 
+chat groups.
+</P>
+
+<UL>
+  <LI><A HREF="#FAQ-MUPPET">Everything is broken, help me!</A>
+  <LI><A HREF="#FAQ-BROKEN">OpenWebRX broken after upgrade!</A>
+  <LI><A HREF="#FAQ-FEATURES">New OpenWebRX features do not show up!</A>
+  <LI><A HREF="#FAQ-DMR">Digital voice modes do not show up!</A>
+  <LI><A HREF="#FAQ-SDRPLAY">My SDRplay device does not work reliably!</A>
+  <LI><A HREF="#FAQ-REQUESTS">Can you implement a feature I want?</A>
+  <LI><A HREF="#FAQ-PROFILES">How do I hide some profiles from users?</A>
+  <LI><A HREF="#FAQ-JUMP-ANY">How do I jump to any frequency?</A>
+  <LI><A HREF="#FAQ-ENTER-ANY">How do I enter any frequency?</A>
+  <LI><A HREF="#FAQ-CONFIG">Where are OpenWebRX configuration files?</A>
+  <LI><A HREF="#FAQ-HTTPS">How do I make OpenWebRX use HTTPS protocol?</A>
+  <LI><A HREF="#FAQ-BOOKMARKS">How do I get rid of default yellow bookmarks?</A>
+  <LI><A HREF="#FAQ-TEMPERATURE">My CPU temperature is wrong!</A>
+</UL>
+
+<A NAME="FAQ-MUPPET"><H3>Everything is broken, help me!</H3></A>
+<P>
+Before seeking online help from other OpenWebRX users, please, consider
+the following steps:
+</P>
+<OL>
+<LI><P>
+<B>Read other FAQ articles</B> in this document. There is a very good 
+chance they offer solutions to your problems.
+</P>
+<LI><P>
+<B>Wait for a day or two</B>, maybe things start working, as they often 
+do.
+</P>
+<LI><P>
+If you are not familiar with Linux and do not want or cannot learn, 
+<B>find a friend familiar with Linux</B> who can offer you hands-on 
+help.
+</P>
+<LI><P>
+If you are familiar with Linux, <B>look at OpenWebRX logs</B> by typing 
+the following command:
+<PRE>sudo journalctl -u openwebrx</PRE>
+</P>
+<LI><P>
+If you <B>need even more log output</B>, edit the following file:
+<PRE>
+/etc/openwebrx/openwebrx.conf
+</PRE>
+and set the <I>log_level</I> in the <I>[core]</I> section:
+<PRE>
+[core]
+log_level = DEBUG
+</PRE>
+Then save the edited file and restart OpenWebRX.
+</P>
+<LI><P>
+If you still need help, ask for it in the Telegram channel or <B>create 
+a separate thread</B> in the forum. Make sure you <B>provide service 
+logs</B> obtained with the above command, <B>as a file</B>, to whoever 
+will be willing to help you.
+</P>
+</OL>
+
+<A NAME="FAQ-BROKEN"><H3>OpenWebRX broken after upgrade!</H3></A>
+<P>
+In a desktop browser, try reloading receiver web page while holding the 
+<SPAN CLASS="Button">SHIFT</SPAN> key. In a mobile browser, clear 
+browser cache and reload the page. If this does not help, try restarting 
+the computer running OpenWebRX.
+</P>
+
+<A NAME="FAQ-FEATURES"><H3>New OpenWebRX features do not show up!</H3></A>
+<P>
+Click on <I>"Settings | Feature Report"</I> and see if the features you 
+are interested in show up as enabled there. If a feature is disabled, 
+the report will tell you what you should do to enable it.
+</P>
+
+<A NAME="FAQ-DMR"><H3>Digital voice modes do not show up!</H3></A>
+<P>
+Digital voice modes (DMR, D-STAR, YSF, NXDN) require AMBE codec 
+algorithms patented by <I>Digital Voice Systems Inc</I>. Because of 
+that, neither OpenWebRX nor OpenWebRX+ include digital voice support out 
+of the box. <B>It is your personal responsibility</B> to add necessary 
+pieces to your own OpenWebRX installation.
+</P>
+<P>
+The proper, legally responsible way to add digital voice modes to 
+OpenWebRX is to attach a
+<A HREF="https://github.com/jketterl/openwebrx/wiki/AMBE-vocoder-device-notes">licensed USB dongle</A>
+that implements AMBE codecs in the hardware. Both OpenWebRX and 
+OpenWebRX+ will support common AMBE dongle models with minimal
+<A HREF="https://github.com/jketterl/openwebrx/wiki/AMBE-vocoder-device-notes">configuration effort</A>.
+</P>
+<P>
+If you do not wish to use an AMBE codec dongle for whatever reason, 
+there is an unlicensed
+<A HREF="https://github.com/szechyjs/mbelib">MBELib</A>
+software implementation with rather questionable origins. The MBELib use 
+may be interpreted as a patent violation. If you are ok with it, there 
+is <A HREF="install-softmbe.sh">a script</A> that adds MBELib support to 
+OpenWebRX. Run it as follows:
+</P>
+<PRE>sudo install-softmbe.sh</PRE>
+<P>
+After installing digital voice support by either method, visit 
+<I>"Settings | Feature Report"</I> page to verify that the installation 
+succeeded. You should now see digital voice buttons at the receiver web 
+page.
+</P>
+
+<A NAME="FAQ-SDRPLAY"><H3>My SDRplay device does not work reliably!</H3></A>
+<P>
+SDRplay devices and their clones are notoriously glitchy and require a 
+good power source for reliable operation. If you experience timeouts or 
+failures with these devices, try connecting them via a powered USB hub. 
+If this does not help, and you have a geniune SDRplay device (not a 
+clone),
+<A HREF="https://www.sdrplay.com/support/open.php">open a ticket</A>
+at the SDRplay website. OpenWebRX developers <B>cannot</B> help you 
+with SDRplay hardware issues.
+</P>
+
+<A NAME="FAQ-REQUESTS"><H3>Can you implement a feature I want?</H3></A>
+<P>
+In general, <B>no</B>. OpenWebRX is a non-profit project, developed by 
+very few people in their spare time. These developers will prioritize 
+features they find personally interesting, repeatedly requested by a 
+lot of people, or easy to implement.
+</P>
+<P>
+Having said that, there is high probablity that the feature you want is 
+either already implemented, or can be achieved by some other means, or 
+has been considered and avoided for some reason. Please, carefully read 
+this document, especially the <A HREF="#FAQ">FAQ section</A>.
+</P>
+<P>
+Also, since OpenWebRX is an open-source project, <B>nothing prevents you 
+from adding features you want on your own</B>. Take a look at the
+<A HREF="https://github.com/jketterl/openwebrx">original OpenWebRX source code</A>
+or the
+<A HREF="https://github.com/luarvique/openwebrx">OpenWebRX+ source code</A>
+and consider participating in the OpenWebRX development.
+</P>
+
+<A NAME="FAQ-PROFILES"><H3>How do I hide some profiles from users?</H3></A>
+<P>
+Since OpenWebRX is an <B>open</B> online receiver, it <B>does not</B> 
+let you hide profiles from the public. If you would like to have private 
+access to your receiver, the best option is to make it inaccessible from 
+the Internet.
+</P>
+<P>
+Having said that, there is an option to prevent users from changing 
+profiles on a specific SDR device connected to OpenWebRX+. It comes 
+useful if this SDR device performs background decoding and changes 
+profiles based on its own schedule. To enable this option, do the 
+following:
+</P>
+<OL>
+<LI><P>
+Go to <I>"Settings | General Settings | Receiver Limits | Magic Key"</I> 
+and set the magic key value you would like to use to <B>force</B> 
+switching profiles on a protected device.
+</P>
+<LI><P>
+Go to <I>"Settings | SDR Devices and Profiles | &lt;Device&gt;"</I>, 
+select <I>"Require magic key to switch profiles on this device"</I> from 
+the <I>"Additional Optional Settings"</I> and click on <SPAN 
+CLASS="Button">Add</SPAN>.
+</P>
+<LI><P>
+Make sure the <I>"Require magic key to switch profiles on this 
+device"</I> checkbox is checked, then click on <SPAN 
+CLASS="Button">Apply and Save</SPAN>.
+</P>
+</OL>
+<P>
+From now on, users can only change profiles on the device by providing 
+the preconfigured magic key value in the URL, as follows:
+</P>
+<PRE>http://openwebrx.receiver.org:8073/#<B>key=&lt;magic-key&gt;</B></PRE>
+
+<A NAME="FAQ-JUMP-ANY"><H3>How do I jump to any frequency?</H3></A>
+<P>
+Since OpenWebRX works in terms of "profiles", i.e. preconfigured ranges 
+of frequencies, you <B>cannot</B> jump to an arbitrary frequency because 
+that new frequency may require different profile settings. Also, other 
+users listening to the same profile may not appreciate you jumping to a 
+completely new frequency.
+</P>
+<P>
+Nevertheless, OpenWebRX+ does offer a way to "side-step" the current 
+profile, going to adjacent frequencies. In order to enable 
+side-stepping, do the following:
+</P>
+<OL>
+<LI><P>
+Go to <I>"Settings | General Settings | Receiver Limits"</I> and make 
+sure the <I>"Allow users to change center frequency"</I> checkbox is 
+checked.
+</P>
+<LI><P>
+If you would like to protect frequency changes with a magic key, enter 
+it in the adjacent <I>"Magic Key"</I> field.
+</P>
+<LI><P>
+Click on <SPAN CLASS="Button">Apply and Save</SPAN> to save changes.
+</P>
+</OL>
+<P>
+From now on, you can step outside the preconfigured frequency range by 
+right-clicking the large round arrows at the top of the receiver web 
+page. Mobile users, who do not have a mouse, can simply hold these large 
+round arrows with their finger for about a second.
+</P>
+<P>
+If a magic key is configured, you will only be able to side-step 
+profiles when providing that key in the URL, as follows:
+</P>
+<PRE>http://openwebrx.receiver.org:8073/#<B>key=&lt;magic-key&gt;</B></PRE>
+
+<A NAME="FAQ-ENTER-ANY"><H3>How do I enter any frequency?</H3></A>
+<P>
+Due to the way OpenWebRX operates, you <B>cannot</B> just enter any 
+frequency into the input field and expect it to work. The entered 
+frequency must be within the current profile to work. Please,
+<A HREF="#FAQ-JUMP-ANY">see above</A> for the reasons.
+</P>
+<P>
+For a special case where you have <A HREF="#FAQ-JUMP-ANY">allowed</A>
+OpenWebRX+ to step outside the preconfigured frequency range, entering
+an arbitrary frequency can be enabled with a
+<A HREF="#HOW-PLUGINS">JavaScript plugin</A>.
+</P>
+
+<A NAME="FAQ-CONFIG"><H3>Where are OpenWebRX configuration files?</H3></A>
+<P>
+If you wish to backup OpenWebRX configuration files, they are located as 
+follows:
+</P>
+<PRE>
+/var/lib/openwebrx/settings.json
+/var/lib/openwebrx/bookmarks.json
+/var/lib/openwebrx/users.json
+/etc/openwebrx/openwebrx.conf
+/etc/openwebrx/bands.json
+</PRE>
+<P>
+You should <B>avoid editing configuration files by hand</B>, since they 
+are normally modified via web-based settings interface. If you do decide 
+to edit configuration files, always <B>make sure you have backup 
+copies</B> first. After updating configuration files, restart OpenWebRX 
+with:
+</P>
+<PRE>sudo systemctl restart openwebrx</PRE>
+
+<A NAME="FAQ-HTTPS"><H3>How do I make OpenWebRX use HTTPS protocol?</H3></A>
+<P>
+While the original OpenWebRX version does not support HTTPS protocol, 
+OpenWebRX+ does. In order to enable HTTPS in OpenWebRX+, <B>you will 
+need the SSL certificate file (<I>cert.pem</I>) and the key for it 
+(<I>key.pem</I>)</B>. Once you have these two files, do the following:
+</P>
+<PRE>
+sudo cp &lt;cert.pem&gt; /etc/openwebrx/cert.pem
+sudo cp &lt;key.pem&gt; /etc/openwebrx/key.pem
+sudo chown openwebrx:openwebrx /etc/openwebrx/cert.pem
+sudo chown openwebrx:openwebrx /etc/openwebrx/key.pem
+sudo chmod 660 /etc/openwebrx/cert.pem
+sudo chmod 660 /etc/openwebrx/key.pem
+sudo systemctl restart openwebrx
+</PRE>
+
+<A NAME="FAQ-BOOKMARKS"><H3>How do I get rid of default yellow bookmarks?</H3></A>
+<P>
+OpenWebRX+ comes with predefined bookmarks for some common frequencies, 
+such as weather information, CB channels, and so on. If you do not like 
+to see these bookmarks, delete them and restart OpenWebRX+ as follows:
+</P>
+<PRE>
+sudo rm -f /etc/openwebrx/bookmarks.d/*
+sudo systemctl restart openwebrx
+</PRE>
+<P>
+If you only want to get rid of <B>some</B> bookmarks, delete or edit 
+individual files in the <I>/etc/openwebrx/bookmarks.d</I> folder.
+</P>
+
+<A NAME="FAQ-TEMPERATURE"><H3>My CPU temperature is wrong!</H3></A>
+<P>
+By default, OpenWebRX+ tries to determine the correct temperature sensor 
+automatically. This works 99% of the time, but the remaining 1% may see
+their temperatures way outside the realistic range. To tell OpenWebRX+
+which sensor to use, edit the following file:
+<PRE>
+/etc/openwebrx/openwebrx.conf
+</PRE>
+adding the following line to the <I>[core]</I> section:
+<PRE>
+[core]
+temperature_sensor=<B>&lt;full-path-to-your-temperature-sensor&gt;</B>
+</PRE>
+Then save the edited file and restart OpenWebRX+.
+</P>
+
+<HR>
+<I>&copy;2023-2024 <A HREF="https://fms.komkon.org/">Marat Fayzullin</A>
+</BODY>
+</HTML>
