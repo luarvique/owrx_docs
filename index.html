@@ -229,7 +229,7 @@ occurs in a Telegram chat.
   <LI><A HREF="#INSTALL-DOCKER">Using Docker Images</A>
   <LI><A HREF="#INSTALL-SOURCES">Building OpenWebRX+ from Sources</A>
 </UL>
-<LI><A HREF="#HardwareGuide"><B>Choosing Hardware</B></A>
+<LI><A HREF="#HardwareGuide"><B>Choosing SDR Device</B></A>
 <UL>
   <LI><A HREF="#INSTALL-RTLSDR">RTL-SDR Devices</A>
   <LI><A HREF="#INSTALL-SDRPLAY">SDRPlay (RSP) Devices</A>
@@ -1259,8 +1259,7 @@ flight.
 <A NAME="InstallGuide"><H2>Installing OpenWebRX+</H2></A>
 <P>
 This section provides step by step instructions for installing 
-OpenWebRX+ and choosing the right hardware for it. There are prebuilt 
-OpenWebRX+ packages for
+OpenWebRX+. There are prebuilt OpenWebRX+ packages for
 <A HREF="#INSTALL-UBUNTU-22">Ubuntu 22.04</A>,
 <A HREF="#INSTALL-UBUNTU-24">Ubuntu 24.04</A>,
 <A HREF="#INSTALL-BULLSEYE">Debian Bullseye</A>, and
@@ -1440,7 +1439,7 @@ as follows:
 sudo dpkg -i ./owrx-output/*.deb
 </PRE>
 
-<A NAME="HardwareGuide"><H2>Choosing Hardware</H2></A>
+<A NAME="HardwareGuide"><H2>Choosing SDR Device</H2></A>
 <P>
 OpenWebRX supports multiple SDR receiver devices at the same time. The 
 total number is mainly limited by your computer performance. In this 
@@ -1481,7 +1480,7 @@ comparison of the most common SDR devices:
 <TH>Resolution</TH>
 <TD>8bit</TD>
 <TD>8bit</TD>
-<TD>14bit</TD>
+<TD>&leq; 14bit</TD>
 <TD>12bit</TD>
 <TD>18bit</TD>
 <TD>12bit</TD>
@@ -1504,10 +1503,10 @@ OpenWebRX.
 <A NAME="INSTALL-RTLSDR"><H3>RTL-SDR Devices</H3></A>
 <P>
 RTL-SDR is a large family of USB-connected SDR receivers based on the 
-<I>RTL2832U</I> and similar <I>Realtek</I> chipsets. Under regular 
-cicrumstances, these devices allow reception in the 24MHz-1766MHz range. 
-They can also be persuaded to work in the 500kHz-14MHz range, although 
-the reception quality is not very good there.
+<I>Realtek RTL2832U</I> chipset. Under regular cicrumstances, these 
+devices allow reception in the 24MHz-1766MHz range. They can also be 
+persuaded to work in the 500kHz-14MHz range, although the reception 
+quality is not very good there.
 </P>
 <UL>
 
@@ -1532,8 +1531,7 @@ built-in transverter. It may require updated RTL-SDR drivers though. If
 your current drivers do not support <I>RTLSDRv4</I>, you may have to 
 build and install the new drivers as follows:
 <PRE CLASS="Shell">
-sudo apt install libusb-1.0-0-dev git cmake build-essential pkg-config 
-debhelper
+sudo apt install libusb-1.0-0-dev git cmake build-essential pkg-config debhelper
 git clone https://github.com/rtlsdrblog/rtl-sdr-blog
 cd rtl-sdr-blog
 sudo dpkg-buildpackage -b --no-sign
