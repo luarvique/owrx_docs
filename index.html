@@ -25,6 +25,7 @@
     --fg-heading: #C04040;
     --fg-pre: #000040;
     --fg-code: #000060;
+    --bg-code: #FFFFFF;
   }
 
   @media (prefers-color-scheme: dark)
@@ -41,6 +42,7 @@
       --fg-heading: #BAF0B4;
       --fg-pre: #A1D99E;
       --fg-code: #ffff9f;
+      --bg-code: #000000;
     }
     img
     {
@@ -89,6 +91,23 @@
     text-align:       center;
     font-family:      monospace;
     color:            var(--fg-code);
+  }
+
+  .Shell
+  {
+    background:        var(--bg-code);
+    color:             var(--fg-code);
+    border:            1px solid var(--fg-code);
+    border-left:       3px solid var(--fg-code);
+    page-break-inside: avoid;
+    font-family:       monospace;
+    line-height:       1.6;
+    margin-bottom:     1.6em;
+    max-width:         100%;
+    overflow:          auto;
+    padding:           1em 1.5em;
+    display:           block;
+    word-wrap:         break-word;
   }
 
   .Admin
@@ -199,6 +218,23 @@ occurs in a Telegram chat.
   <LI><A HREF="#HOW-APRS">Tracking Packet Radio (APRS)</A>
   <LI><A HREF="#HOW-AIS">Tracking Ships (AIS)</A>
   <LI><A HREF="#HOW-ADSB">Tracking Airplanes (ADS-B)</A>
+</UL>
+<LI><A HREF="#InstallGuide"><B>Installing OpenWebRX+</B></A>
+<UL>
+  <LI><A HREF="#INSTALL-UBUNTU-22">Installing on Ubuntu 22.04</A>
+  <LI><A HREF="#INSTALL-UBUNTU-24">Installing on Ubuntu 24.04</A>
+  <LI><A HREF="#INSTALL-BULLSEYE">Installing on Debian Bullseye</A>
+  <LI><A HREF="#INSTALL-BOOKWORM">Installing on Debian Bookworm</A>
+  <LI><A HREF="#INSTALL-RASPBERRY">Using Raspberry Pi SD Images</A>
+  <LI><A HREF="#INSTALL-DOCKER">Using Docker Images</A>
+  <LI><A HREF="#INSTALL-SOURCES">Building OpenWebRX+ from Sources</A>
+</UL>
+<LI><A HREF="#HardwareGuide"><B>Choosing Hardware</B></A>
+<UL>
+  <LI><A HREF="#INSTALL-RTLSDR">RTL-SDR Devices</A>
+  <LI><A HREF="#INSTALL-SDRPLAY">SDRPlay (RSP) Devices</A>
+  <LI><A HREF="#INSTALL-AIRSPY">Airspy Devices</A>
+  <LI><A HREF="#INSTALL-HL2">Hermes Lite 2</A>
 </UL>
 <LI><A HREF="#AdminFeatures"><B>Administrator Features</B></A>
 <UL>
@@ -1220,6 +1256,354 @@ website, where you can find airplane photos and other facts about each
 flight.
 </P>
 
+<A NAME="InstallGuide"><H2>Installing OpenWebRX+</H2></A>
+<P>
+This section provides step by step instructions for installing 
+OpenWebRX+ and choosing the right hardware for it. There are prebuilt 
+OpenWebRX+ packages for
+<A HREF="#INSTALL-UBUNTU-22">Ubuntu 22.04</A>,
+<A HREF="#INSTALL-UBUNTU-24">Ubuntu 24.04</A>,
+<A HREF="#INSTALL-BULLSEYE">Debian Bullseye</A>, and
+<A HREF="#INSTALL-BOOKWORM">Debian Bookworm</A>.
+There are also pre-built
+<A HREF="#INSTALL-RASPBERRY">SD card images for Raspberry Pi</A>
+users, as well as
+<A HREF="#INSTALL-DOCKER">Docker images</A>.
+If you are running a different version of Linux and have sufficient 
+experience, you can try
+<A HREF="#INSTALL-SOURCES">compiling OpenWebRX+ from sources</A>.
+</P>
+
+<A NAME="INSTALL-UBUNTU-22"><H3>Installing on Ubuntu 22.04</H3></A>
+<P>
+Start by adding the OpenWebRX+ repository, as well as the original 
+OpenWebRX repository. You will be asked to enter your Linux user 
+password:
+</P>
+<PRE CLASS="Shell">
+curl -s https://luarvique.github.io/ppa/openwebrx-plus.gpg | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/openwebrx-plus.gpg
+sudo tee /etc/apt/sources.list.d/openwebrx-plus.list <<<"deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/ubuntu ./"
+curl -s https://repo.openwebrx.de/debian/key.gpg.txt | sudo gpg --yes --dearmor -o /usr/share/keyrings/openwebrx.gpg
+sudo tee /etc/apt/sources.list.d/openwebrx.list <<<"deb [signed-by=/usr/share/keyrings/openwebrx.gpg] https://repo.openwebrx.de/ubuntu/ jammy main"
+</PRE>
+<P>
+Once the repositories are added, install OpenWebRX+ as follows:
+</P>
+<PRE CLASS="Shell">
+sudo apt update
+sudo apt install openwebrx
+</PRE>
+<P>
+If you already have an older version of OpenWebRX installed, do this 
+instead:
+</P>
+<PRE CLASS="Shell">
+sudo apt update
+sudo apt upgrade
+</PRE>
+
+<A NAME="INSTALL-UBUNTU-24"><H3>Installing on Ubuntu 24.04</H3></A>
+<P>
+Start by adding the OpenWebRX+ repository, entering your Linux user 
+password when asked:
+</P>
+<PRE CLASS="Shell">
+curl -s https://luarvique.github.io/ppa/openwebrx-plus.gpg | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/openwebrx-plus.gpg
+sudo tee /etc/apt/sources.list.d/openwebrx-plus.list <<<"deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/ubuntu ./"
+</PRE>
+<P>
+Once the repository is added, install OpenWebRX+ as follows:
+</P>
+<PRE CLASS="Shell">
+sudo apt update
+sudo apt install openwebrx
+</PRE>
+<P>
+If you already have an older version of OpenWebRX installed, do this 
+instead:
+</P>
+<PRE CLASS="Shell">
+sudo apt update
+sudo apt upgrade
+</PRE>
+
+<A NAME="INSTALL-BULLSEYE"><H3>Installing on Debian Bullseye</H3></A>
+<P>
+Start by adding the OpenWebRX+ repository, as well as the original 
+OpenWebRX repository. You will be asked to enter your Linux user 
+password:
+</P>
+<PRE CLASS="Shell">
+curl -s https://luarvique.github.io/ppa/openwebrx-plus.gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/openwebrx-plus.gpg
+sudo tee /etc/apt/sources.list.d/openwebrx-plus.list <<<"deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/debian ./"
+curl -s https://repo.openwebrx.de/debian/key.gpg.txt | sudo gpg --yes --dearmor -o /usr/share/keyrings/openwebrx.gpg
+sudo tee /etc/apt/sources.list.d/openwebrx.list <<<"deb [signed-by=/usr/share/keyrings/openwebrx.gpg] https://repo.openwebrx.de/debian/ bullseye main"
+</PRE>
+<P>
+Once the repositories are added, install OpenWebRX+ as follows:
+</P>
+<PRE CLASS="Shell">
+sudo apt update
+sudo apt install openwebrx
+</PRE>
+<P>
+If you already have an older version of OpenWebRX installed, do this 
+instead:
+</P>
+<PRE CLASS="Shell">
+sudo apt update
+sudo apt upgrade
+</PRE>
+
+<A NAME="INSTALL-BOOKWORM"><H3>Installing on Debian Bookworm</H3></A>
+<P>
+Start by adding the OpenWebRX+ repository, entering your Linux user 
+password when asked:
+</P>
+<PRE CLASS="Shell">
+curl -s https://luarvique.github.io/ppa/openwebrx-plus.gpg | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/openwebrx-plus.gpg
+sudo tee /etc/apt/sources.list.d/openwebrx-plus.list <<<"deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/bookworm ./"
+</PRE>
+<P>
+Once the repository is added, install OpenWebRX+ as follows:
+</P>
+<PRE CLASS="Shell">
+sudo apt update
+sudo apt install openwebrx
+</PRE>
+<P>
+If you already have an older version of OpenWebRX installed, do this 
+instead:
+</P>
+<PRE CLASS="Shell">
+sudo apt update
+sudo apt upgrade
+</PRE>
+
+<A NAME="INSTALL-RASPBERRY"><H3>Using Raspberry Pi SD Images</H3></A>
+<P>
+If you have a Raspberry Pi, you can use
+<A HREF="https://github.com/luarvique/openwebrx/releases/">pre-built SD card images</A> 
+containing a clean OpenWebRX+ installation with all the optional 
+packages. The 32bit image should run on all devices except for RPI5. The 
+64bit image should run on all devices except for RPI1, RPI2, and 
+RPIZero1. Both images support all common SDR devices out of the box. The 
+RTL-SDR and SDRPlay devices have been confirmed to work with no 
+additional modifications to the images.
+</P>
+<P>
+The images come with no default passwords. You will be asked to create 
+one on the first startup.
+</P>
+<P>
+Please note that these images come without the software support for 
+digital modes (DMR, NXDN, etc), since the software decoder for these 
+modes (mbelib) has questionable origins. In order to enable digital 
+modes in these images, ssh into the user account you created while 
+installing the image and type:
+</P>
+<PRE CLASS="Shell">
+sudo install-softmbe.sh
+</PRE>
+
+<A NAME="INSTALL-DOCKER"><H3>Using Docker Images</H3></A>
+<P>
+TODO
+</P>
+
+<A NAME="INSTALL-SOURCES"><H3>Compiling OpenWebRX+ from Sources</H3></A>
+<P>
+<B>Please, do not attempt building OpenWebRX+ from sources, unless you 
+know exactly what you are doing!</B> If you feel confident enough 
+though, and have a Debian-like Linux, start by cloning OpenWebRX+ 
+repository and running the <I>"buildall.sh"</I> script, as follows:
+</P>
+<PRE CLASS="Shell">
+git clone https://github.com/luarvique/openwebrx.git
+cd openwebrx
+./buildall.sh
+</PRE>
+<P>
+The script will attempt to fetch and build all OpenWebRX+ dependencies 
+prior to building OpenWebRX+ itself. It will also build a bunch of 
+optional packages. The build process uses the <I>"owrx-build"</I> folder 
+to store intermediate files. The final .deb packages will be deposited 
+into the <I>"owrx-output"</I> folder.
+</P>
+<P>
+If the build breaks, it is up to use to find and fix the cause. It is 
+expected that you know how to find and rectify build issues. Once the 
+build successfully finishes, you can install the freshly built packages 
+as follows:
+</P>
+<PRE CLASS="Shell">
+sudo dpkg -i ./owrx-output/*.deb
+</PRE>
+
+<A NAME="HardwareGuide"><H2>Choosing Hardware</H2></A>
+<P>
+OpenWebRX supports multiple SDR receiver devices at the same time. The 
+total number is mainly limited by your computer performance. In this 
+section, we are going to discuss the most common SDR devices, their 
+capabilities, and how to set them up with OpenWebRX. Here is a short 
+comparison of the most common SDR devices: 
+</P>
+
+<TABLE WIDTH="100%" STYLE="padding:15px;border:1px solid;">
+<TR>
+<TH>Device</TH>
+<TD><A HREF="#INSTALL-RTLSDR">RTLSDRv3</A></TD>
+<TD><A HREF="#INSTALL-RTLSDR">RTLSDRv4</A></TD>
+<TD><A HREF="#INSTALL-SDRPLAY">SDRPlay</A></TD>
+<TD><A HREF="#INSTALL-AIRSPY">Airspy R2</A></TD>
+<TD><A HREF="#INSTALL-AIRSPY">Airspy HF+</A></TD>
+<TD><A HREF="#INSTALL-HL2">Hermes Lite 2</A></TD>
+</TR>
+<TR>
+<TH>Range</TH>
+<TD>500kHz-14MHz,<BR>24MHz-1766MHz</TD>
+<TD>500kHz-1766MHz</TD>
+<TD>1kHz-2000MHz</TD>
+<TD>24MHz-1700MHz</TD>
+<TD>500Hz-31MHz,<BR>64MHz-260MHz</TD>
+<TD>130kHz-30MHz</TD>
+</TR>
+<TR>
+<TH>Bandwidth</TH>
+<TD>2.4Msps</TD>
+<TD>2.4Msps</TD>
+<TD>&leq; 10Msps</TD>
+<TD>10Msps</TD>
+<TD>768ksps</TD>
+<TD>4 x 384ksps</TD>
+</TR>
+<TR>
+<TH>Resolution</TH>
+<TD>8bit</TD>
+<TD>8bit</TD>
+<TD>14bit</TD>
+<TD>12bit</TD>
+<TD>18bit</TD>
+<TD>12bit</TD>
+</TR>
+<TR>
+<TH>Interface</TH>
+<TD>USB</TD>
+<TD>USB</TD>
+<TD>USB</TD>
+<TD>USB</TD>
+<TD>USB</TD>
+<TD>Ethernet</TD>
+</TR>
+</TABLE>
+<P>
+See below for instructions on making these SDR devices work with 
+OpenWebRX.
+</P>
+
+<A NAME="INSTALL-RTLSDR"><H3>RTL-SDR Devices</H3></A>
+<P>
+RTL-SDR is a large family of USB-connected SDR receivers based on the 
+<I>RTL2832U</I> and similar <I>Realtek</I> chipsets. Under regular 
+cicrumstances, these devices allow reception in the 24MHz-1766MHz range. 
+They can also be persuaded to work in the 500kHz-14MHz range, although 
+the reception quality is not very good there.
+</P>
+<UL>
+
+<LI><B>RTLSDRv3</B>
+<P>
+The most common RTL-SDR device is
+<A HREF="https://www.rtl-sdr.com/V3/">RTLSDRv3</A> from
+<A HREF="https://www.rtl-sdr.com/">RTL-SDR Blog</A>.
+In a lot of cases, the device driver for this device is already 
+installed in your Linux system. If it is not, you can install it with 
+the following command:
+<PRE CLASS="Shell">apt install rtl-sdr librtlsdr0 librtlsdr-dev</pre>
+</P>
+
+<LI><B>RTLSDRv4</B>
+<P>
+A somewhat better RTL-SDR version is
+<A HREF="https://www.rtl-sdr.com/V4/">RTLSDRv4</A> from
+<A HREF="https://www.rtl-sdr.com/">RTL-SDR Blog</A>.
+This device officially supports the 500kHz-24MHz frequency range via the 
+built-in transverter. It may require updated RTL-SDR drivers though. If 
+your current drivers do not support <I>RTLSDRv4</I>, you may have to 
+build and install the new drivers as follows:
+<PRE CLASS="Shell">
+sudo apt install libusb-1.0-0-dev git cmake build-essential pkg-config 
+debhelper
+git clone https://github.com/rtlsdrblog/rtl-sdr-blog
+cd rtl-sdr-blog
+sudo dpkg-buildpackage -b --no-sign
+cd ..
+sudo dpkg -i librtlsdr0_*.deb librtlsdr-dev_*.deb rtl-sdr_*.deb
+</PRE>
+</P>
+
+<LI><B>Using Shortware Frequencies with RTL-SDR</B>
+<P>
+With RTLSDRv4 devices, you do not need to do anything special in order 
+to use the 500kHz-24MHz frequency range. These frequencies will work out 
+of the box, as long as you are using the correct device driver.
+</P>
+<P>
+With RTLSDRv3 and similar devices, you will have to add the <I>"Direct 
+Sampling"</I> option to each shortwave profile and set its value to 
+<I>"Direct Sampling (Q branch)"</I>. With this option enabled, most 
+RTL-SDR devices will be able to receive in the 500kHz-14MHz range. The 
+14MHz-24MHz range will remain unusable.
+</P>
+
+<LI><B>Connecting Multiple RTL-SDR Devices</B>
+<P>
+When using multiple RTL-SDR devices with OpenWebRX, you will have to 
+assign each of them a unique serial number with the following shell 
+command:
+<PRE CLASS="Shell">
+rtl_eeprom -d &lt;device-index&gt; -s &lt;serial-number&gt;
+</PRE>
+Once assigned, the serial number will be persistently stored within
+each device. To make OpenWebRX distinguish between your devices, add
+the <I>"Device Identifier"</I> option to each device and set it to
+device's unique serial number.
+</P>
+<P>
+To see indices and serial numbers of your RTL-SDR devices, run the same
+command without arguments:
+<PRE CLASS="Shell">
+rtl_eeprom
+</PRE>
+</P>
+</UL>
+
+<A NAME="INSTALL-SDRPLAY"><H3>SDRPlay (RSP) Devices</H3></A>
+<P>
+RSP is a family of USB-connected SDR receivers based on the <I>Mirics 
+MSI001 / MSI2500</I> chipset. The official RSP devices are made and sold 
+by
+<A HREF="https://www.sdrplay.com/">SDRPlay</A>,
+but since the basic schematics are standard, there are many inferior, 
+but cheaper Chinese RSP clones on the market. These devices are capable 
+of continuous reception in the 0-2GHz range, with bandwidth of up to 
+6Msps. This bandwith can be further widened to 10Msps at the cost of 
+losing some bit resolution.
+</P>
+<P>
+TODO
+</P>
+
+<A NAME="INSTALL-AIRSPY"><H3>Airspy Devices</H3></A>
+<P>
+TODO
+</P>
+
+<A NAME="INSTALL-HL2"><H3>Hermes Lite 2</H3></A>
+<P>
+TODO
+</P>
+
 <A NAME="AdminFeatures"><H2>Administrator Features</H2></A>
 <P>
 This section discusses administering an OpenWebRX server and how it can 
@@ -1271,7 +1655,7 @@ band plan via web-based settings at the moment. After editing and saving
 the file, restart OpenWebRX as follows and make sure there is a green 
 bookmark at the frequency you added:
 </P>
-<PRE>sudo systemctl restart openwebrx</PRE>
+<PRE CLASS="Shell">sudo systemctl restart openwebrx</PRE>
 
 <A NAME="HOW-SCHEDULED"><H3>Scheduled Decoding</H3></A>
 <P>
@@ -1850,7 +2234,7 @@ help.
 <LI><P>
 If you are familiar with Linux, <B>look at OpenWebRX logs</B> by typing 
 the following command:
-<PRE>sudo journalctl -u openwebrx</PRE>
+<PRE CLASS="Shell">sudo journalctl -u openwebrx</PRE>
 </P>
 <LI><P>
 If you <B>need even more log output</B>, edit the following file:
@@ -1912,7 +2296,7 @@ may be interpreted as a patent violation. If you are ok with it, there
 is <A HREF="install-softmbe.sh">a script</A> that adds MBELib support to 
 OpenWebRX. Run it as follows:
 </P>
-<PRE>sudo install-softmbe.sh</PRE>
+<PRE CLASS="Shell">sudo install-softmbe.sh</PRE>
 <P>
 After installing digital voice support by either method, visit 
 <I>"Settings | Feature Report"</I> page to verify that the installation 
@@ -2064,7 +2448,7 @@ to edit configuration files, always <B>make sure you have backup
 copies</B> first. After updating configuration files, restart OpenWebRX 
 with:
 </P>
-<PRE>sudo systemctl restart openwebrx</PRE>
+<PRE CLASS="Shell">sudo systemctl restart openwebrx</PRE>
 
 <A NAME="FAQ-HTTPS"><H3>How do I make OpenWebRX use HTTPS protocol?</H3></A>
 <P>
@@ -2073,7 +2457,7 @@ OpenWebRX+ does. In order to enable HTTPS in OpenWebRX+, <B>you will
 need the SSL certificate file (<I>cert.pem</I>) and the key for it 
 (<I>key.pem</I>)</B>. Once you have these two files, do the following:
 </P>
-<PRE>
+<PRE CLASS="Shell">
 sudo cp &lt;cert.pem&gt; /etc/openwebrx/cert.pem
 sudo cp &lt;key.pem&gt; /etc/openwebrx/key.pem
 sudo chown openwebrx:openwebrx /etc/openwebrx/cert.pem
@@ -2089,7 +2473,7 @@ OpenWebRX+ comes with predefined bookmarks for some common frequencies,
 such as weather information, CB channels, and so on. If you do not like 
 to see these bookmarks, delete them and restart OpenWebRX+ as follows:
 </P>
-<PRE>
+<PRE CLASS="Shell">
 sudo rm -f /etc/openwebrx/bookmarks.d/*
 sudo systemctl restart openwebrx
 </PRE>
