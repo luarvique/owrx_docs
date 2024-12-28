@@ -129,8 +129,11 @@
 <CENTER>
 <H1>OpenWebRX+</H1>
 <H2>A Better Online SDR Radio</H2>
-<A HREF="#Install">Installation</A>&nbsp;|&nbsp;
-<A HREF="#Docs">Documentation</A>&nbsp;|&nbsp;
+<A HREF="#TOC">Contents</A>&nbsp;|&nbsp;
+<A HREF="#Docs">Usage</A>&nbsp;|&nbsp;
+<A HREF="#InstallGuide">Installation</A>&nbsp;|&nbsp;
+<A HREF="#HardwareGuide">Hardware</A>&nbsp;|&nbsp;
+<A HREF="#AdminFeatures">Advanced</A>&nbsp;|&nbsp;
 <A HREF="#FAQ">FAQ</A>
 </CENTER>
 
@@ -225,6 +228,7 @@ occurs in a Telegram chat.
   <LI><A HREF="#INSTALL-UBUNTU-24">Installing on Ubuntu 24.04</A>
   <LI><A HREF="#INSTALL-BULLSEYE">Installing on Debian Bullseye</A>
   <LI><A HREF="#INSTALL-BOOKWORM">Installing on Debian Bookworm</A>
+  <LI><A HREF="#INSTALL-PACKAGES">Installing from Packages</A>
   <LI><A HREF="#INSTALL-RASPBERRY">Using Raspberry Pi SD Images</A>
   <LI><A HREF="#INSTALL-DOCKER">Using Docker Images</A>
   <LI><A HREF="#INSTALL-SOURCES">Building OpenWebRX+ from Sources</A>
@@ -1286,20 +1290,9 @@ curl -s https://repo.openwebrx.de/debian/key.gpg.txt | sudo gpg --yes --dearmor 
 sudo tee /etc/apt/sources.list.d/openwebrx.list <<<"deb [signed-by=/usr/share/keyrings/openwebrx.gpg] https://repo.openwebrx.de/ubuntu/ jammy main"
 </PRE>
 <P>
-Once the repositories are added, install OpenWebRX+ as follows:
+Once the repositories are added,
+<A HREF="#INSTALL-PACKAGES">install OpenWebRX+ from packages</A>.
 </P>
-<PRE CLASS="Shell">
-sudo apt update
-sudo apt install openwebrx
-</PRE>
-<P>
-If you already have an older version of OpenWebRX installed, do this 
-instead:
-</P>
-<PRE CLASS="Shell">
-sudo apt update
-sudo apt upgrade
-</PRE>
 
 <A NAME="INSTALL-UBUNTU-24"><H3>Installing on Ubuntu 24.04</H3></A>
 <P>
@@ -1311,20 +1304,9 @@ curl -s https://luarvique.github.io/ppa/openwebrx-plus.gpg | sudo gpg --yes --de
 sudo tee /etc/apt/sources.list.d/openwebrx-plus.list <<<"deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/ubuntu ./"
 </PRE>
 <P>
-Once the repository is added, install OpenWebRX+ as follows:
+Once the repository is added,
+<A HREF="#INSTALL-PACKAGES">install OpenWebRX+ from packages</A>.
 </P>
-<PRE CLASS="Shell">
-sudo apt update
-sudo apt install openwebrx
-</PRE>
-<P>
-If you already have an older version of OpenWebRX installed, do this 
-instead:
-</P>
-<PRE CLASS="Shell">
-sudo apt update
-sudo apt upgrade
-</PRE>
 
 <A NAME="INSTALL-BULLSEYE"><H3>Installing on Debian Bullseye</H3></A>
 <P>
@@ -1339,20 +1321,9 @@ curl -s https://repo.openwebrx.de/debian/key.gpg.txt | sudo gpg --yes --dearmor 
 sudo tee /etc/apt/sources.list.d/openwebrx.list <<<"deb [signed-by=/usr/share/keyrings/openwebrx.gpg] https://repo.openwebrx.de/debian/ bullseye main"
 </PRE>
 <P>
-Once the repositories are added, install OpenWebRX+ as follows:
+Once the repositories are added,
+<A HREF="#INSTALL-PACKAGES">install OpenWebRX+ from packages</A>.
 </P>
-<PRE CLASS="Shell">
-sudo apt update
-sudo apt install openwebrx
-</PRE>
-<P>
-If you already have an older version of OpenWebRX installed, do this 
-instead:
-</P>
-<PRE CLASS="Shell">
-sudo apt update
-sudo apt upgrade
-</PRE>
 
 <A NAME="INSTALL-BOOKWORM"><H3>Installing on Debian Bookworm</H3></A>
 <P>
@@ -1364,7 +1335,14 @@ curl -s https://luarvique.github.io/ppa/openwebrx-plus.gpg | sudo gpg --yes --de
 sudo tee /etc/apt/sources.list.d/openwebrx-plus.list <<<"deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/bookworm ./"
 </PRE>
 <P>
-Once the repository is added, install OpenWebRX+ as follows:
+Once the repository is added,
+<A HREF="#INSTALL-PACKAGES">install OpenWebRX+ from packages</A>.
+</P>
+
+<A NAME="INSTALL-PACKAGES"><H3>Installing from Packages</H3></A>
+<P>
+Once you have all required package repositories added, install 
+OpenWebRX+ as follows:
 </P>
 <PRE CLASS="Shell">
 sudo apt update
@@ -1377,6 +1355,13 @@ instead:
 <PRE CLASS="Shell">
 sudo apt update
 sudo apt upgrade
+</PRE>
+<P>
+To make sure OpenWebRX+ is running, direct your local web browser to the 
+following address and see if OpenWebRX+ web interface shows up there:
+</P>
+<PRE>
+http://localhost:8073/
 </PRE>
 
 <A NAME="INSTALL-RASPBERRY"><H3>Using Raspberry Pi SD Images</H3></A>
@@ -1415,7 +1400,7 @@ TODO
 <B>Please, do not attempt building OpenWebRX+ from sources, unless you 
 know exactly what you are doing!</B> If you feel confident enough 
 though, and have a Debian-like Linux, start by cloning OpenWebRX+ 
-repository and running the <I>"buildall.sh"</I> script, as follows:
+repository and running the <I>"buildall.sh"</I> script as follows:
 </P>
 <PRE CLASS="Shell">
 git clone https://github.com/luarvique/openwebrx.git
@@ -1426,14 +1411,14 @@ cd openwebrx
 The script will attempt to fetch and build all OpenWebRX+ dependencies 
 prior to building OpenWebRX+ itself. It will also build a bunch of 
 optional packages. The build process uses the <I>"owrx-build"</I> folder 
-to store intermediate files. The final .deb packages will be deposited 
-into the <I>"owrx-output"</I> folder.
+to store intermediate files. The final <I>.deb</I> packages will be 
+deposited into the <I>"owrx-output"</I> folder.
 </P>
 <P>
-If the build breaks, it is up to use to find and fix the cause. It is 
-expected that you know how to find and rectify build issues. Once the 
-build successfully finishes, you can install the freshly built packages 
-as follows:
+<B>If the build breaks, it is up to you to find and fix the cause.</B> 
+It is expected that you know how to find and rectify build issues. Once 
+the build successfully finishes, you can install the freshly built 
+packages as follows:
 </P>
 <PRE CLASS="Shell">
 sudo dpkg -i ./owrx-output/*.deb
@@ -1448,50 +1433,54 @@ capabilities, and how to set them up with OpenWebRX. Here is a short
 comparison of the most common SDR devices: 
 </P>
 
-<TABLE WIDTH="100%" STYLE="padding:15px;border:1px solid;">
-<TR>
+<TABLE WIDTH="100%" STYLE="padding:15px;border:1px solid;background-color:white;">
+<TR STYLE="background-color:#D0D0FF;">
 <TH>Device</TH>
-<TD><A HREF="#INSTALL-RTLSDR">RTLSDRv3</A></TD>
-<TD><A HREF="#INSTALL-RTLSDR">RTLSDRv4</A></TD>
-<TD><A HREF="#INSTALL-SDRPLAY">SDRPlay</A></TD>
-<TD><A HREF="#INSTALL-AIRSPY">Airspy R2</A></TD>
-<TD><A HREF="#INSTALL-AIRSPY">Airspy HF+</A></TD>
-<TD><A HREF="#INSTALL-HL2">Hermes Lite 2</A></TD>
-</TR>
-<TR>
 <TH>Range</TH>
-<TD>500kHz-14MHz,<BR>24MHz-1766MHz</TD>
-<TD>500kHz-1766MHz</TD>
-<TD>1kHz-2000MHz</TD>
-<TD>24MHz-1700MHz</TD>
-<TD>500Hz-31MHz,<BR>64MHz-260MHz</TD>
-<TD>130kHz-30MHz</TD>
-</TR>
-<TR>
 <TH>Bandwidth</TH>
-<TD>2.4Msps</TD>
-<TD>2.4Msps</TD>
-<TD>&leq; 10Msps</TD>
-<TD>10Msps</TD>
-<TD>768ksps</TD>
-<TD>4 x 384ksps</TD>
-</TR>
-<TR>
 <TH>Resolution</TH>
-<TD>8bit</TD>
-<TD>8bit</TD>
-<TD>&leq; 14bit</TD>
-<TD>12bit</TD>
-<TD>18bit</TD>
-<TD>12bit</TD>
+<TH>Interface</TH>
 </TR>
 <TR>
-<TH>Interface</TH>
+<TD><A HREF="#INSTALL-RTLSDR">RTLSDRv3</A></TD>
+<TD>500kHz-14MHz, 24MHz-1766MHz</TD>
+<TD>2.4Msps</TD>
+<TD>8bit</TD>
 <TD>USB</TD>
+</TR>
+<TR>
+<TD><A HREF="#INSTALL-RTLSDR">RTLSDRv4</A></TD>
+<TD>500kHz-1766MHz</TD>
+<TD>2.4Msps</TD>
+<TD>8bit</TD>
 <TD>USB</TD>
+</TR>
+<TR>
+<TD><A HREF="#INSTALL-SDRPLAY">SDRPlay</A></TD>
+<TD>1kHz-2000MHz</TD>
+<TD>&leq; 10Msps</TD>
+<TD>&leq; 14bit</TD>
 <TD>USB</TD>
+</TR>
+<TR>
+<TD><A HREF="#INSTALL-AIRSPY">Airspy R2</A></TD>
+<TD>24MHz-1700MHz</TD>
+<TD>10Msps</TD>
+<TD>12bit</TD>
 <TD>USB</TD>
+</TR>
+<TR>
+<TD><A HREF="#INSTALL-AIRSPY">Airspy HF+</A></TD>
+<TD>500Hz-31MHz, 64MHz-260MHz</TD>
+<TD>768ksps</TD>
+<TD>18bit</TD>
 <TD>USB</TD>
+</TR>
+<TR>
+<TD><A HREF="#INSTALL-HL2">Hermes Lite 2</A></TD>
+<TD>130kHz-30MHz</TD>
+<TD>4 x 384ksps</TD>
+<TD>12bit</TD>
 <TD>Ethernet</TD>
 </TR>
 </TABLE>
@@ -1518,7 +1507,9 @@ The most common RTL-SDR device is
 In a lot of cases, the device driver for this device is already 
 installed in your Linux system. If it is not, you can install it with 
 the following command:
-<PRE CLASS="Shell">apt install rtl-sdr librtlsdr0 librtlsdr-dev</pre>
+<PRE CLASS="Shell">
+sudo apt install rtl-sdr librtlsdr0 librtlsdr-dev
+</PRE>
 </P>
 
 <LI><B>RTLSDRv4</B>
@@ -1588,9 +1579,71 @@ of continuous reception in the 0-2GHz range, with bandwidth of up to
 6Msps. This bandwith can be further widened to 10Msps at the cost of 
 losing some bit resolution.
 </P>
+<UL>
+
+<LI><B>Making RSP Device Work with OpenWebRX+</B>
 <P>
-TODO
+To make an RSP device work with OpenWebRX+, you will first have to 
+download and install the latest SDRPlay API for your version of
+Linux from the
+<A HREF="https://www.sdrplay.com/downloads/">SDRPlay website</A>.
+<B>Your RSP device will not work unless you install the SDRPlay API.</B> 
 </P>
+<P>
+Once you have SDRPlay API installed, install the SoapySDRPlay3 package 
+from OpenWebRX+ repositories as follows:
+<PRE CLASS="Shell">
+sudo apt install soapysdr-module-sdrplay3
+</PRE>
+During installation, the SoapySDRPlay3 package will also install the 
+latest SoapySDR and remove all locally built SoapySDR files from 
+<I>/usr/local</I> to prevent conflicts between packaged and locally 
+built versions of SoapySDR.
+</P>
+
+<LI><B>Solving SDRPlay API Problems</B>
+<P>
+You may encounter a situation where the current SDRPlay API breaks down
+on your Linux version due to incompatible system libraries. If you look 
+at the SDRPlay service logs:
+<PRE CLASS="Shell">
+journalctl -u sdrplay
+</PRE>
+and see the following messages:
+<PRE>
+/opt/sdrplay_api/sdrplay_apiService:
+/lib/arm-linux-gnueabihf/libc.so.6: version `GLIBC_2.34' not found
+(required by /opt/sdrplay_api/sdrplay_apiService)
+</PRE>
+then the only way to fix it is to downgrade to an older version of the 
+SDRPlay API. Install SDRPlay API v3.07 from their website, then 
+downgrade SoapySDRPlay3 to a compatible version and prevent it from 
+further upgrades:
+<PRE CLASS="Shell">
+sudo apt install soapysdr-module-sdrplay3=0.8.6
+sudo apt-mark hold soapysdr-module-sdrplay3
+</PRE>
+</P>
+
+<LI><B>Connecting Multiple RSP Devices</B>
+<P>
+Each geniune RSP device has a unique serial number assigned at the 
+factory. You can see these serial numbers with the following command:
+<PRE CLASS="Shell">
+sudo SoapySDRUtil --probe="driver=sdrplay"
+</PRE>
+To make OpenWebRX distinguish between your devices, add the <I>"Device 
+Identifier"</I> option to each device and set it to device's unique 
+serial number.
+</P>
+<P>
+The Chinese-made RSP clones all come with the same serial number and
+thus <B>only one</B> Chinese RSP clone can be used with the SDRPlay API.
+A workaround to this problem is to downgrade SDRPlay API to v3.07 and
+install the corresponding SoapySDRPlay3 package version, since the older 
+SDRPlay API uses USB port numbers as serial numbers.
+<P>
+</UL>
 
 <A NAME="INSTALL-AIRSPY"><H3>Airspy Devices</H3></A>
 <P>
@@ -1599,8 +1652,40 @@ TODO
 
 <A NAME="INSTALL-HL2"><H3>Hermes Lite 2</H3></A>
 <P>
-TODO
+Hermes Lite 2 (HL2) is a hobbyist-designed SDR transceiver based on high 
+performance ADC and FPGA chip. Transmit capability aside, HL2 can 
+receive up to four independent chunks of spectrum in the 0-30MHz range. 
+Each chunk is limited to 384kHz in width though. This makes HL2 ideal 
+for monitoring multiple shortwave bands at the same time.
 </P>
+<UL>
+
+<LI><B>Making HL2 Work with OpenWebRX+</B>
+<P>
+To make HL2 work with OpenWebRX+, you will have to connect HL2 to your 
+OpenWebRX+ computer with a physical Ethernet cable. Once HL2 is 
+connected and powered up, it will eventually assign itself the "local" 
+IP address of 169.254.19.221. You then need to the <I>HPSDR 
+Connector</I> package from OpenWebRX+ repositories, as follows:
+<PRE>
+sudo apt install hpsdrconnector
+</PRE>
+Once installed, you should be able to add new HPSDR devices in the 
+OpenWebRX+ settings. When adding an HPSDR device, make sure you add the 
+<I>"Remote IP"</I> option and set it to the default HL2 IP address of 
+169.254.19.221.
+</P>
+
+<LI><B>Adding Multiple HPSDR Devices</B>
+<P>
+As has been said before, your HL2 can receive up to four distinct chunks 
+of the shortwave spectrum, representing each chunk with a separate 
+virtual "device". To make use of this capability though, you will have 
+to add four separate HPSDR devices to OpenWebRX+. Point all four devices 
+to the same IP address. <B>Make sure all HPSDR devices use the same 
+sampling rate</B>, as HL2 runs all its RX channels at the same rate.
+</P>
+</UL>
 
 <A NAME="AdminFeatures"><H2>Administrator Features</H2></A>
 <P>
@@ -2197,7 +2282,7 @@ chat groups.
 <UL>
   <LI><A HREF="#FAQ-MUPPET">Everything is broken, help me!</A>
   <LI><A HREF="#FAQ-BROKEN">OpenWebRX broken after upgrade!</A>
-  <LI><A HREF="#FAQ-FEATURES">New OpenWebRX features do not show up!</A>
+  <LI><A HREF="#FAQ-FEATURES">OpenWebRX features do not show up!</A>
   <LI><A HREF="#FAQ-DMR">Digital voice modes do not show up!</A>
   <LI><A HREF="#FAQ-SDRPLAY">My SDRplay device does not work reliably!</A>
   <LI><A HREF="#FAQ-REQUESTS">Can you implement a feature I want?</A>
@@ -2262,7 +2347,7 @@ browser cache and reload the page. If this does not help, try restarting
 the computer running OpenWebRX.
 </P>
 
-<A NAME="FAQ-FEATURES"><H3>New OpenWebRX features do not show up!</H3></A>
+<A NAME="FAQ-FEATURES"><H3>OpenWebRX features do not show up!</H3></A>
 <P>
 Click on <I>"Settings | Feature Report"</I> and see if the features you 
 are interested in show up as enabled there. If a feature is disabled, 
