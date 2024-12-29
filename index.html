@@ -233,12 +233,13 @@ occurs in a Telegram chat.
   <LI><A HREF="#INSTALL-DOCKER">Using Docker Images</A>
   <LI><A HREF="#INSTALL-SOURCES">Building OpenWebRX+ from Sources</A>
 </UL>
-<LI><A HREF="#HardwareGuide"><B>Choosing SDR Device</B></A>
+<LI><A HREF="#HardwareGuide"><B>Hardware Setup</B></A>
 <UL>
   <LI><A HREF="#INSTALL-RTLSDR">RTL-SDR Devices</A>
   <LI><A HREF="#INSTALL-SDRPLAY">SDRPlay (RSP) Devices</A>
   <LI><A HREF="#INSTALL-AIRSPY">Airspy Devices</A>
   <LI><A HREF="#INSTALL-HL2">Hermes Lite 2</A>
+  <LI><A HREF="#INSTALL-ANTENNA">Choosing an Antenna</A>
 </UL>
 <LI><A HREF="#AdminFeatures"><B>Administrator Features</B></A>
 <UL>
@@ -1424,7 +1425,7 @@ packages as follows:
 sudo dpkg -i ./owrx-output/*.deb
 </PRE>
 
-<A NAME="HardwareGuide"><H2>Choosing SDR Device</H2></A>
+<A NAME="HardwareGuide"><H2>Hardware Setup</H2></A>
 <P>
 OpenWebRX supports multiple SDR receiver devices at the same time. The 
 total number is mainly limited by your computer performance. In this 
@@ -1686,6 +1687,94 @@ to add four separate HPSDR devices to OpenWebRX+. Point all four devices
 to the same IP address. <B>Make sure all HPSDR devices use the same 
 sampling rate</B>, as HL2 runs all its RX channels at the same rate.
 </P>
+</UL>
+
+<A NAME="INSTALL-ANTENNA"><H3>Choosing an Antenna</H3></A>
+<P>
+It is recommended to connect antenna via a shielded cable in order to 
+keep it away from the receiver and other interference sources. Possible 
+interference sources include power supplies, phone chargers, LED lights, 
+refridgerators, air conditioners, water pumps, and other devices.
+</P>
+<P>
+Your antenna choice will always depend on the frequencies you would like 
+to receive and the amount of radio interference at your location. In 
+this section, we will go over some available options.
+</P>
+<UL>
+
+<LI><B>Telescopic Antennas</B>
+<P>
+A telescopic antenna can be used at a wide variety of different 
+frequencies, as long as you do not have any strong electromagnetic 
+interference sources nearby. All telescopic antennas work approximately 
+the same, with longer antennas being more sensitive at lower 
+frequencies. This <B>does not</B> make them the best choice in the LW, 
+MW, and SW bands (&lt;30MHz). More expensive telescopic antennas are 
+made of sturdier materials and offer better articulation, but not better 
+reception. CB telescopic antennas are a special case, since they contain 
+circuitry biasing them in favor of the CB band.
+</P>
+
+<LI><B>Long Wire Antennas (LW, MW, SW)</B>
+<P>
+The optimal length of a telescopic antenna should be close to 1/2 of the 
+wavelength you expect to receive. For example, if you are planning to 
+listen to the 25m shortwave band, the optimal antenna length will be 25 
+/ 2 &thickapprox; 12.5 meters, which makes good shortwave telescopic 
+antennas rather difficult to implement. It is still possible though to 
+attach a really long wire to the antenna connector, throwing it outside 
+or wrapping it around a room as necessary. Same as telescopic antennas, 
+long wires are susceptible to the electromagnetic interference.
+</P>
+
+<LI><B>Rubber Whip Antennas (VHF, UHF)</B>
+<P>
+At shorter wavelengths (80MHz+), it is possible to use short rubber whip 
+antennas made for the use in walkie talkies, first responder radios, and 
+scanners. These antennas are small, very portable, and offer decent 
+reception in the FM, VHF, and UHF bands. It is necessary to say though 
+that these antennas are <B>specifically tuned</B> for the VHF and UHF 
+bands and thus become useless in the LW, MW, and SW bands.
+</P>
+
+<LI><B>Loop Antennas</B>
+<P>
+As mentioned in the previous sections, the electromagnetic interference 
+is often a huge problem when listening to the radio indoors or in urban 
+environment. The magnetic loop antennas attempt to work around this 
+interference by receiving the magnetic component of the wave rather 
+than noisier electric component.
+</P>
+<P>
+A typical loop antenna consists of one or more relatively small loops of 
+wire connected to a receiver via a tiny transformer ("balun" or "unun"). 
+The total surface of the wire loop determines how much magnetic flux it 
+receives, making bigger loops more sensitive. A loop antenna is 
+directional:
+</P>
+<UL>
+<LI>
+<P>
+<B>At the wavelengths much longer than the loop size (LW, MW, SW)</B>, 
+the maximum gain is achieved when a side of the loop is directed towards 
+the signal source.
+</P>
+<LI>
+<P>
+<B>At the wavelengths comparable to the loop size (FM, VHF, UHF)</B>, 
+the maximum gain is achieved when the loop surface is directed towards 
+the signal source, same as if it were a dipole.
+</P>
+</UL>
+<P>
+While loop antennas are less susceptible to the eletromagnetic 
+interference, they are also less sensitive than conventional antennas. 
+Thus, most commercial loop antennas include <B>low-noise amplifiers</B>, 
+requiring a power source. Some commercially available loop antennas are 
+<I>YouLoop</I>, <I>MLA-30+</I>, and <I>GA-450</I>.
+</P>
+
 </UL>
 
 <A NAME="AdminFeatures"><H2>Administrator Features</H2></A>
