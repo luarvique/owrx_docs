@@ -1705,27 +1705,40 @@ this section, we will go over some available options.
 
 <LI><B>Telescopic Antennas</B>
 <P>
-A telescopic antenna can be used at a wide variety of different 
-frequencies, as long as you do not have any strong electromagnetic 
-interference sources nearby. All telescopic antennas work approximately 
-the same, with longer antennas being more sensitive at lower 
-frequencies. This <B>does not</B> make them the best choice in the LW, 
-MW, and SW bands (&lt;30MHz). More expensive telescopic antennas are 
+A telescopic antenna is going to be resonant (most sensitive) to 
+wavelengths that are twice the antenna length. Their limited length 
+makes telescopic antennas the best at FM, VHF, and UHF bands. These
+antennas can be used for shortwave (&lt;30MHz) reception, but are
+not very good there.
+</P>
+<P>
+All telescopic antennas work the same, with longer antennas being more 
+sensitive at lower frequencies. More expensive telescopic antennas are 
 made of sturdier materials and offer better articulation, but not better 
-reception. CB telescopic antennas are a special case, since they contain 
-circuitry biasing them in favor of the CB band.
+reception. CB telescopic antennas are a <B>special case</B>, since they 
+contain circuitry biasing them in favor of the CB band.
+</P>
+<P>
+Grounding the receiver will improve antenna performance. Also, a 
+telescopic dipole ("TV whiskers") will have better performance than a 
+single whip, since it has bigger total length and does not require 
+grounding.
 </P>
 
 <LI><B>Long Wire Antennas (LW, MW, SW)</B>
 <P>
-The optimal length of a telescopic antenna should be close to 1/2 of the 
+The optimal length of a linear antenna should be close to 1/2 of the 
 wavelength you expect to receive. For example, if you are planning to 
 listen to the 25m shortwave band, the optimal antenna length will be 25 
-/ 2 &thickapprox; 12.5 meters, which makes good shortwave telescopic 
-antennas rather difficult to implement. It is still possible though to 
-attach a really long wire to the antenna connector, throwing it outside 
-or wrapping it around a room as necessary. Same as telescopic antennas, 
-long wires are susceptible to the electromagnetic interference.
+/ 2 &thickapprox; 12.5 meters, which makes shortwave telescopic antennas 
+rather difficult to implement. It is still possible though to attach a 
+really long wire to the antenna connector, throwing it outside or 
+wrapping it around a room as necessary.
+</P>
+<P>
+Grounding the receiver will improve antenna performance. Also, a dipole 
+made of two pieces of wire will have better performance than a single 
+wire, since it has bigger total length and does not require grounding.
 </P>
 
 <LI><B>Rubber Whip Antennas (VHF, UHF)</B>
@@ -1768,11 +1781,25 @@ the signal source, same as if it were a dipole.
 </P>
 </UL>
 <P>
-While loop antennas are less susceptible to the eletromagnetic 
-interference, they are also less sensitive than conventional antennas. 
-Thus, most commercial loop antennas include <B>low-noise amplifiers</B>, 
-requiring a power source. Some commercially available loop antennas are 
+While loop antennas are less susceptible to eletromagnetic interference, 
+they are also less sensitive to the actual signals. Thus, most 
+commercial loop antennas include <B>low-noise amplifiers</B>, requiring 
+a power source. Some commercially available loop antennas are 
 <I>YouLoop</I>, <I>MLA-30+</I>, and <I>GA-450</I>.
+</P>
+
+<LI><B>MiniWhip Antennas</B>
+<P>
+A MiniWhip is an active antenna made of a small metal plate ("probe") 
+and a low-noise amplifier. It measures the electric field strength at 
+the probe, making it a tiny receive-only antenna for a wide range of 
+frequencies.
+</P>
+<P>
+Being an active antenna, MiniWhip does require a power source. Also, 
+since MiniWhip is essentially a non-resonant electric field probe, it is 
+highly susceptible to interference. Thus, you will need to install it in 
+an area free of electromagnetic noise sources.
 </P>
 
 </UL>
