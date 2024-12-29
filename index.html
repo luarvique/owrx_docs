@@ -1504,9 +1504,9 @@ quality is not very good there.
 The most common RTL-SDR device is
 <A HREF="https://www.rtl-sdr.com/V3/">RTLSDRv3</A> from
 <A HREF="https://www.rtl-sdr.com/">RTL-SDR Blog</A>.
-In a lot of cases, the device driver for this device is already 
-installed in your Linux system. If it is not, you can install it with 
-the following command:
+In a lot of cases, the driver for this device is already installed in 
+your Linux system. If it is not, you can install it with the following 
+command:
 <PRE CLASS="Shell">
 sudo apt install rtl-sdr librtlsdr0 librtlsdr-dev
 </PRE>
@@ -1531,7 +1531,7 @@ sudo dpkg -i librtlsdr0_*.deb librtlsdr-dev_*.deb rtl-sdr_*.deb
 </PRE>
 </P>
 
-<LI><B>Using Shortware Frequencies with RTL-SDR</B>
+<LI><B>Receiving Shortwawe Frequencies with RTL-SDR</B>
 <P>
 With RTLSDRv4 devices, you do not need to do anything special in order 
 to use the 500kHz-24MHz frequency range. These frequencies will work out 
@@ -1603,8 +1603,8 @@ built versions of SoapySDR.
 
 <LI><B>Solving SDRPlay API Problems</B>
 <P>
-You may encounter a situation where the current SDRPlay API breaks down
-on your Linux version due to incompatible system libraries. If you look 
+You may encounter a situation where installed SDRPlay API breaks down
+on your Linux system due to incompatible system libraries. If you look 
 at the SDRPlay service logs:
 <PRE CLASS="Shell">
 journalctl -u sdrplay
@@ -1616,8 +1616,9 @@ and see the following messages:
 (required by /opt/sdrplay_api/sdrplay_apiService)
 </PRE>
 then the only way to fix it is to downgrade to an older version of the 
-SDRPlay API. Install SDRPlay API v3.07 from their website, then 
-downgrade SoapySDRPlay3 to a compatible version and prevent it from 
+SDRPlay API. Install SDRPlay API v3.07 from the
+<A HREF="https://www.sdrplay.com/downloads/">SDRPlay website</A>,
+then downgrade SoapySDRPlay3 to a compatible version and prevent it from 
 further upgrades:
 <PRE CLASS="Shell">
 sudo apt install soapysdr-module-sdrplay3=0.8.6
@@ -1640,7 +1641,7 @@ serial number.
 The Chinese-made RSP clones all come with the same serial number and
 thus <B>only one</B> Chinese RSP clone can be used with the SDRPlay API.
 A workaround to this problem is to downgrade SDRPlay API to v3.07 and
-install the corresponding SoapySDRPlay3 package version, since the older 
+install the corresponding SoapySDRPlay3 package version, since older 
 SDRPlay API uses USB port numbers as serial numbers.
 <P>
 </UL>
@@ -1653,20 +1654,20 @@ TODO
 <A NAME="INSTALL-HL2"><H3>Hermes Lite 2</H3></A>
 <P>
 Hermes Lite 2 (HL2) is a hobbyist-designed SDR transceiver based on high 
-performance ADC and FPGA chip. Transmit capability aside, HL2 can 
-receive up to four independent chunks of spectrum in the 0-30MHz range. 
-Each chunk is limited to 384kHz in width though. This makes HL2 ideal 
-for monitoring multiple shortwave bands at the same time.
+performance ADC and FPGA chips. Transmit capability aside, HL2 can 
+receive up to four independent chunks of spectrum in the 0-30MHz range, 
+with each chunk limited to the 384kHz width. This makes HL2 ideal for 
+monitoring multiple shortwave bands at the same time.
 </P>
 <UL>
 
 <LI><B>Making HL2 Work with OpenWebRX+</B>
 <P>
 To make HL2 work with OpenWebRX+, you will have to connect HL2 to your 
-OpenWebRX+ computer with a physical Ethernet cable. Once HL2 is 
-connected and powered up, it will eventually assign itself the "local" 
-IP address of 169.254.19.221. You then need to install the <I>HPSDR 
-Connector</I> package from OpenWebRX+ repositories, as follows:
+OpenWebRX+ computer with an Ethernet cable. Once HL2 is connected and 
+powered up, it will eventually assign itself the "local" IP address of 
+169.254.19.221. You then need to install the <I>HPSDR Connector</I>
+package from OpenWebRX+ repositories, as follows:
 <PRE>
 sudo apt install hpsdrconnector
 </PRE>
