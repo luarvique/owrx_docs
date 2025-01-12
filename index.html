@@ -129,6 +129,7 @@
 <CENTER>
 <H1>OpenWebRX+</H1>
 <H2>A Better Online SDR Radio</H2>
+<A HREF="https://www.receiverbook.de/map?type=openwebrx">Receivers</A>&nbsp;|&nbsp;
 <A HREF="#TOC">Contents</A>&nbsp;|&nbsp;
 <A HREF="#Docs">Usage</A>&nbsp;|&nbsp;
 <A HREF="#InstallGuide">Installation</A>&nbsp;|&nbsp;
@@ -159,6 +160,12 @@ are marked so.
 <A NAME="Install"><H2>How to Get OpenWebRX+</H2></A>
 <UL>
 
+<LI><P><A HREF="https://www.receiverbook.de/map?type=openwebrx">Public receivers</A>
+are located all over the globe and can be found via the
+<A HREF="https://www.receiverbook.de/map">ReceiverBook</A>
+website.
+</P>
+
 <LI><P><A HREF="https://luarvique.github.io/ppa/">Binary packages</A>
 for the latest Ubuntu and Debian Linux can be installed from
 <A HREF="https://luarvique.github.io/ppa/">this package repository</A>.
@@ -174,7 +181,8 @@ is available from my Github account. Most development happens in the
 <I>"master"</I> branches of the relevant repos, such as <I>csdr</I>, 
 <I>pycsdr</I>, <I>owrx_connector</I>, and <I>openwebrx</I>. Some 
 packages are reused from the <I>"master"</I> branches of the original 
-OpenWebRX repos without changes.</P>
+OpenWebRX repos without changes.
+</P>
 
 <LI><P><A HREF="https://t.me/openwebrx">News and announcements</A>
 are posted to a Telegram channel.
@@ -203,24 +211,42 @@ occurs in a Telegram chat.
   <LI><A HREF="#HOW-MAP-STATIONS">Shortwave Stations</A>
   <LI><A HREF="#HOW-MAP-REPEATERS">Repeaters</A>
 </UL>
-<LI><A HREF="#UsageScenarios"><B>Usage Scenarios</B></A>
+<LI><A HREF="#Broadcast"><B>Broadcast Radio</B></A>
 <UL>
   <LI><A HREF="#HOW-FM">Listening to FM Broadcasts</A>
-  <LI><A HREF="#HOW-HDR">HDRadio: Digital FM in America</A>
-  <LI><A HREF="#HOW-DAB">DAB: Digital FM in Europe</A>
   <LI><A HREF="#HOW-AM">Listening to AM Broadcasts</A>
   <LI><A HREF="#HOW-SWL">Shortwave Listening (SWL)</A>
+  <LI><A HREF="#HOW-HDR">HDRadio: Digital FM in America</A>
+  <LI><A HREF="#HOW-DAB">DAB: Digital FM in Europe</A>
+</UL>
+<LI><A HREF="#Amateur"><B>Amateur Radio</B></A>
+<UL>
   <LI><A HREF="#HOW-CB">Listening to Citizens Band (CB)</A>
   <LI><A HREF="#HOW-HAM">Listening to HAM Bands</A>
   <LI><A HREF="#HOW-CW">Listening to Morse Code (CW)</A>
   <LI><A HREF="#HOW-RTTY">Receiving Teletype (RTTY)</A>
   <LI><A HREF="#HOW-SSTV">Receiving SSTV Images</A>
+  <LI><A HREF="#HOW-APRS">Tracking Packet Radio (APRS)</A>
+</UL>
+<LI><A HREF="#Digital"><B>Digital Communications</B></A>
+<UL>
   <LI><A HREF="#HOW-FAX">Receiving Fax Images</A>
   <LI><A HREF="#HOW-PAGER">Monitoring Pager Messages (POCSAG)</A>
   <LI><A HREF="#HOW-ISM">Monitoring Wireless Devices (ISM)</A>
-  <LI><A HREF="#HOW-APRS">Tracking Packet Radio (APRS)</A>
-  <LI><A HREF="#HOW-AIS">Tracking Ships (AIS)</A>
+</UL>
+<LI><A HREF="#Air"><B>Aeronautic Communications</B></A>
+<UL>
   <LI><A HREF="#HOW-ADSB">Tracking Airplanes (ADS-B)</A>
+  <LI><A HREF="#HOW-HFDL">Long Range Communications (HFDL)</A>
+  <LI><A HREF="#HOW-VDL2">Short Range Communications (VDL2)</A>
+  <LI><A HREF="#HOW-ACARS">Legacy Communications (ACARS)</A>
+</UL>
+<LI><A HREF="#Sea"><B>Maritime Communications</B></A>
+<UL>
+  <LI><A HREF="#HOW-AIS">Tracking Ships (AIS)</A>
+  <LI><A HREF="#HOW-DSC">Digital Selective Calling (DSC)</A>
+  <LI><A HREF="#HOW-MSI">Maritime Information (MSI)</A>
+  <LI><A HREF="#HOW-NAVTEX">Navigational Telex (NAVTEX)</A>
 </UL>
 <LI><A HREF="#InstallGuide"><B>Installing OpenWebRX+</B></A>
 <UL>
@@ -253,6 +279,7 @@ occurs in a Telegram chat.
   <LI><A HREF="#HOW-USERS">Monitoring Receiver Use</A>
   <LI><A HREF="#HOW-MQTT">Advanced MQTT Reporting</A>
   <LI><A HREF="#HOW-PLUGINS">JavaScript Plugins</A>
+  <LI><A HREF="#HOW-RIGCONTROL">External Transceiver Rig Control</A>
 </UL>
 <LI><A HREF="#FAQ"><B>Frequently Asked Questions</B></A>
 </UL>
@@ -713,11 +740,10 @@ shown below.
 </P>
 <CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-Repeaters.png"></CENTER>
 
-<A NAME="UsageScenarios"><H2>Usage Scenarios</H2></A>
+<A NAME="Broadcast"><H2>Broadcast Radio</H2></A>
 <P>
-In this section, we will go over some common things you can use 
-OpenWebRX for, such as listening to broadcast radio, HAM operators, and 
-tracking ships and aircraft.
+In this section, we will go over common radio broadcasting types and 
+how to use OpenWebRX to listen to the broadcast radio.
 </P>
 
 <A NAME="HOW-FM"><H3 CLASS="Section">Listening to FM Broadcasts</H3></A>
@@ -752,43 +778,6 @@ compared to Europe, you may want to go to <I>"Settings | Demodulation
 and Decoding | Miscellaneous"</I> and change the <I>"Decode USA-specific 
 RDS information from WFM broadcasts"</I> option to reflect your receiver 
 location.
-</P>
-
-<A NAME="HOW-HDR"><H3 CLASS="Section">HDRadio: Digital FM in America</H3></A>
-<DIV STYLE="text-align:right;">
-<A HREF="https://en.wikipedia.org/wiki/HD_Radio"><I>What is HDRadio?</I></A>
-</DIV>
-<P>
-Many American FM broadcasters are now using a form of digital radio 
-known as <I>HDRadio</I> or <I>NRSC5</I>. The HDRadio signal, showing up 
-as two thick "columns" around the traditional WFM signal, adds up to 
-four digital channels to each analog FM broadcast.
-</P>
-<P>
-<B>HDRadio decoding requires a lot of CPU power and will not work on 
-slower computers, or wide profiles.</B> In order to listen to the 
-HDRadio in OpenWebRX+, tune to the "enhanced" WFM signal and click on 
-the <SPAN CLASS="Button">HDR</SPAN> button. Once the decoder syncs with 
-the signal, the station information and the channel selector should show 
-up at the bottom of the waterfall.
-</P>
-
-<A NAME="HOW-HDR"><H3 CLASS="Section">DAB: Digital FM in Europe</H3></A>
-<DIV STYLE="text-align:right;">
-<A HREF="https://en.wikipedia.org/wiki/Digital_Audio_Broadcasting"><I>What is DAB?</I></A>
-</DIV>
-<P>
-Where American broadcasters use HDRadio, European FM broadcasters use a 
-different digital standard known as <I>DAB</I>. Each DAB multiplex 
-signal essentially occupies a single old analog TV channel and transmits 
-many individual radio station signals at once.
-</P>
-<P>
-<B>DAB decoding requires a lot of CPU power and will not work on slower 
-computers, or wide profiles.</B> In order to listen to DAB in OpenWebRX, 
-tune to the DAB signal and click on the <SPAN CLASS="Button">DAB</SPAN> 
-button. Once the decoder syncs with the signal, the station information 
-and the station selector should show up at the bottom of the waterfall.
 </P>
 
 <A NAME="HOW-AM"><H3 CLASS="Section">Listening to AM Broadcasts</H3></A>
@@ -853,6 +842,49 @@ Once a day, OpenWebRX+ queries the
 database for shortwave broadcast schedules. Currently broadcasting 
 stations are indicated with <B>&#9041;</B> markers on the map and
 with bookmarks in the main receiver window. 
+</P>
+
+<A NAME="HOW-HDR"><H3 CLASS="Section">HDRadio: Digital FM in America</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/HD_Radio"><I>What is HDRadio?</I></A>
+</DIV>
+<P>
+Many American FM broadcasters are now using a form of digital radio 
+known as <I>HDRadio</I> or <I>NRSC5</I>. The HDRadio signal, showing up 
+as two thick "columns" around the traditional WFM signal, adds up to 
+four digital channels to each analog FM broadcast.
+</P>
+<P>
+<B>HDRadio decoding requires a lot of CPU power and will not work on 
+slower computers, or wide profiles.</B> In order to listen to the 
+HDRadio in OpenWebRX+, tune to the "enhanced" WFM signal and click on 
+the <SPAN CLASS="Button">HDR</SPAN> button. Once the decoder syncs with 
+the signal, the station information and the channel selector should show 
+up at the bottom of the waterfall.
+</P>
+
+<A NAME="HOW-HDR"><H3 CLASS="Section">DAB: Digital FM in Europe</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Digital_Audio_Broadcasting"><I>What is DAB?</I></A>
+</DIV>
+<P>
+Where American broadcasters use HDRadio, European FM broadcasters use a 
+different digital standard known as <I>DAB</I>. Each DAB multiplex 
+signal essentially occupies a single old analog TV channel and transmits 
+many individual radio station signals at once.
+</P>
+<P>
+<B>DAB decoding requires a lot of CPU power and will not work on slower 
+computers, or wide profiles.</B> In order to listen to DAB in OpenWebRX, 
+tune to the DAB signal and click on the <SPAN CLASS="Button">DAB</SPAN> 
+button. Once the decoder syncs with the signal, the station information 
+and the station selector should show up at the bottom of the waterfall.
+</P>
+
+<A NAME="Amateur"><H2>Amateur Radio</H2></A>
+<P>
+This section discusses amateur (HAM) radio uses and how to use OpenWebRX 
+to listen to the amateur radio.
 </P>
 
 <A NAME="HOW-CB"><H3 CLASS="Section">Listening to Citizens Band (CB)</H3></A>
@@ -952,6 +984,19 @@ it is decoding. To do that, go to <I>"Settings | Demodulation and
 Decoding | Miscellaneous"</I> and enable the <I>"Show CW codes (dits / 
 dahs) when decoding CW"</I> option.
 </P>
+<P>
+Finally, OpenWebRX+ can attempt <B>decoding all CW transmissions in 
+24kHz of spectrum</B>, at once, in real time, and present them to you in 
+a table, sorted by frequency. This functionality is enabled by selecting 
+the
+<I>"CW Skimmer"</I> digital mode.
+</P>
+<P CLASS="Admin">
+CW skimmer support requires installing the
+<A HREF="https://github.com/luarvique/csdr-cwskimmer">CSDR CWSkimmer</A>
+package. Please, refer to <I>"Settings | Feature Report"</I> for further
+instructions.
+</P>
 
 <A NAME="HOW-RTTY"><H3 CLASS="Section">Receiving Teletype (RTTY)</H3></A>
 <DIV STYLE="text-align:right;">
@@ -1039,9 +1084,48 @@ mobile device.
 </P>
 </OL>
 <P>
-The only SSTV formats currently supported by OpenWebRX+ are Robot36, 
-Robot72, Martin1, Martin2, Scottie1, Scottie2, and ScottieDX. Other SSTV 
-formats, including digital SSTV, will not be received.
+OpenWebRX+ supports the following SSTV formats:
+<UL>
+<LI>Robot12, Robot24, Robot36, and Robot72
+<LI>Scottie1, Scottie2, Scottie3, Scottie4, and ScottieDX
+<LI>PD50, PD90, PD120, PD160, PD180, PD240, PD290
+<LI>Wraase SC2-30, SC2-60, SC2-120
+</UL>
+Other SSTV formats, including digital SSTV, will not be received.
+</P>
+
+<A NAME="HOW-APRS"><H3 CLASS="Section">Tracking Packet Radio (APRS)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Automatic_Packet_Reporting_System"><I>What is APRS?</I></A>
+</DIV>
+<P>
+The <I>Automatic Packet Reporting System (APRS)</I> lets HAM operators 
+exchange digital data, messages, and share their locations with the 
+world. The APRS uses 144.39MHz frequency in the North America, 144.8MHz 
+in Europe. Please note that the OpenWebRX bandplan only has European 
+APRS frequency enabled. <B>If your receiver is in the North America, 
+edit the bandplan to switch to the 144.39MHz frequency.</B>
+</P>
+<P>
+In order to monitor APRS traffic in OpenWebRX, select <I>"Packet"</I> 
+digital mode and tune to one of the above frequencies. You will see 
+decoded APRS messages in a separate panel on top of the waterfall 
+display. Moreover, the sources of these messages will pop up at the 
+map, shown by clicking the <SPAN CLASS="Button">Map</SPAN> button.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-APRS.png"></CENTER>
+<P>
+OpenWebRX+ bandplan includes one more APRS entry, at 145.825MHz. This is 
+the <I>International Space Station (ISS)</I> frequency. Several times a 
+day, as ISS flies above the receiver location, you can expect to see 
+APRS reports from really far away at this frequency. These reports are 
+retransmitted by the APRS repeater located at the ISS.
+</P>
+
+<A NAME="Digital"><H2>Digital Communications</H2></A>
+<P>
+In this section, we are looking at digital radio transmissions that can 
+be heard and decoded with OpenWebRX.
 </P>
 
 <A NAME="HOW-FAX"><H3 CLASS="Section">Receiving Fax Images</H3></A>
@@ -1168,32 +1252,191 @@ waterfall, <B>try testing the decoder with your wireless car keys</B>.
 It is important to know their signalling frequency though.
 </P>
 
-<A NAME="HOW-APRS"><H3 CLASS="Section">Tracking Packet Radio (APRS)</H3></A>
+<A NAME="Air"><H2>Aeronautic Communications</H2></A>
+<P>
+Most voice communications between pilots and air traffic controllers 
+occur in the specially designated 108-137MHz VHF "air band". Somewhat 
+unusual for VHF bands, aircraft use AM modulation to let multiple 
+signals be heard at once at the same frequency. On the shortwave bands, 
+you will find aeronautic weather reports (VOLMET) and some pilot chatter 
+using USB modulation.
+</P>
+<P>
+In addition to analog voice communications, aircraft and air traffic 
+control services use several digital radio protocols for reporting 
+aircraft
+<A HREF="#HOW-ADSB">locations</A>,
+<A HREF="#HOW-VDL2">telemetry</A>,
+<A HREF="#HOW-ACARS">messaging</A>, and 
+<A HREF="#HOW-HFDL">traffic management</A>.
+With sufficient hardware, OpenWebRX+ can receive multiple aeronautic 
+protocols at multiple frequencies at once, maintaining a common database 
+of all received aircraft data and presenting it on the map.
+</P>
+<P>
+Aircraft are identified with several different IDs, including flight ID, 
+aircraft tail number, and ICAO code (aka Mode-S transponder code). 
+OpenWebRX+ will hyperlink received IDs to the
+<A HREF="https://www.flightaware.com/">FlightAware</A>
+website, where you can find airplane photos and other facts about each 
+flight.
+</P>
+
+<A NAME="HOW-ADSB"><H3 CLASS="Section">Tracking Airplanes (ADS-B)</H3></A>
 <DIV STYLE="text-align:right;">
-<A HREF="https://en.wikipedia.org/wiki/Automatic_Packet_Reporting_System"><I>What is APRS?</I></A>
+<A HREF="https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast"><I>What is ADS-B?</I></A>
 </DIV>
 <P>
-The <I>Automatic Packet Reporting System (APRS)</I> lets HAM operators 
-exchange digital data, messages, and share their locations with the 
-world. The APRS uses 144.39MHz frequency in the North America, 144.8MHz 
-in Europe. Please note that the OpenWebRX bandplan only has European 
-APRS frequency enabled. <B>If your receiver is in the North America, 
-edit the bandplan to switch to the 144.39MHz frequency.</B>
+Airplanes periodically report their positions in the air using the 
+<I>Automatic Dependent Surveillance Broadcast (ADS-B)</I> system, at 
+1090MHz and 978MHz frequencies. OpenWebRX+ can listen to these 
+frequencies and display received flight information to you.
 </P>
 <P>
-In order to monitor APRS traffic in OpenWebRX, select <I>"Packet"</I> 
-digital mode and tune to one of the above frequencies. You will see 
-decoded APRS messages in a separate panel on top of the waterfall 
-display. Moreover, the sources of these messages will pop up at the 
-map, shown by clicking the <SPAN CLASS="Button">Map</SPAN> button.
+To receive ADS-B transmissions, select a profile containing one of the
+ADS-B frequencies. Since these transmissions require 2MHz of bandwidth, 
+the profile must have at least 1MHz of bandwidth at each side of the 
+ADS-B frequency.
 </P>
-<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-APRS.png"></CENTER>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Mode-ADSB.png"></CENTER>
 <P>
-OpenWebRX+ bandplan includes one more APRS entry, at 145.825MHz. This is 
-the <I>International Space Station (ISS)</I> frequency. Several times a 
-day, as ISS flies above the receiver location, you can expect to see 
-APRS reports from really far away at this frequency. These reports are 
-retransmitted by the APRS repeater located at the ISS.
+Standard ADS-B frequencies are part of the OpenWebRX+ band plan and thus 
+marked with green bookmarks. Once you click on an ADS-B bookmark, a 
+panel will appear showing the reported aircraft with their flight data.
+</P>
+<P>
+If you click on the <SPAN CLASS="Button">Map</SPAN> button, you should 
+see aircraft locations on the map. Clicking on an airplane pops up a 
+bubble showing some basic information about that airplane.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-ADSB.png"></CENTER>
+
+<A NAME="HOW-HFDL"><H3 CLASS="Section">Long Range Communications (HFDL)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/"><I>What is HFDL?</I></A>
+</DIV>
+<P>
+The <I>HF Data Link (HFDL)</I> is a long-distance shortwave messaging 
+system used to manage aircraft traffic around the globe. The system 
+consists of around 15 ground stations (GS) covering the entire globe. 
+HFDL messages may contain aircraft positions, telemetry, and text 
+communications between ground stations and the aircraft.
+</P>
+<P>
+All HFDL ground station frequencies are marked with yellow bookmarks in 
+OpenWebRX+. Simply click on a bookmark to start receiving HFDL messages, 
+or tune manually and select the <I>"HFDL"</I> digital mode.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Mode-HFDL.png"></CENTER>
+<P>
+Keep in mind that you will not be able to hear all the ground stations 
+from a single location: that is why there are multiple stations all 
+around the globe. Also, each ground station has its own broadcasting 
+schedule and thus may be silent at the present time.
+</P>
+<P>
+If you click on the <SPAN CLASS="Button">Map</SPAN> button, you should 
+see HFDL-reported aircraft locations as little
+<B STYLE="color:#006000;">green</B> airplanes on the map. Clicking on an 
+airplane pops up a bubble showing some basic information about that 
+airplane. Since HFDL does not report aircraft altitude or direction, 
+most airplanes will be pointing North. If OpenWebRX+ receives more than
+one HFDL position report though, it will orient airplane based on the
+difference between the two last reports. 
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-HFDL.png"></CENTER>
+
+<A NAME="HOW-VDL2"><H3 CLASS="Section">Short Range Communications (VDL2)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/"><I>What is VDL2?</I></A>
+</DIV>
+<P>
+The <I>VHF Data Link Mode 2 (VDL2)</I> is a short-distance air band 
+(VHF) messaging system aircraft use to communicate with the air traffic 
+control in their immediate vicinity. VDL2 messages may contain aircraft 
+positions, telemetry, and text communications between aircraft and local 
+ground control stations.
+</P>
+<P>
+VDL2 frequencies are found at the end of the air band (108-137MHz) and 
+marked with yellow bookmarks in OpenWebRX+. These bookmarks are commonly 
+labelled with <I>"ARINC"</I> or <I>"SITA"</I>, depending on the company 
+that manages each frequency. Simply click on a bookmark to start 
+receiving VDL2 messages, or tune manually and select the <I>"VDL2"</I> 
+digital mode.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Mode-VDL2.png"></CENTER>
+<P>
+Keep in mind that not all VDL2 frequencies will appear live from your
+receiver location: some of them are only used in certain parts of the 
+world.
+</P>
+<P>
+If you click on the <SPAN CLASS="Button">Map</SPAN> button, you should 
+see VDL2-reported aircraft locations as little
+<B STYLE="color:#000060;">blue</B> airplanes on the map. Clicking on an 
+airplane pops up a bubble showing some basic information about that 
+airplane, including text message history. Since VDL2 does not report 
+aircraft direction, most airplanes will be pointing North. If OpenWebRX+ 
+receives more than one VDL2 position report though, it will orient 
+airplane based on the difference between two last reports. 
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-VDL2.png"></CENTER>
+
+<A NAME="HOW-ACARS"><H3 CLASS="Section">Legacy Communications (ACARS)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/"><I>What is ACARS?</I></A>
+</DIV>
+<P>
+The <I>Aircraft Communications Addressing and Reporting System 
+(ACARS)</I> is the original aircraft communications protocol, now mostly 
+replaced with VDL2. Similarly to VDL2, ACARS communications use air band 
+(VHF) and carry telemetry and text communications between aircraft and 
+local air traffic control. Unlike VDL2, ACARS messages rarely contain 
+position information.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Mode-ACARS.png"></CENTER>
+<P>
+ACARS frequencies are found at the end of the air band (108-137MHz) and 
+marked with yellow bookmarks in OpenWebRX+. Simply click on a bookmark 
+to start receiving ACARS messages, or tune manually and select the 
+<I>"ACARS"</I> digital mode.
+</P>
+<P>
+Keep in mind that not all ACARS frequencies will appear live from your
+receiver location: some of them are only used in certain parts of the 
+world, others replaced with VDL2.
+</P>
+<P>
+If you click on the <SPAN CLASS="Button">Map</SPAN> button, you may
+see ACARS-reported aircraft locations as little
+<B STYLE="color:#600000;">red</B> airplanes on the map. Clicking on an 
+airplane pops up a bubble showing some basic information about that 
+airplane, including text message history. Since ACARS does not report 
+aircraft direction, most airplanes will be pointing North. If OpenWebRX+ 
+receives more than one ACARS position report though, it will orient 
+airplane based on the difference between two last reports.
+</P>
+
+<A NAME="Sea"><H2>Maritime Communications</H2></A>
+<P>
+Short range voice communications between vessels at sea and the shore 
+usually happen in the 156-174MHz VHF "marine band", divided into 
+multiple FM channels spaced at 25kHz. In addition to analog voice, the 
+marine band contains <A HREF="#HOW-AIS">AIS</A>,
+<A HREF="#HOW-PAGER">paging</A>, and other frequencies. Long range voice 
+communications occur in shortwave bands using USB modulation.
+</P>
+<P>
+A lot of digital maritime communications fall under
+<A 
+HREF="https://en.wikipedia.org/wiki/Global_Maritime_Distress_and_Safety_System">Global Maritime Distress and Safety System (GMDSS)</A>,
+which includes
+<A HREF="#HOW-DSC">digital selective calling (DSC)</A>,
+<A HREF="#HOW-MSI">mairne safety information (MSI)</A>, and
+<A HREF="#HOW-NAVTEX">navigational telex (NAVTEX)</A>.
+Finally, marine weather maps are available via
+<A HREF="#HOW-FAX">weather fax</A> transmissions from coastal stations.
 </P>
 
 <A NAME="HOW-AIS"><H3 CLASS="Section">Tracking Ships (AIS)</H3></A>
@@ -1202,17 +1445,16 @@ retransmitted by the APRS repeater located at the ISS.
 </DIV>
 <P>
 Modern vessels report their locations using a VHF radio system known as 
-AIS. If your OpenWebRX+ receiver is located near a large enough body of 
-water, it may be able to receive AIS position reports and display them 
-at the map.
+Automatic Identification System (AIS). If your OpenWebRX+ receiver is 
+located near a large enough body of water, it may be able to receive AIS 
+position reports and display them at the map.
 </P>
 <P>
-AIS operates at two maritime band frequencies, 161.975MHz and 
-162.025MHz. Once you select a profile containing these frequencies, you 
-will see them marked with green bookmarks, since they are part of the 
-band plan. Click on an AIS bookmark and a secondary waterfall should 
-appear, together with the information panel showing received position 
-reports.
+AIS operates at two marine band frequencies, 161.975MHz and 162.025MHz. 
+Once you select a profile containing these frequencies, you will see 
+them marked with green bookmarks, since they are part of the band plan. 
+Click on an "AIS" bookmark and a secondary waterfall should appear, 
+together with the information panel showing received position reports.
 </P>
 <P>
 Now, if you click on the <SPAN CLASS="Button">Map</SPAN> button, you 
@@ -1227,38 +1469,53 @@ OpenWebRX+ shows these MMSI numbers, hyperlinking them to the
 website, where you can find photos and other facts about each vessel.
 </P>
 
-<A NAME="HOW-ADSB"><H3 CLASS="Section">Tracking Airplanes (ADS-B)</H3></A>
+<A NAME="HOW-DSC"><H3 CLASS="Section">Digital Selective Calling (DSC)</H3></A>
 <DIV STYLE="text-align:right;">
-<A HREF="https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast"><I>What is ADS-B?</I></A>
+<A HREF="https://en.wikipedia.org/wiki/Digital_selective_calling"><I>What is DSC?</I></A>
 </DIV>
 <P>
-Airplanes periodically report their positions in the air using the ADS-B 
-system, at 1090MHz and 978MHz frequencies. OpenWebRX+ can listen to 
-these frequencies and display received flight information to you.
+Digital Selective Calling (DSC) uses predefined digital messages to 
+report emergencies and other special events, as well as announce voice 
+call frequencies. DSC operates in shortwave and marine (VHF) bands, but 
+OpenWebRX+ is only able to decode shortwave DSC modes. In addition to 
+sender's and receiver's MMSIs, DSC messages will carry ship positions 
+and emergency locations.
 </P>
 <P>
-To receive ADS-B transmissions, select a profile containing one of the
-ADS-B frequencies. Since these transmissions require 2MHz of bandwidth, 
-the profile must have at least 1MHz of bandwidth at each side of the 
-ADS-B frequency.
+Standard DSC frequencies are marked with yellow bookmarks in OpenWebRX+. 
+Simply click on a bookmark to start receiving DSC messages, or tune 
+manually and select the <I>"DSC"</I> digital mode.
+</P>
+
+<A NAME="HOW-MSI"><H3 CLASS="Section">Maritime Safety Information (MSI)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/"><I>What is MSI?</I></A>
+</DIV>
+<P>
+The Maritime Safety Information (MSI) is distributed using SITOR-B 
+protocol. The SITOR-B is somewhat similar to <A HREF="#HOW-RTTY">RTTY</A>,
+but adds redundancy and error checking.
 </P>
 <P>
-Standard ADS-B frequencies are part of the OpenWebRX+ band plan and thus 
-marked with green bookmarks. Once you click on an ADS-B bookmark, a 
-panel will appear showing the reported aircraft with their flight data.
+Standard MSI frequencies are marked with yellow "MSI" bookmarks in 
+OpenWebRX+. Simply click on a bookmark to start receiving MSI messages, 
+or tune manually and select the <I>"SITOR-B"</I> digital mode.
+</P>
+
+<A NAME="HOW-NAVTEX"><H3 CLASS="Section">Navigational Telex (NAVTEX)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/NAVTEX"><I>What is NAVTEX?</I></A>
+</DIV>
+<P>
+Similar to MSI, Navigational Telex (NAVTEX) uses SITOR-B protocol. 
+Coastal stations send regular NAVTEX bulletins at prearranged MW and SW 
+frequencies. Each NAVTEX bulletin starts with a four-letter code 
+specifying its origin, subject, and sequential number.
 </P>
 <P>
-If you click on the <SPAN CLASS="Button">Map</SPAN> button, you should 
-see aircraft locations on the map. Clicking on an airplane pops up a 
-bubble showing some basic information about that airplane.
-</P>
-<P>
-Aircraft are identified with several different IDs, including flight ID, 
-aircraft tail number, and ICAO code (aka Mode-S transponder code). 
-OpenWebRX+ will hyperlink received IDs to the
-<A HREF="https://www.flightaware.com/">FlightAware</A>
-website, where you can find airplane photos and other facts about each 
-flight.
+Standard NAVTEX frequencies are marked with yellow "NAVTEX" bookmarks in 
+OpenWebRX+. Simply click on a bookmark to start receiving NAVTEX 
+messages, or tune manually and select the <I>"NAVTEX"</I> digital mode.
 </P>
 
 <A NAME="InstallGuide"><H2>Installing OpenWebRX+</H2></A>
@@ -1302,7 +1559,7 @@ password when asked:
 </P>
 <PRE CLASS="Shell">
 curl -s https://luarvique.github.io/ppa/openwebrx-plus.gpg | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/openwebrx-plus.gpg
-sudo tee /etc/apt/sources.list.d/openwebrx-plus.list <<<"deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/ubuntu ./"
+sudo tee /etc/apt/sources.list.d/openwebrx-plus.list <<<"deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/noble ./"
 </PRE>
 <P>
 Once the repository is added,
@@ -1532,7 +1789,7 @@ sudo dpkg -i librtlsdr0_*.deb librtlsdr-dev_*.deb rtl-sdr_*.deb
 </PRE>
 </P>
 
-<LI><B>Receiving Shortwawe Frequencies with RTL-SDR</B>
+<LI><B>Receiving Shortwave Frequencies with RTL-SDR</B>
 <P>
 With RTLSDRv4 devices, you do not need to do anything special in order 
 to use the 500kHz-24MHz frequency range. These frequencies will work out 
@@ -2388,6 +2645,50 @@ page.
 Plugins placed into this folder will be loaded into the map view page.
 </P>
 </UL>
+
+<A NAME="HOW-RIGCONTROL"><H3>External Transceiver Rig Control</H3></A>
+<P>
+For HAM operators, OpenWebRX+ offers a way to send tuning frequency
+and modulation changes to an external transceiver rig connected to the
+OpenWebRX+ server. This is done using tools from the well known 
+<A HREF="https://hamlib.github.io/">Hamlib</A> project, so you will
+need to install Hamlib prior to enabling rig control in OpenWebRX+.
+</P>
+<P>
+Please, keep in mind that <B>unless you are running a private OpenWebRX+ 
+server, letting it control your transceiver is not the best idea</B>, 
+even though OpenWebRX+ cannot be used to trigger actual radio 
+transmission.
+</P>
+<P>
+Once you have installed Hamlib and connected your transceiver to the 
+OpenWebRX+ server, go to
+<I>"Settings | Spotting and Reporting | RigControl Settings"</I>
+and select your transceiver model. Then enter the name of a Linux device 
+your rig is connected to (serial, USB, etc). For network-connected rigs, 
+enter column-separated IP address and port instead.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/RigControl-Settings.png"></CENTER>
+<P>
+If OpenWebRX+ is unable to open your Linux device due to access 
+restrictions, check what group that device belongs to and add the 
+<I>"openwebrx"</I> user to the same group:
+<PRE CLASS="Shell">
+$ <B>ls -l /dev/ttyUSB0</B>
+crw-rw---- 1 root <B>dialout</B> 188, 0 Jan  7 15:28 /dev/ttyUSB0
+$ <B>sudo usermod -a -G dialout openwebrx</B>
+</PRE>
+</P>
+<P>
+At this point, you can enable global rig control for all SDR devices and 
+profiles by checking the <I>"Enable sending changes to a standalone 
+transceiver"</I> option. Most HAM operators would like to restrict rig 
+control to certain (shortwave) profiles though. To do that, <B>keep the 
+global enable option off</B>. Go to a desired profile instead and add 
+the <I>"Enable sending changes to a standalone transceiver"</I> option 
+there.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/RigControl-Profile.png"></CENTER>
 
 <A NAME="FAQ"><H2>Frequently Asked Questions</H2></A>
 <P>
