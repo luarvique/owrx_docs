@@ -143,16 +143,19 @@ This document is about
 <A HREF="https://luarvique.github.io/ppa/">OpenWebRX+</A>,
 an improved and extended version of the original
 <A HREF="https://www.openwebrx.de/">OpenWebRX</A>
-web-based SDR radio. Since the original project is missing such 
-necessary features as noise reduction, tuning steps, and support for 
-many digital modes, I have decided to fork it and add the features
-considered necessary, interesting, or simply widely requested by the 
-public.
+web-based SDR radio. For casual radio listeners, it explains how to use 
+online OpenWebRX+ receivers and what you can do with them. For those 
+interested in hosting their own OpenWebRX+ receiver, there are 
+installation instructions and advice for selecting the hardware.
 </P>
+
 <P>
-Please note that the following document covers <B>both</B> the original 
-OpenWebRX and the extended OpenWebRX+. Features specific to OpenWebRX+
-are marked so.
+OpenWebRX+ adds many features missing from the original OpenWebRX, such 
+as noise reduction, tuning steps, scanner, keyboard shortcuts, improved 
+user interface and maps, and decoders for many digital communication 
+protocols. Please note that the following document covers <B>both</B> 
+the original OpenWebRX and the extended OpenWebRX+. Features specific to 
+OpenWebRX+ are marked so.
 </P>
 
 <CENTER><IMG WIDTH="50%" SRC="gfx/Receiver.png"></CENTER>
@@ -244,9 +247,9 @@ occurs in a Telegram chat.
 <LI><A HREF="#Sea"><B>Maritime Communications</B></A>
 <UL>
   <LI><A HREF="#HOW-AIS">Tracking Ships (AIS)</A>
-  <LI><A HREF="#HOW-DSC">Digital Selective Calling (DSC)</A>
-  <LI><A HREF="#HOW-MSI">Maritime Information (MSI)</A>
+  <LI><A HREF="#HOW-MSI">Maritime Safety Information (MSI)</A>
   <LI><A HREF="#HOW-NAVTEX">Navigational Telex (NAVTEX)</A>
+  <LI><A HREF="#HOW-DSC">Digital Selective Calling (DSC)</A>
 </UL>
 <LI><A HREF="#InstallGuide"><B>Installing OpenWebRX+</B></A>
 <UL>
@@ -1102,9 +1105,9 @@ Other SSTV formats, including digital SSTV, will not be received.
 The <I>Automatic Packet Reporting System (APRS)</I> lets HAM operators 
 exchange digital data, messages, and share their locations with the 
 world. The APRS uses 144.39MHz frequency in the North America, 144.8MHz 
-in Europe. Please note that the OpenWebRX bandplan only has European 
+in Europe. Please note that the OpenWebRX band plan only has European 
 APRS frequency enabled. <B>If your receiver is in the North America, 
-edit the bandplan to switch to the 144.39MHz frequency.</B>
+edit the band plan to switch to the 144.39MHz frequency.</B>
 </P>
 <P>
 In order to monitor APRS traffic in OpenWebRX, select <I>"Packet"</I> 
@@ -1115,9 +1118,9 @@ map, shown by clicking the <SPAN CLASS="Button">Map</SPAN> button.
 </P>
 <CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-APRS.png"></CENTER>
 <P>
-OpenWebRX+ bandplan includes one more APRS entry, at 145.825MHz. This is 
-the <I>International Space Station (ISS)</I> frequency. Several times a 
-day, as ISS flies above the receiver location, you can expect to see 
+OpenWebRX+ band plan includes one more APRS entry, at 145.825MHz. This 
+is the <I>International Space Station (ISS)</I> frequency. Several times 
+a day, as ISS flies above the receiver location, you can expect to see 
 APRS reports from really far away at this frequency. These reports are 
 retransmitted by the APRS repeater located at the ISS.
 </P>
@@ -1263,9 +1266,8 @@ using USB modulation.
 </P>
 <P>
 In addition to analog voice communications, aircraft and air traffic 
-control services use several digital radio protocols for reporting 
-aircraft
-<A HREF="#HOW-ADSB">locations</A>,
+control services use several digital radio protocols for
+<A HREF="#HOW-ADSB">location reporting</A>,
 <A HREF="#HOW-VDL2">telemetry</A>,
 <A HREF="#HOW-ACARS">messaging</A>, and 
 <A HREF="#HOW-HFDL">traffic management</A>.
@@ -1278,8 +1280,8 @@ Aircraft are identified with several different IDs, including flight ID,
 aircraft tail number, and ICAO code (aka Mode-S transponder code). 
 OpenWebRX+ will hyperlink received IDs to the
 <A HREF="https://www.flightaware.com/">FlightAware</A>
-website, where you can find airplane photos and other facts about each 
-flight.
+website, where you can find flight paths, photos, and other facts about 
+each flight.
 </P>
 
 <A NAME="HOW-ADSB"><H3 CLASS="Section">Tracking Airplanes (ADS-B)</H3></A>
@@ -1287,18 +1289,18 @@ flight.
 <A HREF="https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast"><I>What is ADS-B?</I></A>
 </DIV>
 <P>
-Airplanes periodically report their positions in the air using the 
-<I>Automatic Dependent Surveillance Broadcast (ADS-B)</I> system, at 
-1090MHz and 978MHz frequencies. OpenWebRX+ can listen to these 
-frequencies and display received flight information to you.
+Airplanes periodically report their locations using the <I>Automatic 
+Dependent Surveillance Broadcast (ADS-B)</I> system, at 1090MHz and 
+978MHz frequencies. OpenWebRX+ can listen to these frequencies and 
+display received flight information to you.
 </P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Mode-ADSB.png"></CENTER>
 <P>
 To receive ADS-B transmissions, select a profile containing one of the
 ADS-B frequencies. Since these transmissions require 2MHz of bandwidth, 
-the profile must have at least 1MHz of bandwidth at each side of the 
+the profile must have at least 1MHz of bandwidth at each side of an 
 ADS-B frequency.
 </P>
-<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Mode-ADSB.png"></CENTER>
 <P>
 Standard ADS-B frequencies are part of the OpenWebRX+ band plan and thus 
 marked with green bookmarks. Once you click on an ADS-B bookmark, a 
@@ -1319,7 +1321,7 @@ bubble showing some basic information about that airplane.
 The <I>HF Data Link (HFDL)</I> is a long-distance shortwave messaging 
 system used to manage aircraft traffic around the globe. The system 
 consists of around 15 ground stations (GS) covering the entire globe. 
-HFDL messages may contain aircraft positions, telemetry, and text 
+HFDL messages may contain aircraft locations, telemetry, and text 
 communications between ground stations and the aircraft.
 </P>
 <P>
@@ -1340,9 +1342,9 @@ see HFDL-reported aircraft locations as little
 <B STYLE="color:#006000;">green</B> airplanes on the map. Clicking on an 
 airplane pops up a bubble showing some basic information about that 
 airplane. Since HFDL does not report aircraft altitude or direction, 
-most airplanes will be pointing North. If OpenWebRX+ receives more than
-one HFDL position report though, it will orient airplane based on the
-difference between the two last reports. 
+most airplanes will be pointing north. If OpenWebRX+ receives more than
+one HFDL position report though, <B>it will orient airplane based on the
+difference between the last two reports</B>. 
 </P>
 <CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-HFDL.png"></CENTER>
 
@@ -1351,11 +1353,11 @@ difference between the two last reports.
 <A HREF="https://en.wikipedia.org/wiki/"><I>What is VDL2?</I></A>
 </DIV>
 <P>
-The <I>VHF Data Link Mode 2 (VDL2)</I> is a short-distance air band 
-(VHF) messaging system aircraft use to communicate with the air traffic 
-control in their immediate vicinity. VDL2 messages may contain aircraft 
-positions, telemetry, and text communications between aircraft and local 
-ground control stations.
+The <I>VHF Data Link Mode 2 (VDL2)</I> is an air band (VHF) messaging 
+system aircraft use to communicate with the air traffic control within 
+their line of sight. VDL2 messages may contain aircraft locations, 
+telemetry, and text communications between aircraft and local ground 
+control.
 </P>
 <P>
 VDL2 frequencies are found at the end of the air band (108-137MHz) and 
@@ -1377,23 +1379,22 @@ see VDL2-reported aircraft locations as little
 <B STYLE="color:#000060;">blue</B> airplanes on the map. Clicking on an 
 airplane pops up a bubble showing some basic information about that 
 airplane, including text message history. Since VDL2 does not report 
-aircraft direction, most airplanes will be pointing North. If OpenWebRX+ 
-receives more than one VDL2 position report though, it will orient 
-airplane based on the difference between two last reports. 
+aircraft direction, most airplanes will be pointing north. If OpenWebRX+ 
+receives more than one VDL2 position report though, <B>it will orient 
+airplane based on the difference between last two reports</B>. 
 </P>
 <CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-VDL2.png"></CENTER>
 
 <A NAME="HOW-ACARS"><H3 CLASS="Section">Legacy Communications (ACARS)</H3></A>
 <DIV STYLE="text-align:right;">
 <A HREF="https://en.wikipedia.org/wiki/"><I>What is ACARS?</I></A>
-</DIV>
+</DIV> 
 <P>
 The <I>Aircraft Communications Addressing and Reporting System 
 (ACARS)</I> is the original aircraft communications protocol, now mostly 
-replaced with VDL2. Similarly to VDL2, ACARS communications use air band 
-(VHF) and carry telemetry and text communications between aircraft and 
-local air traffic control. Unlike VDL2, ACARS messages rarely contain 
-position information.
+replaced with VDL2. Similarly to VDL2, ACARS uses the air band to carry 
+telemetry and text messages between aircraft and local air traffic 
+control. Unlike VDL2, ACARS messages rarely contain aircraft locations.
 </P>
 <CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Mode-ACARS.png"></CENTER>
 <P>
@@ -1408,34 +1409,33 @@ receiver location: some of them are only used in certain parts of the
 world, others replaced with VDL2.
 </P>
 <P>
-If you click on the <SPAN CLASS="Button">Map</SPAN> button, you may
-see ACARS-reported aircraft locations as little
+If you click on the <SPAN CLASS="Button">Map</SPAN> button, you might
+see some ACARS-reported aircraft locations as little
 <B STYLE="color:#600000;">red</B> airplanes on the map. Clicking on an 
 airplane pops up a bubble showing some basic information about that 
 airplane, including text message history. Since ACARS does not report 
-aircraft direction, most airplanes will be pointing North. If OpenWebRX+ 
-receives more than one ACARS position report though, it will orient 
-airplane based on the difference between two last reports.
+aircraft direction, most airplanes will be pointing north. If OpenWebRX+ 
+receives more than one ACARS position report though, <B>it will orient 
+airplane based on the difference between last two reports</B>.
 </P>
 
 <A NAME="Sea"><H2>Maritime Communications</H2></A>
 <P>
-Short range voice communications between vessels at sea and the shore 
-usually happen in the 156-174MHz VHF "marine band", divided into 
-multiple FM channels spaced at 25kHz. In addition to analog voice, the 
-marine band contains <A HREF="#HOW-AIS">AIS</A>,
-<A HREF="#HOW-PAGER">paging</A>, and other frequencies. Long range voice 
-communications occur in shortwave bands using USB modulation.
+Vessels at sea use shortwave bands and USB modulation for voice 
+communications over long distances. Short range voice calls between 
+ships and the shore occur in the 156-174MHz VHF "marine band". In 
+addition to analog voice, the marine band contains
+<A HREF="#HOW-AIS">AIS</A> location reporting,
+<A HREF="#HOW-PAGER">paging</A>, and other digital services.
 </P>
 <P>
-A lot of digital maritime communications fall under
-<A 
-HREF="https://en.wikipedia.org/wiki/Global_Maritime_Distress_and_Safety_System">Global Maritime Distress and Safety System (GMDSS)</A>,
+A lot of digital maritime communications fall under the
+<A HREF="https://en.wikipedia.org/wiki/Global_Maritime_Distress_and_Safety_System">Global Maritime Distress and Safety System (GMDSS)</A>,
 which includes
-<A HREF="#HOW-DSC">digital selective calling (DSC)</A>,
-<A HREF="#HOW-MSI">mairne safety information (MSI)</A>, and
-<A HREF="#HOW-NAVTEX">navigational telex (NAVTEX)</A>.
-Finally, marine weather maps are available via
+<A HREF="#HOW-MSI">mairne safety information (MSI)</A>,
+<A HREF="#HOW-NAVTEX">navigational telex (NAVTEX)</A>, and
+<A HREF="#HOW-DSC">digital selective calling (DSC)</A>.
+Marine weather maps are available via
 <A HREF="#HOW-FAX">weather fax</A> transmissions from coastal stations.
 </P>
 
@@ -1445,9 +1445,9 @@ Finally, marine weather maps are available via
 </DIV>
 <P>
 Modern vessels report their locations using a VHF radio system known as 
-Automatic Identification System (AIS). If your OpenWebRX+ receiver is 
-located near a large enough body of water, it may be able to receive AIS 
-position reports and display them at the map.
+<I>Automatic Identification System (AIS)</I>. If your OpenWebRX+ 
+receiver is located near a large enough body of water, it may be able to 
+receive AIS position reports and display them on the map.
 </P>
 <P>
 AIS operates at two marine band frequencies, 161.975MHz and 162.025MHz. 
@@ -1469,32 +1469,15 @@ OpenWebRX+ shows these MMSI numbers, hyperlinking them to the
 website, where you can find photos and other facts about each vessel.
 </P>
 
-<A NAME="HOW-DSC"><H3 CLASS="Section">Digital Selective Calling (DSC)</H3></A>
-<DIV STYLE="text-align:right;">
-<A HREF="https://en.wikipedia.org/wiki/Digital_selective_calling"><I>What is DSC?</I></A>
-</DIV>
-<P>
-Digital Selective Calling (DSC) uses predefined digital messages to 
-report emergencies and other special events, as well as announce voice 
-call frequencies. DSC operates in shortwave and marine (VHF) bands, but 
-OpenWebRX+ is only able to decode shortwave DSC modes. In addition to 
-sender's and receiver's MMSIs, DSC messages will carry ship positions 
-and emergency locations.
-</P>
-<P>
-Standard DSC frequencies are marked with yellow bookmarks in OpenWebRX+. 
-Simply click on a bookmark to start receiving DSC messages, or tune 
-manually and select the <I>"DSC"</I> digital mode.
-</P>
-
 <A NAME="HOW-MSI"><H3 CLASS="Section">Maritime Safety Information (MSI)</H3></A>
 <DIV STYLE="text-align:right;">
 <A HREF="https://en.wikipedia.org/wiki/"><I>What is MSI?</I></A>
 </DIV>
 <P>
-The Maritime Safety Information (MSI) is distributed using SITOR-B 
-protocol. The SITOR-B is somewhat similar to <A HREF="#HOW-RTTY">RTTY</A>,
-but adds redundancy and error checking.
+The <I>Maritime Safety Information (MSI)</I> messages are distributed 
+on shortwave bands using SITOR-B protocol. The SITOR-B is somewhat 
+similar to <A HREF="#HOW-RTTY">RTTY</A>, but adds redundancy and error 
+checking.
 </P>
 <P>
 Standard MSI frequencies are marked with yellow "MSI" bookmarks in 
@@ -1507,16 +1490,40 @@ or tune manually and select the <I>"SITOR-B"</I> digital mode.
 <A HREF="https://en.wikipedia.org/wiki/NAVTEX"><I>What is NAVTEX?</I></A>
 </DIV>
 <P>
-Similar to MSI, Navigational Telex (NAVTEX) uses SITOR-B protocol. 
-Coastal stations send regular NAVTEX bulletins at prearranged MW and SW 
-frequencies. Each NAVTEX bulletin starts with a four-letter code 
-specifying its origin, subject, and sequential number.
+Similar to MSI, <I>Navigational Telex (NAVTEX)</I> uses SITOR-B 
+protocol. Coastal stations send regular NAVTEX bulletins at prearranged 
+shortwave frequencies. Each NAVTEX bulletin starts with a four-letter 
+code specifying its origin, subject, and sequential number.
 </P>
 <P>
-Standard NAVTEX frequencies are marked with yellow "NAVTEX" bookmarks in 
-OpenWebRX+. Simply click on a bookmark to start receiving NAVTEX 
-messages, or tune manually and select the <I>"NAVTEX"</I> digital mode.
+Standard NAVTEX frequencies are part of the OpenWebRX+ band plan and 
+thus marked with green "NAVTEX" bookmarks. Simply click on a bookmark to 
+start receiving NAVTEX messages, or tune manually and select the 
+<I>"NAVTEX"</I> digital mode. Same NAVTEX transmissions can be received 
+by selecting the <I>"SITOR-B"</I> digital mode, but OpenWebRX+ will not
+be able to check for the four-letter bulletin identifiers when using 
+plain SITOR-B.
 </P>
+
+<A NAME="HOW-DSC"><H3 CLASS="Section">Digital Selective Calling (DSC)</H3></A>
+<DIV STYLE="text-align:right;">
+<A HREF="https://en.wikipedia.org/wiki/Digital_selective_calling"><I>What is DSC?</I></A>
+</DIV>
+<P>
+<I>Digital Selective Calling (DSC)</I> uses predefined digital messages 
+to report emergencies and other special events, as well as announce 
+voice call frequencies. DSC operates in shortwave and marine (VHF) 
+bands, but OpenWebRX+ is only able to decode shortwave DSC modes at the 
+moment. In addition to sender's and receiver's MMSIs, DSC messages may
+also carry their positions. For emergencies, the nature and location of 
+emergency are reported.
+</P>
+<P>
+Standard DSC frequencies are marked with yellow bookmarks in OpenWebRX+. 
+Simply click on a bookmark to start receiving DSC messages, or tune 
+manually and select the <I>"DSC"</I> digital mode.
+</P>
+<CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Mode-DSC.png"></CENTER>
 
 <A NAME="InstallGuide"><H2>Installing OpenWebRX+</H2></A>
 <P>
@@ -1951,7 +1958,10 @@ sampling rate</B>, as HL2 runs all its RX channels at the same rate.
 It is recommended to connect antenna via a shielded cable in order to 
 keep it away from the receiver and other interference sources. Possible 
 interference sources include power supplies, phone chargers, LED lights, 
-refridgerators, air conditioners, water pumps, and other devices.
+refridgerators, air conditioners, water pumps, and other devices. Power 
+lines inside your home may then carry this interference all over the 
+place. Also, powerline network adapters are especially bad sources of 
+electric noise, so avoid using them.
 </P>
 <P>
 Your antenna choice will always depend on the frequencies you would like 
@@ -1984,7 +1994,7 @@ grounding.
 
 <LI><B>Long Wire Antennas (LW, MW, SW)</B>
 <P>
-The optimal length of a linear antenna should be close to 1/2 of the 
+The optimal length of an antenna should be close to 1/2 of the 
 wavelength you expect to receive. For example, if you are planning to 
 listen to the 25m shortwave band, the optimal antenna length will be 25 
 / 2 &thickapprox; 12.5 meters, which makes shortwave telescopic antennas 
@@ -2008,55 +2018,58 @@ that these antennas are <B>specifically tuned</B> for the VHF and UHF
 bands and thus become useless in the LW, MW, and SW bands.
 </P>
 
-<LI><B>Loop Antennas</B>
+<LI><B>Non-Resonant Loop Antennas</B>
 <P>
-As mentioned in the previous sections, the electromagnetic interference 
-is often a huge problem when listening to the radio indoors or in urban 
-environment. The magnetic loop antennas attempt to work around this 
-interference by receiving the magnetic component of the wave rather 
-than noisier electric component.
+As said before, the electromagnetic interference is often a huge problem 
+when listening to the radio indoors or in urban environment. The 
+magnetic loop antennas attempt to work around this interference by 
+receiving the magnetic component of the wave rather than the noisier 
+electric component.
 </P>
 <P>
-A typical loop antenna consists of one or more relatively small loops of 
-wire connected to a receiver via a tiny transformer ("balun" or "unun"). 
-The total surface of the wire loop determines how much magnetic flux it 
-receives, making bigger loops more sensitive. A loop antenna is 
-directional:
+A typical non-resonant loop antenna consists of one or more relatively 
+small (&thickapprox;1m in diameter) loops of wire connected to a 
+receiver via a tiny transformer ("balun" or "unun"). The total surface 
+of the wire loop determines how much magnetic flux it receives, making 
+bigger loops more sensitive. A loop antenna is directional:
 </P>
 <UL>
 <LI>
 <P>
 <B>At the wavelengths much longer than the loop size (LW, MW, SW)</B>, 
 the maximum gain is achieved when a side of the loop is directed towards 
-the signal source.
+the signal source. <B>The loop is not resonant at these frequencies,</B>
+i.e. it does not favor any specific frequency.
 </P>
 <LI>
 <P>
 <B>At the wavelengths comparable to the loop size (FM, VHF, UHF)</B>, 
 the maximum gain is achieved when the loop surface is directed towards 
-the signal source, same as if it were a dipole.
+the signal source, same as if it were a dipole. <B>The loop becomes
+resonant at these frequencies.</B>
 </P>
 </UL>
 <P>
 While loop antennas are less susceptible to eletromagnetic interference, 
-they are also less sensitive to the actual signals. Thus, most 
-commercial loop antennas include <B>low-noise amplifiers</B>, requiring 
-a power source. Some commercially available loop antennas are 
+they are also less sensitive to the actual signals. Thus, many 
+commercial loop antennas include <B>low-noise amplifiers (LNAs)</B>, 
+requiring a power source. If your loop antenna does not have an LNA, 
+consider adding one. Some commercially available loop antennas are 
 <I>YouLoop</I>, <I>MLA-30+</I>, and <I>GA-450</I>.
 </P>
 
 <LI><B>MiniWhip Antennas</B>
 <P>
 A MiniWhip is an active antenna made of a small metal plate ("probe") 
-and a low-noise amplifier. It measures the electric field strength at 
-the probe, making it a tiny receive-only antenna for a wide range of 
+and a low-noise amplifier (LNA). It measures the electric field strength 
+at the probe, making it a tiny receive-only antenna for a wide range of 
 frequencies.
 </P>
 <P>
 Being an active antenna, MiniWhip does require a power source. Also, 
 since MiniWhip is essentially a non-resonant electric field probe, it is 
 highly susceptible to interference. Thus, you will need to install it in 
-an area free of electromagnetic noise sources.
+an area free of electromagnetic noise.
 </P>
 
 </UL>
@@ -2192,7 +2205,7 @@ Please, note that <B>only one decoder can send data to the APRS-IS
 network</B> using the same callsign. Thus, if you have more than one 
 APRS decoder running (for example, at 144.39MHz and 145.825MHz), some of 
 your reports will not make it through. To fix this issue, <B>disable all 
-but one APRS frequency</B> in the bandplan file.
+but one APRS frequency</B> in the band plan file.
 </P>
 
 <LI><P><B>PSKReporter</B><BR>
