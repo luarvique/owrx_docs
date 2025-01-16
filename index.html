@@ -1990,8 +1990,30 @@ SDRPlay API uses USB port numbers as serial numbers.
 
 <A NAME="INSTALL-AIRSPY"><H3>Airspy Devices</H3></A>
 <P>
-TODO
+Airspy is a family of USB-connected SDR receivers based on the <I>R820T2</I> chipset.
+These devices are made and sold by <A HREF="https://airspy.com/">Airspy</A>.
 </P>
+<P>
+The <I>Airspy R2</I> and the <I>Airspy Mini</I> devices should already have the soapy module installed.
+If not, you can install it with this command:
+</P>
+<PRE CLASS="Shell">
+sudo apt install soapysdr-module-airspy
+</PRE>
+
+<P>
+The <I>Airspy HF+</I> device does not have a packaged soapy module yet, and you will need to compile it yourself.
+</P>
+<PRE CLASS="Shell">
+sudo apt install libusb-1.0-0-dev git cmake build-essential pkg-config debhelper libairspyhf-dev
+git clone https://github.com/pothosware/SoapyAirspyHF.git
+cd SoapyAirspyHF
+sed -i 's/soapysdr0.7-module/soapysdr0.8-module/' debian/control
+mv debian/soapysdr0.{7,8}-module-airspyhf.install
+sudo dpkg-buildpackage -b --no-sign
+cd ..
+dpkg -i soapysdr0.8-module-airspyhf_*.deb soapysdr-module-airspyhf_*.deb
+</PRE>
 
 <A NAME="INSTALL-HL2"><H3>Hermes Lite 2</H3></A>
 <P>
