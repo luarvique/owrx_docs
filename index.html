@@ -1658,8 +1658,72 @@ sudo install-softmbe.sh
 </PRE>
 
 <A NAME="INSTALL-DOCKER"><H3>Using Docker Images</H3></A>
+<P CLASS="Admin">
+<B>IMPORTANT:</B> Docker images will not work on Windows OS.
+Docker on Windows does not allow access to USB devices.
+You will have to use Linux either installed on a real hardware or in virtual machine.
+</P>
 <P>
-TODO
+There are two Docker images, both supporting X86-64, ARM64 and ARM32 architectures
+and both images containing a clean OpenWebRX+ installation with all the optional packages.
+One with <A HREF="https://hub.docker.com/r/slechev/openwebrxplus-softmbe">softmbe</A>
+and one <A HREF="https://hub.docker.com/r/slechev/openwebrxplus">without the questionable software</A>.
+</P>
+<P>
+The easiest way to use docker image is <A HREF="https://docs.docker.com/compose/">docker-compose</A>.
+Installing Docker and Docker Compose depends on your Linux distribution.
+You will need to research that by yourself.
+</P>
+<P>
+First create the folders to store your persistent data (settings, profiles, plugins, etc.).
+Here we will use <strong>/opt/owrx-docker</strong> as a base folder to store all our data,
+but you can use any folder you wish. If you use another folder, update docker-compose.yaml file.
+</P>
+<PRE CLASS="Shell">
+sudo mkdir -p /opt/owrx-docker/var /opt/owrx-docker/etc /opt/owrx-docker/plugins/{receiver,map}
+</PRE>
+<P>
+Now create a <strong>docker-compose.yaml</strong> file from the contents below.
+Keep in mind that YAML files are indented with spaces and the spaces in front of each line are important.
+You can save the file in /opt/owrx-docker folder and modify it to your needs. Update the TZ, ADMIN_USER and ADMIN_PASS.
+List with TZ identifiers can be found <A HREF="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List">here</A>.
+Use the canonical ones.
+</P>
+<PRE>
+services:
+  owrx:
+    image: 'slechev/openwebrxplus-softmbe:latest'
+    container_name: owrx-mbe
+    restart: unless-stopped
+    ports:
+      - '8073:8073'
+    environment:
+      TZ: Europe/Sofia
+      OPENWEBRX_ADMIN_USER: myuser
+      OPENWEBRX_ADMIN_PASSWORD: password
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    volumes:
+      - /opt/owrx-docker/etc:/etc/openwebrx
+      - /opt/owrx-docker/var:/var/lib/openwebrx
+      - /opt/owrx-docker/plugins:/usr/lib/python3/dist-packages/htdocs/plugins
+</PRE>
+
+<P>
+Now you can start a container.
+</P>
+<PRE CLASS="Shell">
+cd /opt/owrx-docker && sudo docker compose up -d
+</PRE>
+<P>
+To update the container to the latest released image, use:
+</P>
+<PRE CLASS="Shell">
+cd /opt/owrx-docker && sudo docker compose pull && sudo docker compose down && docker compose up -d
+</PRE>
+<P>
+More information on image environment variables and how to use docker-cli method can be
+found on <A HREF="https://hub.docker.com/r/slechev/openwebrxplus">Docker Hub Page</A>.
 </P>
 
 <A NAME="INSTALL-SOURCES"><H3>Compiling OpenWebRX+ from Sources</H3></A>
