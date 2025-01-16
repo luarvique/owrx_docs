@@ -26,6 +26,8 @@
     --fg-pre: #000040;
     --fg-code: #000060;
     --bg-code: #FFFFFF;
+    --bg-table: white;
+    --bg-tr: #D0D0FF;
   }
 
   @media (prefers-color-scheme: dark)
@@ -43,6 +45,8 @@
       --fg-pre: #A1D99E;
       --fg-code: #ffff9f;
       --bg-code: #000000;
+      --bg-table: #000000;
+      --bg-tr: #ac80fd;
     }
     img
     {
@@ -391,7 +395,7 @@ data.
 <LI><P>
 The <SPAN CLASS="Button">Settings</SPAN> button opens the password 
 protected <B>settings page</B> for configuring OpenWebRX. Normally, only 
-server adminstrator needs to access the server settings.
+server administrator needs to access the server settings.
 </P>
 
 <LI><P>
@@ -567,7 +571,7 @@ key with a mouse click.
 <P>
 <B>On touch-based devices</B>, such as smartphones and tablets, the 
 right mouse button is simulated by holding the spot with your finger for 
-a little bit longer than unusal.
+a little bit longer than usual.
 </P>
 <P>
 The <B>mouse scroll wheel</B> operates in two modes: <B>normal</B> and 
@@ -702,7 +706,7 @@ By clicking on a marker, you can see marker-specific information, such
 as APRS weather report shown below. The information bubble also 
 indicates marker's name (e.g. HAM callsign), its distance from the 
 receiver, and the last time information has been received about this 
-marker. When relevant, OpenWebRX+ will also indicate the path infomation 
+marker. When relevant, OpenWebRX+ will also indicate the path information 
 travelled, as seen at the bottom of the information bubble.
 </P>
 <CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/Map-Marker.png"></CENTER>
@@ -816,7 +820,7 @@ more resistant to interference.
 <A HREF="https://en.wikipedia.org/wiki/Shortwave_bands">multiple bands</A>
 between 1800kHz and 30MHz used by radio broadcasters, amateurs, and 
 professionals alike. The SWL activity generally refers to shortwave 
-broadcast listening though, with brodcasters easily reaching across 
+broadcast listening though, with broadcasters easily reaching across 
 thousands of kilometers using AM modulation. Global shortwave broadcast 
 schedules can be found at the
 <A HREF="https://short-wave.info/">Shortwave Info</A> and
@@ -1219,7 +1223,7 @@ display.
 A lot of pager messages carry numeric or binary data. As an 
 <B>administrator</B>, you can choose to ignore these unreadable messages 
 by going to <I>"Settings | General | Demodulation and Decoding | 
-Miscelaneous"</I> and enabling the <I>"Filter out empty, numeric, or 
+Miscellaneous"</I> and enabling the <I>"Filter out empty, numeric, or 
 unreadable pager messages"</I> option.
 </P>
 
@@ -1433,7 +1437,7 @@ addition to analog voice, the marine band contains
 A lot of digital maritime communications fall under the
 <A HREF="https://en.wikipedia.org/wiki/Global_Maritime_Distress_and_Safety_System">Global Maritime Distress and Safety System (GMDSS)</A>,
 which includes
-<A HREF="#HOW-MSI">mairne safety information (MSI)</A>,
+<A HREF="#HOW-MSI">marine safety information (MSI)</A>,
 <A HREF="#HOW-NAVTEX">navigational telex (NAVTEX)</A>, and
 <A HREF="#HOW-DSC">digital selective calling (DSC)</A>.
 Marine weather maps are available via
@@ -1642,8 +1646,10 @@ RTL-SDR and SDRPlay devices have been confirmed to work with no
 additional modifications to the images.
 </P>
 <P>
+It is recommended to use <A HREF="https://www.raspberrypi.com/software/">Raspberry Pi Imager</A> to install the images.
+In "Operating System -&gt; CHOOSE OS", select the last entry in the list - "USE CUSTOM".
 The images come with no default passwords. You will be asked to create 
-one on the first startup.
+one on the first startup. Or you can setup one in the RPi-Imager before flashing the SD Card.
 </P>
 <P>
 Please note that these images come without the software support for 
@@ -1657,8 +1663,72 @@ sudo install-softmbe.sh
 </PRE>
 
 <A NAME="INSTALL-DOCKER"><H3>Using Docker Images</H3></A>
+<P CLASS="Admin">
+<B>IMPORTANT:</B> Docker images will not work on Windows OS.
+Docker on Windows does not allow access to USB devices.
+You will have to use Linux either installed on a real hardware or in virtual machine.
+</P>
 <P>
-TODO
+There are two Docker images, both supporting X86-64, ARM64 and ARM32 architectures
+and both images containing a clean OpenWebRX+ installation with all the optional packages.
+One with <A HREF="https://hub.docker.com/r/slechev/openwebrxplus-softmbe">softmbe</A>
+and one <A HREF="https://hub.docker.com/r/slechev/openwebrxplus">without the questionable software</A>.
+</P>
+<P>
+The easiest way to use docker image is <A HREF="https://docs.docker.com/compose/">docker-compose</A>.
+Installing Docker and Docker Compose depends on your Linux distribution.
+You will need to research that by yourself.
+</P>
+<P>
+First create the folders to store your persistent data (settings, profiles, plugins, etc.).
+Here we will use <strong>/opt/owrx-docker</strong> as a base folder to store all our data,
+but you can use any folder you wish. If you use another folder, update docker-compose.yaml file.
+</P>
+<PRE CLASS="Shell">
+sudo mkdir -p /opt/owrx-docker/var /opt/owrx-docker/etc /opt/owrx-docker/plugins/{receiver,map}
+</PRE>
+<P>
+Now create a <strong>docker-compose.yaml</strong> file from the contents below.
+Keep in mind that YAML files are indented with spaces and the spaces in front of each line are important.
+You can save the file in /opt/owrx-docker folder and modify it to your needs. Update the TZ, ADMIN_USER and ADMIN_PASS.
+List with TZ identifiers can be found <A HREF="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List">here</A>.
+Use the canonical ones.
+</P>
+<PRE>
+services:
+  owrx:
+    image: 'slechev/openwebrxplus-softmbe:latest'
+    container_name: owrx-mbe
+    restart: unless-stopped
+    ports:
+      - '8073:8073'
+    environment:
+      TZ: Europe/Sofia
+      OPENWEBRX_ADMIN_USER: myuser
+      OPENWEBRX_ADMIN_PASSWORD: password
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    volumes:
+      - /opt/owrx-docker/etc:/etc/openwebrx
+      - /opt/owrx-docker/var:/var/lib/openwebrx
+      - /opt/owrx-docker/plugins:/usr/lib/python3/dist-packages/htdocs/plugins
+</PRE>
+
+<P>
+Now you can start a container.
+</P>
+<PRE CLASS="Shell">
+cd /opt/owrx-docker && sudo docker compose up -d
+</PRE>
+<P>
+To update the container to the latest released image, use:
+</P>
+<PRE CLASS="Shell">
+cd /opt/owrx-docker && sudo docker compose pull && sudo docker compose down && docker compose up -d
+</PRE>
+<P>
+More information on image environment variables and how to use docker-cli method can be
+found on <A HREF="https://hub.docker.com/r/slechev/openwebrxplus">Docker Hub Page</A>.
 </P>
 
 <A NAME="INSTALL-SOURCES"><H3>Compiling OpenWebRX+ from Sources</H3></A>
@@ -1699,8 +1769,8 @@ capabilities, and how to set them up with OpenWebRX. Here is a short
 comparison of the most common SDR devices: 
 </P>
 
-<TABLE WIDTH="100%" STYLE="padding:15px;border:1px solid;background-color:white;">
-<TR STYLE="background-color:#D0D0FF;">
+<TABLE WIDTH="100%" STYLE="padding:15px;border:1px solid;background-color: var(--bg-table);">
+<TR STYLE="background-color: var(--bg-tr);">
 <TH>Device</TH>
 <TH>Range</TH>
 <TH>Bandwidth</TH>
@@ -1749,6 +1819,13 @@ comparison of the most common SDR devices:
 <TD>12bit</TD>
 <TD>Ethernet</TD>
 </TR>
+<TR>
+<TD><A HREF="#INSTALL-HACKRF">HackRF</A></TD>
+<TD>1MHz-6GHz</TD>
+<TD>20Msps</TD>
+<TD>8bit</TD>
+<TD>USB</TD>
+</TR>
 </TABLE>
 <P>
 See below for instructions on making these SDR devices work with 
@@ -1758,7 +1835,7 @@ OpenWebRX.
 <A NAME="INSTALL-RTLSDR"><H3>RTL-SDR Devices</H3></A>
 <P>
 RTL-SDR is a large family of USB-connected SDR receivers based on the 
-<I>Realtek RTL2832U</I> chipset. Under regular cicrumstances, these 
+<I>Realtek RTL2832U</I> chipset. Under regular circumstances, these 
 devices allow reception in the 24MHz-1766MHz range. They can also be 
 persuaded to work in the 500kHz-14MHz range, although the reception 
 quality is not very good there.
@@ -1842,7 +1919,7 @@ by
 but since the basic schematics are standard, there are many inferior, 
 but cheaper Chinese RSP clones on the market. These devices are capable 
 of continuous reception in the 0-2GHz range, with bandwidth of up to 
-6Msps. This bandwith can be further widened to 10Msps at the cost of 
+6Msps. This bandwidth can be further widened to 10Msps at the cost of 
 losing some bit resolution.
 </P>
 <UL>
@@ -1894,7 +1971,7 @@ sudo apt-mark hold soapysdr-module-sdrplay3
 
 <LI><B>Connecting Multiple RSP Devices</B>
 <P>
-Each geniune RSP device has a unique serial number assigned at the 
+Each genuine RSP device has a unique serial number assigned at the 
 factory. You can see these serial numbers with the following command:
 <PRE CLASS="Shell">
 sudo SoapySDRUtil --probe="driver=sdrplay"
@@ -1914,8 +1991,30 @@ SDRPlay API uses USB port numbers as serial numbers.
 
 <A NAME="INSTALL-AIRSPY"><H3>Airspy Devices</H3></A>
 <P>
-TODO
+Airspy is a family of USB-connected SDR receivers based on the <I>R820T2</I> chipset.
+These devices are made and sold by <A HREF="https://airspy.com/">Airspy</A>.
 </P>
+<P>
+The <I>Airspy R2</I> and the <I>Airspy Mini</I> devices should already have the soapy module installed.
+If not, you can install it with this command:
+</P>
+<PRE CLASS="Shell">
+sudo apt install soapysdr-module-airspy
+</PRE>
+
+<P>
+The <I>Airspy HF+</I> device does not have a packaged soapy module yet, and you will need to compile it yourself.
+</P>
+<PRE CLASS="Shell">
+sudo apt install libusb-1.0-0-dev git cmake build-essential pkg-config debhelper libairspyhf-dev
+git clone https://github.com/pothosware/SoapyAirspyHF.git
+cd SoapyAirspyHF
+sed -i 's/soapysdr0.7-module/soapysdr0.8-module/' debian/control
+mv debian/soapysdr0.{7,8}-module-airspyhf.install
+sudo dpkg-buildpackage -b --no-sign
+cd ..
+dpkg -i soapysdr0.8-module-airspyhf_*.deb soapysdr-module-airspyhf_*.deb
+</PRE>
 
 <A NAME="INSTALL-HL2"><H3>Hermes Lite 2</H3></A>
 <P>
@@ -1954,12 +2053,24 @@ sampling rate</B>, as HL2 runs all its RX channels at the same rate.
 </P>
 </UL>
 
+<A NAME="INSTALL-HACKRF"><H3>HackRF One Devices</H3></A>
+<P>
+HackRF One is an Open Source, USB-connected SDR receiver.
+</P>
+<P>
+The <I>HackRF One</I> device should already have the soapy module installed.
+If not, you can install it with this command:
+</P>
+<PRE CLASS="Shell">
+sudo apt install soapysdr-module-hackrf
+</PRE>
+
 <A NAME="INSTALL-ANTENNA"><H3>Choosing an Antenna</H3></A>
 <P>
 It is recommended to connect antenna via a shielded cable in order to 
 keep it away from the receiver and other interference sources. Possible 
 interference sources include power supplies, phone chargers, LED lights, 
-refridgerators, air conditioners, water pumps, and other devices. Power 
+refrigerators, air conditioners, water pumps, and other devices. Power 
 lines inside your home may then carry this interference all over the 
 place. Also, powerline network adapters are especially bad sources of 
 electric noise, so avoid using them.
@@ -2051,7 +2162,7 @@ resonant at these frequencies.</B>
 </P>
 </UL>
 <P>
-While loop antennas are less susceptible to eletromagnetic interference, 
+While loop antennas are less susceptible to electromagnetic interference, 
 they are also less sensitive to the actual signals. Thus, many 
 commercial loop antennas include <B>low-noise amplifiers (LNAs)</B>, 
 requiring a power source. If your loop antenna does not have an LNA, 
@@ -2884,7 +2995,7 @@ page.
 SDRplay devices and their clones are notoriously glitchy and require a 
 good power source for reliable operation. If you experience timeouts or 
 failures with these devices, try connecting them via a powered USB hub. 
-If this does not help, and you have a geniune SDRplay device (not a 
+If this does not help, and you have a genuine SDRplay device (not a 
 clone),
 <A HREF="https://www.sdrplay.com/support/open.php">open a ticket</A>
 at the SDRplay website. OpenWebRX developers <B>cannot</B> help you 
@@ -2899,7 +3010,7 @@ features they find personally interesting, repeatedly requested by a
 lot of people, or easy to implement.
 </P>
 <P>
-Having said that, there is high probablity that the feature you want is 
+Having said that, there is high probability that the feature you want is 
 either already implemented, or can be achieved by some other means, or 
 has been considered and avoided for some reason. Please, carefully read 
 this document, especially the <A HREF="#FAQ">FAQ section</A>.
