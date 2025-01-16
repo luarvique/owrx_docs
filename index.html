@@ -283,6 +283,7 @@ occurs in a Telegram chat.
   <LI><A HREF="#HOW-MQTT">Advanced MQTT Reporting</A>
   <LI><A HREF="#HOW-PLUGINS">JavaScript Plugins</A>
   <LI><A HREF="#HOW-RIGCONTROL">External Transceiver Rig Control</A>
+  <LI><A HREF="#HOW-SATDUMP">Receiving Satellite Data</A>
 </UL>
 <LI><A HREF="#FAQ"><B>Frequently Asked Questions</B></A>
 </UL>
@@ -2661,11 +2662,12 @@ Plugins placed into this folder will be loaded into the map view page.
 
 <A NAME="HOW-RIGCONTROL"><H3>External Transceiver Rig Control</H3></A>
 <P>
-For HAM operators, OpenWebRX+ offers a way to send tuning frequency
-and modulation changes to an external transceiver rig connected to the
-OpenWebRX+ server. This is done using tools from the well known 
-<A HREF="https://hamlib.github.io/">Hamlib</A> project, so you will
-need to install Hamlib prior to enabling rig control in OpenWebRX+.
+For HAM operators, OpenWebRX+ offers a way to send tuning frequency and 
+modulation changes to a transceiver rig connected to the OpenWebRX+ 
+server. This is done using
+<A HREF="https://hamlib.github.io/">Hamlib</A>
+tools, so you will need to install Hamlib prior to enabling rig control 
+in OpenWebRX+.
 </P>
 <P>
 Please, keep in mind that <B>unless you are running a private OpenWebRX+ 
@@ -2702,6 +2704,65 @@ the <I>"Enable sending changes to a standalone transceiver"</I> option
 there.
 </P>
 <CENTER><IMG WIDTH="80%" STYLE="max-width:800px;" SRC="gfx/RigControl-Profile.png"></CENTER>
+
+<A NAME="HOW-SATDUMP"><H3>Receiving Satellite Data</H3></A>
+<P>
+To receive satellite weather maps, OpenWebRX+ integrates with the
+<A HREF="https://www.satdump.org/">SatDump</A>
+satellite decoder. Unfortunately, since SatDump is not a real-time tool, 
+the online decoding is not possible. Hence, the users of your receiver 
+will not be able to make use of SatDump and that is why <B>OpenWebRX+ 
+satellite data support is disabled by default</B>.
+</P>
+<P>
+If you are running a private OpenWebRX+ server and would like to use it 
+to receive satellite data, you can manually enable SatDump support and 
+receive satellite weather images as follows:
+</P>
+
+<OL>
+<LI><P>
+<B>Install SatDump</B> by following instructions from the 
+<A HREF="https://github.com/SatDump/SatDump">official GitHub repository</A>.
+You can also try installing SatDump from packages available at their
+<A HREF="https://github.com/SatDump/SatDump">downloads page</A>,
+but these may not work on your specific Linux flavor. Source code
+compilation is more reliable, although it does take a significant
+amount of time.
+</P>
+
+<LI><P>
+<B>Enable SatDump integration</B> in the following OpenWebRX+ file:
+<PRE>
+/usr/lib/python3/dist-packages/owrx/modes.py
+</PRE>
+Search for the <I>"SatDump stuff"</I> and uncomment all the following 
+lines. After saving the file, restart the OpenWebRX+ service. If you 
+have done everything right, the <I>"NOAA APT"</I> and <I>"METEOR 
+LRPT"</I> options will appear on the list of digital modes.
+</P>
+
+<LI><P>
+<B>Tune to a satellite frequency</B>, select the appropriate digital 
+mode, and wait for the satellite signal to show up. You may have to keep 
+adjusting the frequency to account for the Doppler shift. There is even 
+a <A HREF="#HOW-PLUGINS">JavaScript plugin</A> that will do it for you.
+</P>
+
+<LI><P>
+<B>Once the satellite goes out of sight</B> and its signal disappears, 
+switch to an analog mode or simply close the web page. This will stop 
+the SatDump decoding process. Please note that the NOAA decoder will 
+keep recording data even when there is no satellite signal present.
+</P>
+
+<LI><P>
+<B>All received data is stored</B> in the <I>"/tmp/satdump"</I> folder. 
+For the NOAA decoder, you will see complete images there. For the METEOR 
+decoder, you will get a .CADU file with data. Use SatDump on your 
+personal computer to convert this file to actual images.
+</P>
+</OL>
 
 <A NAME="FAQ"><H2>Frequently Asked Questions</H2></A>
 <P>
