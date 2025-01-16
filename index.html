@@ -26,6 +26,8 @@
     --fg-pre: #000040;
     --fg-code: #000060;
     --bg-code: #FFFFFF;
+    --bg-table: white;
+    --bg-tr: #D0D0FF;
   }
 
   @media (prefers-color-scheme: dark)
@@ -43,6 +45,8 @@
       --fg-pre: #A1D99E;
       --fg-code: #ffff9f;
       --bg-code: #000000;
+      --bg-table: #000000;
+      --bg-tr: #ac80fd;
     }
     img
     {
@@ -1764,8 +1768,8 @@ capabilities, and how to set them up with OpenWebRX. Here is a short
 comparison of the most common SDR devices: 
 </P>
 
-<TABLE WIDTH="100%" STYLE="padding:15px;border:1px solid;background-color:white;">
-<TR STYLE="background-color:#D0D0FF;">
+<TABLE WIDTH="100%" STYLE="padding:15px;border:1px solid;background-color: var(--bg-table);">
+<TR STYLE="background-color: var(--bg-tr);">
 <TH>Device</TH>
 <TH>Range</TH>
 <TH>Bandwidth</TH>
@@ -1813,6 +1817,13 @@ comparison of the most common SDR devices:
 <TD>4 x 384ksps</TD>
 <TD>12bit</TD>
 <TD>Ethernet</TD>
+</TR>
+<TR>
+<TD><A HREF="#INSTALL-HACKRF">HackRF</A></TD>
+<TD>1MHz-6GHz</TD>
+<TD>20Msps</TD>
+<TD>8bit</TD>
+<TD>USB</TD>
 </TR>
 </TABLE>
 <P>
