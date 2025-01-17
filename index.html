@@ -272,6 +272,7 @@ occurs in a Telegram chat.
   <LI><A HREF="#INSTALL-SDRPLAY">SDRPlay (RSP) Devices</A>
   <LI><A HREF="#INSTALL-AIRSPY">Airspy Devices</A>
   <LI><A HREF="#INSTALL-HL2">Hermes Lite 2</A>
+  <LI><A HREF="#INSTALL-HACKRF">HackRF One</A>
   <LI><A HREF="#INSTALL-ANTENNA">Choosing an Antenna</A>
 </UL>
 <LI><A HREF="#AdminFeatures"><B>Administrator Features</B></A>
@@ -1641,15 +1642,17 @@ If you have a Raspberry Pi, you can use
 containing a clean OpenWebRX+ installation with all the optional 
 packages. The 32bit image should run on all devices except for RPI5. The 
 64bit image should run on all devices except for RPI1, RPI2, and 
-RPIZero1. Both images support all common SDR devices out of the box. The 
-RTL-SDR and SDRPlay devices have been confirmed to work with no 
-additional modifications to the images.
+RPIZero1. Both images support common SDR device models out of the box. 
+For example, both RTL-SDR and SDRPlay devices have been confirmed to 
+work with no additional modifications to the images.
 </P>
 <P>
-It is recommended to use <A HREF="https://www.raspberrypi.com/software/">Raspberry Pi Imager</A> to install the images.
-In "Operating System -&gt; CHOOSE OS", select the last entry in the list - "USE CUSTOM".
-The images come with no default passwords. You will be asked to create 
-one on the first startup. Or you can setup one in the RPi-Imager before flashing the SD Card.
+To flash image to an SD card, run
+<A HREF="https://www.raspberrypi.com/software/">Raspberry Pi Imager</A>
+and select <I>"USE CUSTOM"</I> option from the <I>"Operating System | 
+CHOOSE OS"</I> menu. <B>Prior to flashing SD card, you can tell RPI 
+Imager to set up the root password.</B> If you skip this step, you will 
+be asked to create root password on the first startup.
 </P>
 <P>
 Please note that these images come without the software support for 
@@ -1664,36 +1667,44 @@ sudo install-softmbe.sh
 
 <A NAME="INSTALL-DOCKER"><H3>Using Docker Images</H3></A>
 <P CLASS="Admin">
-<B>IMPORTANT:</B> Docker images will not work on Windows OS.
-Docker on Windows does not allow access to USB devices.
-You will have to use Linux either installed on a real hardware or in virtual machine.
+<B>IMPORTANT:</B> Docker images will not work on Windows OS. Windows 
+does not allow Docker access to USB devices. You will have to run Docker 
+on Linux.
 </P>
 <P>
-There are two Docker images, both supporting X86-64, ARM64 and ARM32 architectures
-and both images containing a clean OpenWebRX+ installation with all the optional packages.
-One with <A HREF="https://hub.docker.com/r/slechev/openwebrxplus-softmbe">softmbe</A>
-and one <A HREF="https://hub.docker.com/r/slechev/openwebrxplus">without the questionable software</A>.
+Pre-built Docker images contain clean OpenWebRX+ installation with all 
+the optional packages. There are two Docker images, both supporting 
+x86-64, ARM64, and ARM32 architectures, one
+<A HREF="https://hub.docker.com/r/slechev/openwebrxplus-softmbe">with SoftMBE</A>
+and another
+<A HREF="https://hub.docker.com/r/slechev/openwebrxplus">without SoftMBE</A>.
+The easiest way to use OpenWebRX+ Docker image is through
+<A HREF="https://docs.docker.com/compose/">Docker Compose</A>,
+as shown below:
 </P>
-<P>
-The easiest way to use docker image is <A HREF="https://docs.docker.com/compose/">docker-compose</A>.
-Installing Docker and Docker Compose depends on your Linux distribution.
-You will need to research that by yourself.
+<OL>
+<LI><P><B>Install Docker and Docker Compose.</B> The exact procedure 
+depends on your Linux distribution. You will need to research that by 
+yourself.
 </P>
-<P>
-First create the folders to store your persistent data (settings, profiles, plugins, etc.).
-Here we will use <strong>/opt/owrx-docker</strong> as a base folder to store all our data,
-but you can use any folder you wish. If you use another folder, update docker-compose.yaml file.
-</P>
+<LI><P><B>Create folders to store your persistent data</B> (settings, 
+profiles, plugins, etc.). Here, we will use <I>"/opt/owrx-docker"</I> as 
+the base folder to store all our data, but you can also use a different 
+folder:
 <PRE CLASS="Shell">
 sudo mkdir -p /opt/owrx-docker/var /opt/owrx-docker/etc /opt/owrx-docker/plugins/{receiver,map}
 </PRE>
-<P>
-Now create a <strong>docker-compose.yaml</strong> file from the contents below.
-Keep in mind that YAML files are indented with spaces and the spaces in front of each line are important.
-You can save the file in /opt/owrx-docker folder and modify it to your needs. Update the TZ, ADMIN_USER and ADMIN_PASS.
-List with TZ identifiers can be found <A HREF="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List">here</A>.
-Use the canonical ones.
 </P>
+
+<LI><P><B>Create <I>"docker-compose.yaml"</I> file</B> as shown below. 
+You can save this file to the <I>"/opt/owrx-docker"</I> folder and 
+modify it to your needs. Configure TZ, ADMIN_USER, and ADMIN_PASS 
+variables, using 
+<A HREF="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List">canonical identifier</A>
+for TZ. If you are using data folder different from 
+<I>"/opt/owrx-docker"</I>, modify your <I>"docker-compose.yaml"</I> file 
+to reflect that. Keep in mind that YAML files are indented with spaces, 
+and the spaces in front of each line are important.
 <PRE>
 services:
   owrx:
@@ -1713,22 +1724,23 @@ services:
       - /opt/owrx-docker/var:/var/lib/openwebrx
       - /opt/owrx-docker/plugins:/usr/lib/python3/dist-packages/htdocs/plugins
 </PRE>
-
-<P>
-Now you can start a container.
 </P>
+
+<LI><P><B>Start the container</B> as follows:
 <PRE CLASS="Shell">
 cd /opt/owrx-docker && sudo docker compose up -d
 </PRE>
-<P>
-To update the container to the latest released image, use:
-</P>
+To update your container to the latest released image, use:
 <PRE CLASS="Shell">
 cd /opt/owrx-docker && sudo docker compose pull && sudo docker compose down && docker compose up -d
 </PRE>
+</P>
+</OL>
+
 <P>
-More information on image environment variables and how to use docker-cli method can be
-found on <A HREF="https://hub.docker.com/r/slechev/openwebrxplus">Docker Hub Page</A>.
+More information about environment variables within the image and how to 
+use <I>docker-cli</I> method can be found at the
+<A HREF="https://hub.docker.com/r/slechev/openwebrxplus">Docker Hub Page</A>.
 </P>
 
 <A NAME="INSTALL-SOURCES"><H3>Compiling OpenWebRX+ from Sources</H3></A>
@@ -1820,7 +1832,7 @@ comparison of the most common SDR devices:
 <TD>Ethernet</TD>
 </TR>
 <TR>
-<TD><A HREF="#INSTALL-HACKRF">HackRF</A></TD>
+<TD><A HREF="#INSTALL-HACKRF">HackRF One</A></TD>
 <TD>1MHz-6GHz</TD>
 <TD>20Msps</TD>
 <TD>8bit</TD>
@@ -1991,20 +2003,27 @@ SDRPlay API uses USB port numbers as serial numbers.
 
 <A NAME="INSTALL-AIRSPY"><H3>Airspy Devices</H3></A>
 <P>
-Airspy is a family of USB-connected SDR receivers based on the <I>R820T2</I> chipset.
-These devices are made and sold by <A HREF="https://airspy.com/">Airspy</A>.
+Airspy is a family of USB-connected SDR receivers based on the 
+<I>Realtek R820T2</I> chipset. These devices are made and sold by
+<A HREF="https://airspy.com/">Airspy</A>.
 </P>
+<UL>
+<LI><B>Airspy R2 and Airspy Mini</B>
 <P>
-The <I>Airspy R2</I> and the <I>Airspy Mini</I> devices should already have the soapy module installed.
-If not, you can install it with this command:
-</P>
+Most Linux distributions will have
+<A HREF="https://airspy.com/airspy-r2/">Airspy R2</A> and
+<A HREF="https://airspy.com/airspy-mini/">Airspy Mini</A>
+drivers installed by default. If this is not the case, you can install 
+the drivers as follows:
 <PRE CLASS="Shell">
 sudo apt install soapysdr-module-airspy
 </PRE>
-
-<P>
-The <I>Airspy HF+</I> device does not have a packaged soapy module yet, and you will need to compile it yourself.
 </P>
+<LI><B>Airspy HF+</B>
+<P>
+The <A HREF="https://airspy.com/airspy-hf-plus/">Airspy HF+</A>
+does not have a packaged driver yet, so you will need to compile it as 
+follows:
 <PRE CLASS="Shell">
 sudo apt install libusb-1.0-0-dev git cmake build-essential pkg-config debhelper libairspyhf-dev
 git clone https://github.com/pothosware/SoapyAirspyHF.git
@@ -2015,6 +2034,8 @@ sudo dpkg-buildpackage -b --no-sign
 cd ..
 dpkg -i soapysdr0.8-module-airspyhf_*.deb soapysdr-module-airspyhf_*.deb
 </PRE>
+</P>
+</UL>
 
 <A NAME="INSTALL-HL2"><H3>Hermes Lite 2</H3></A>
 <P>
@@ -2053,17 +2074,15 @@ sampling rate</B>, as HL2 runs all its RX channels at the same rate.
 </P>
 </UL>
 
-<A NAME="INSTALL-HACKRF"><H3>HackRF One Devices</H3></A>
+<A NAME="INSTALL-HACKRF"><H3>HackRF One</H3></A>
 <P>
-HackRF One is an Open Source, USB-connected SDR receiver.
-</P>
-<P>
-The <I>HackRF One</I> device should already have the soapy module installed.
-If not, you can install it with this command:
-</P>
+HackRF One is an open source, USB-connected SDR. In most cases, HackRF 
+One drivers should already be present in your system. If this is not the 
+case, install the drivers as follows:
 <PRE CLASS="Shell">
 sudo apt install soapysdr-module-hackrf
 </PRE>
+</P>
 
 <A NAME="INSTALL-ANTENNA"><H3>Choosing an Antenna</H3></A>
 <P>
