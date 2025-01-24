@@ -1671,13 +1671,6 @@ sudo install-softmbe.sh
 does not allow Docker access to USB devices. You will have to run Docker 
 on Linux.
 </P>
-<P CLASS="Admin">
-<B>WARNING:</B>
-If you are using SDRPlay device, when you reboot the host or 
-reconnect the device, <B>you need to restart the container once</B>.
-The SDRPlayAPI will initialize the device, then the device restarts itself and reconnect to the USB.
-Docker will not present the "new" device to the container, unless the container is restarted.
-</P>
 <P>
 Pre-built Docker images contain clean OpenWebRX+ installation with all 
 the optional packages. There are two Docker images, both supporting 
@@ -1748,6 +1741,13 @@ cd /opt/owrx-docker && sudo docker compose pull && sudo docker compose down && d
 More information about environment variables within the image and how to 
 use <I>docker-cli</I> method can be found at the
 <A HREF="https://hub.docker.com/r/slechev/openwebrxplus">Docker Hub Page</A>.
+</P>
+
+<P CLASS="Admin">
+<B>IMPORTANT:</B> If you are using SDRPlay devices with Docker, 
+<B>restart the container every time you reboot the host or reconnect a 
+device</B>. Docker will not present a "new" SDRPlay device to the 
+container unless that container is restarted.
 </P>
 
 <A NAME="INSTALL-SOURCES"><H3>Compiling OpenWebRX+ from Sources</H3></A>
