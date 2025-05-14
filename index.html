@@ -2918,7 +2918,7 @@ chat groups.
   <LI><A HREF="#FAQ-PROFILES">How do I hide some profiles from users?</A>
   <LI><A HREF="#FAQ-JUMP-ANY">How do I jump to any frequency?</A>
   <LI><A HREF="#FAQ-ENTER-ANY">How do I enter any frequency?</A>
-  <LI><A HREF="#FAQ-CONFIG">Where are OpenWebRX configuration files?</A>
+  <LI><A HREF="#FAQ-CONFIG">Where are OpenWebRX configuration files and how to backup them?</A>
   <LI><A HREF="#FAQ-HTTPS">How do I make OpenWebRX use HTTPS protocol?</A>
   <LI><A HREF="#FAQ-BOOKMARKS">How do I get rid of default yellow bookmarks?</A>
   <LI><A HREF="#FAQ-TEMPERATURE">My CPU temperature is wrong!</A>
@@ -3141,7 +3141,7 @@ an arbitrary frequency can be enabled with a
 <A HREF="#HOW-PLUGINS">JavaScript plugin</A>.
 </P>
 
-<A NAME="FAQ-CONFIG"><H3>Where are OpenWebRX configuration files?</H3></A>
+<A NAME="FAQ-CONFIG"><H3>Where are OpenWebRX configuration files and how to backup them?</H3></A>
 <P>
 If you wish to backup OpenWebRX configuration files, they are located as 
 follows:
@@ -3161,6 +3161,13 @@ copies</B> first. After updating configuration files, restart OpenWebRX
 with:
 </P>
 <PRE CLASS="Shell">sudo systemctl restart openwebrx</PRE>
+<P>
+  Backing up the files should be as simple as:
+</P>
+<PRE CLASS="Shell">tar fcv /tmp/openwebrx-backup.tar /var/lib/openwebrx /etc/openwebrx</PRE>
+<P>
+  Then you can use FileZilla, WinSCP or similar tools to copy the file (/tmp/openwebrx-backup.tar) to your computer.
+</P>
 
 <A NAME="FAQ-HTTPS"><H3>How do I make OpenWebRX use HTTPS protocol?</H3></A>
 <P>
