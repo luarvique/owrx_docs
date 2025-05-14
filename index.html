@@ -200,6 +200,9 @@ occurs in a Telegram chat.
 </UL>
 
 <A NAME="TOC"><H2>Table of Contents</H2></A>
+<TABLE ALIGN="CENTER" WIDTH="90%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">
 <UL>
 <LI><A HREF="#Docs"><B>How to Use OpenWebRX+</B></A>
 <UL>
@@ -255,6 +258,10 @@ occurs in a Telegram chat.
   <LI><A HREF="#HOW-NAVTEX">Navigational Telex (NAVTEX)</A>
   <LI><A HREF="#HOW-DSC">Digital Selective Calling (DSC)</A>
 </UL>
+</UL>
+</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">
+<UL>
 <LI><A HREF="#InstallGuide"><B>Installing OpenWebRX+</B></A>
 <UL>
   <LI><A HREF="#INSTALL-UBUNTU-22">Installing on Ubuntu 22.04</A>
@@ -292,6 +299,9 @@ occurs in a Telegram chat.
 </UL>
 <LI><A HREF="#FAQ"><B>Frequently Asked Questions</B></A>
 </UL>
+</TD>
+</TR>
+</TABLE>
 
 <A NAME="Docs"><H2>How to Use OpenWebRX+</H2></A>
 <P>
@@ -860,19 +870,19 @@ with bookmarks in the main receiver window.
 <P>
 Many American FM broadcasters are now using a form of digital radio 
 known as <I>HDRadio</I> or <I>NRSC5</I>. The HDRadio signal, showing up 
-as two thick "columns" around the traditional WFM signal, adds up to 
-four digital channels to each analog FM broadcast.
+as two thick "columns" around a traditional WFM signal, adds up to four 
+digital channels to each analog FM broadcast.
 </P>
 <P>
 <B>HDRadio decoding requires a lot of CPU power and will not work on 
-slower computers, or wide profiles.</B> In order to listen to the 
-HDRadio in OpenWebRX+, tune to the "enhanced" WFM signal and click on 
-the <SPAN CLASS="Button">HDR</SPAN> button. Once the decoder syncs with 
-the signal, the station information and the channel selector should show 
-up at the bottom of the waterfall.
+slower computers, or wide profiles.</B> In order to listen to HDRadio in 
+OpenWebRX+, tune to an "enhanced" WFM signal and click on the <SPAN 
+CLASS="Button">HDR</SPAN> button. Once the decoder syncs with the 
+signal, the station information and the channel selector should show up 
+at the bottom of the waterfall.
 </P>
 
-<A NAME="HOW-HDR"><H3 CLASS="Section">DAB: Digital FM in Europe</H3></A>
+<A NAME="HOW-DAB"><H3 CLASS="Section">DAB: Digital FM in Europe</H3></A>
 <DIV STYLE="text-align:right;">
 <A HREF="https://en.wikipedia.org/wiki/Digital_Audio_Broadcasting"><I>What is DAB?</I></A>
 </DIV>
@@ -885,9 +895,10 @@ many individual radio station signals at once.
 <P>
 <B>DAB decoding requires a lot of CPU power and will not work on slower 
 computers, or wide profiles.</B> In order to listen to DAB in OpenWebRX, 
-tune to the DAB signal and click on the <SPAN CLASS="Button">DAB</SPAN> 
-button. Once the decoder syncs with the signal, the station information 
-and the station selector should show up at the bottom of the waterfall.
+tune to a DAB multiplex signal and click on the
+<SPAN CLASS="Button">DAB</SPAN> button. Once the decoder syncs up with 
+the signal, the station information and the station selector should show 
+up at the bottom of the waterfall.
 </P>
 
 <A NAME="Amateur"><H2>Amateur Radio</H2></A>
@@ -904,7 +915,7 @@ to listen to the amateur radio.
 Citizens Band (CB) generally covers a swath of spectrum between 27MHz 
 and 28MHz, where individuals can communicate without a license, as long 
 as they adhere to a few rules. The exact boundaries of the CB band 
-change from country to country. It sits adjacent to the 10m amateur 
+differ from country to country. It sits adjacent to the 10m amateur 
 band.
 </P>
 <P>
@@ -934,7 +945,7 @@ The amateur radio operators (HAMs) are found at 160m, 80m, 40m, 20m, and
 a few
 <A HREF="https://en.wikipedia.org/wiki/Shortwave_bands">other shortwave bands</A>.
 All kinds of activities happen at these bands, from Morse code, to 
-voice, to digital transmissions.
+voice, to digital communications.
 </P>
 <P>
 Each amateur band is usually broken into three parts:
@@ -944,9 +955,9 @@ Each amateur band is usually broken into three parts:
 known as "telegraph" or CW.
 <LI><P>
 Right above the Morse code, there is a bunch of digital transmissions in 
-different formats, such as RTTY, FT8, FT4, and so on. A lot of these 
-formats operate at fixed frequencies, which are included into OpenWebRX 
-band plan and thus show up as green bookmarks.
+different modes, such as RTTY, FT8, FT4, and so on. A lot of these modes 
+operate at fixed frequencies, which are included into OpenWebRX band 
+plan and thus show up as green bookmarks.
 </P>
 <LI><P>
 The rest of a band is allocated for the voice (or "telephone") 
@@ -1640,11 +1651,11 @@ http://localhost:8073/
 If you have a Raspberry Pi, you can use
 <A HREF="https://github.com/luarvique/openwebrx/releases/">pre-built SD card images</A> 
 containing a clean OpenWebRX+ installation with all the optional 
-packages. The 32bit image should run on all devices except for RPI5. The 
-64bit image should run on all devices except for RPI1, RPI2, and 
-RPIZero1. Both images support common SDR device models out of the box. 
-For example, both RTL-SDR and SDRPlay devices have been confirmed to 
-work with no additional modifications to the images.
+packages. The 32bit image should run on all devices except for RPI1 and 
+RPI5. The 64bit image should run on all devices except for RPI1, RPI2, 
+and RPIZero1. Both images support common SDR device models out of the 
+box. For example, both RTL-SDR and SDRPlay devices have been confirmed 
+to work with no additional modifications to the images.
 </P>
 <P>
 To flash image to an SD card, run
@@ -1869,10 +1880,10 @@ The most common RTL-SDR device is
 In a lot of cases, the driver for this device is already installed in 
 your Linux system. If it is not, you can install it with the following 
 command:
+</P>
 <PRE CLASS="Shell">
 sudo apt install rtl-sdr librtlsdr0 librtlsdr-dev
 </PRE>
-</P>
 
 <LI><B>RTLSDRv4</B>
 <P>
@@ -1883,6 +1894,7 @@ This device officially supports the 500kHz-24MHz frequency range via the
 built-in transverter. It may require updated RTL-SDR drivers though. If 
 your current drivers do not support <I>RTLSDRv4</I>, you may have to 
 build and install the new drivers as follows:
+</P>
 <PRE CLASS="Shell">
 sudo apt install libusb-1.0-0-dev git cmake build-essential pkg-config debhelper
 git clone https://github.com/rtlsdrblog/rtl-sdr-blog
@@ -1891,7 +1903,6 @@ sudo dpkg-buildpackage -b --no-sign
 cd ..
 sudo dpkg -i librtlsdr0_*.deb librtlsdr-dev_*.deb rtl-sdr_*.deb
 </PRE>
-</P>
 
 <LI><B>Receiving Shortwave Frequencies with RTL-SDR</B>
 <P>
@@ -1905,6 +1916,13 @@ Sampling"</I> option to each shortwave profile and set its value to
 <I>"Direct Sampling (Q branch)"</I>. With this option enabled, most 
 RTL-SDR devices will be able to receive in the 500kHz-14MHz range. The 
 14MHz-24MHz range will remain unusable.
+</P>
+<P>
+Please, note that the default RTLSDR device entry in OpenWebRX has been 
+created for RTLSDRv3, so all profiles under that entry have the 
+<I>"Direct Sampling"</I> option enabled. <B>If you happen to have 
+RTLSDRv4, make sure to remove the direct sampling option</B> from every 
+RTLSDR profile. Otherwise, these profiles will not work.
 </P>
 
 <LI><B>Connecting Multiple RTL-SDR Devices</B>
@@ -2004,7 +2022,15 @@ The Chinese-made RSP clones all come with the same serial number and
 thus <B>only one</B> Chinese RSP clone can be used with the SDRPlay API.
 A workaround to this problem is to downgrade SDRPlay API to v3.07 and
 install the corresponding SoapySDRPlay3 package version, since older 
-SDRPlay API uses USB port numbers as serial numbers.
+SDRPlay API uses USB port numbers as serial numbers. Install SDRPlay API 
+v3.07 from the
+<A HREF="https://www.sdrplay.com/downloads/">SDRPlay website</A>,
+then downgrade SoapySDRPlay3 to a compatible version and prevent it from 
+further upgrades:
+<PRE CLASS="Shell">
+sudo apt install soapysdr-module-sdrplay3=0.8.6
+sudo apt-mark hold soapysdr-module-sdrplay3
+</PRE>
 <P>
 </UL>
 
@@ -2097,9 +2123,9 @@ It is recommended to connect antenna via a shielded cable in order to
 keep it away from the receiver and other interference sources. Possible 
 interference sources include power supplies, phone chargers, LED lights, 
 refrigerators, air conditioners, water pumps, and other devices. Power 
-lines inside your home may then carry this interference all over the 
-place. Also, powerline network adapters are especially bad sources of 
-electric noise, so avoid using them.
+lines inside your home may carry this interference all over the place. 
+Also, powerline network adapters are especially bad sources of electric 
+noise, so avoid using them.
 </P>
 <P>
 Your antenna choice will always depend on the frequencies you would like 
@@ -2255,15 +2281,81 @@ In order to enable background decoding at a frequency that is <B>not</B>
 part of the band plan (<B>no</B> green bookmark), you will have to add 
 that frequency to the band plan by editing the following file:
 </P>
-<PRE>/etc/openwebrx/bands.json</PRE>
+<PRE CLASS="Shell">sudo nano /etc/openwebrx/bands.json</PRE>
 <P>
-Prior to editing this file, make sure you <B>create a backup copy</B>, 
-in case something goes wrong. Unfortunately, there is no way to edit the
-band plan via web-based settings at the moment. After editing and saving 
-the file, restart OpenWebRX as follows and make sure there is a green 
-bookmark at the frequency you added:
+There are also region-specific band plan files in the same folder. <B>If 
+you have selected a region-specific band plan in <I>"Settings | 
+General"</I>, edit that band plan instead</B>. Prior to editing a band 
+plan file, make sure you <B>create a backup copy</B>, in case something 
+goes wrong. After editing and saving the file, restart OpenWebRX as 
+follows and make sure there is a green bookmark at the frequency you 
+added:
 </P>
 <PRE CLASS="Shell">sudo systemctl restart openwebrx</PRE>
+<P>
+A typical <I>bands.json</I> frequency entry will look as follows:
+</P>
+<PRE>
+"frequencies": {
+    "&lt;mode&gt;": &lt;frequency&gt;,
+    ...
+}
+</PRE>
+<P>
+<P>
+The background decoding in OpenWebRX+ supports the following modes: 
+<I>
+"ft8", "wspr", "jt65", "jt9", "ft4", "fst4", "fst4w", "q65", "msk144", 
+"js8", "packet", "ais", "sstv", "fax", "navtex", "dsc", "page", "eas", 
+"ism", "hfdl", "vdl2", "acars", "adsb", "audio".
+</I>
+If you have multiple frequencies associated with the same mode, 
+enter them as a list:
+</P>
+<PRE>
+"frequencies": {
+    "&lt;mode&gt;": [ &lt;frequency1&gt;, &lt;frequency2&gt;, ... ],
+    ...
+}
+</PRE>
+<P>
+Finally, if you would like to specify an underlying modulation, such as 
+<I>"lsb"</I>, <I>"usb"</I>, <I>"am"</I>, <I>"nfm"</I>, <I>"sam"</I>, or 
+<I>"cw"</I>, enter it as follows:
+</P>
+<PRE>
+"frequencies": {
+    "&lt;mode&gt;": { "frequency": &lt;frequency&gt;, "underlying": "&lt;modulation&gt;" },
+    ...
+}
+</PRE>
+</P>
+<P>
+Here is an example of two FT4 frequencies, using their default USB 
+modulation, and two SSTV frequencies using different modulations:
+</P>
+<PRE>
+"frequencies": {
+    "ft4": [ 3568000, 3575000 ],
+    "sstv": [
+        { "frequency": 3730000, "underlying": "lsb" },
+        { "frequency": 3845000, "underlying": "usb" }
+    ],
+    ...
+}
+</PRE>
+<P>
+Here is another example of an FM-modulated VHF frequency. With the 
+<I>"Settings | Background Decoding | Audio Recorder"</I> option enabled, 
+this entry will make OpenWebRX+ record audio to an MP3 file and let 
+users access it via the file browser page:
+</P>
+<PRE>
+"frequencies": {
+    "audio": { "frequency": 145700000, "underlying": "nfm" },
+    ...
+}
+</PRE>
 
 <A NAME="HOW-SCHEDULED"><H3>Scheduled Decoding</H3></A>
 <P>
@@ -2634,7 +2726,7 @@ clients' log / chat panels.
 <P>
 <B>If you are running OpenWebRX+ behind NGINX</B>, you may not be able 
 to see clients' IP addresses unless you edit this file:
-<PRE>/etc/nginx/sites-enabled/openwebrx</PRE>
+<PRE CLASS="Shell">sudo nano /etc/nginx/sites-enabled/openwebrx</PRE>
 and add the following line to the <B>location section</B>:
 <PRE>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</PRE>
 </P>
@@ -2922,6 +3014,7 @@ chat groups.
   <LI><A HREF="#FAQ-HTTPS">How do I make OpenWebRX use HTTPS protocol?</A>
   <LI><A HREF="#FAQ-BOOKMARKS">How do I get rid of default yellow bookmarks?</A>
   <LI><A HREF="#FAQ-TEMPERATURE">My CPU temperature is wrong!</A>
+  <LI><A HREF="#FAQ-BANDPLAN">Band ribbons or green bookmarks are wrong!</A>
 </UL>
 
 <A NAME="FAQ-MUPPET"><H3>Everything is broken, help me!</H3></A>
@@ -2950,9 +3043,7 @@ the following command:
 </P>
 <LI><P>
 If you <B>need even more log output</B>, edit the following file:
-<PRE>
-/etc/openwebrx/openwebrx.conf
-</PRE>
+<PRE CLASS="Shell">sudo nano /etc/openwebrx/openwebrx.conf</PRE>
 and set the <I>log_level</I> in the <I>[core]</I> section:
 <PRE>
 [core]
@@ -3152,6 +3243,9 @@ follows:
 /var/lib/openwebrx/users.json
 /etc/openwebrx/openwebrx.conf
 /etc/openwebrx/bands.json
+/etc/openwebrx/bands-r1.json
+/etc/openwebrx/bands-r2.json
+/etc/openwebrx/bands-r3.json
 </PRE>
 <P>
 You should <B>avoid editing configuration files by hand</B>, since they 
@@ -3200,18 +3294,39 @@ By default, OpenWebRX+ tries to determine the correct temperature sensor
 automatically. This works 99% of the time, but the remaining 1% may see
 their temperatures way outside the realistic range. To tell OpenWebRX+
 which sensor to use, edit the following file:
-<PRE>
-/etc/openwebrx/openwebrx.conf
-</PRE>
+</P>
+<PRE CLASS="Shell">sudo nano /etc/openwebrx/openwebrx.conf</PRE>
+<P>
 adding the following line to the <I>[core]</I> section:
+</P>
 <PRE>
 [core]
 temperature_sensor=<B>&lt;full-path-to-your-temperature-sensor&gt;</B>
 </PRE>
+<P>
 Then save the edited file and restart OpenWebRX+.
 </P>
 
+<A NAME="FAQ-BANDPLAN"><H3>Band ribbons or green bookmarks are wrong!</H3></A>
+<P>
+By default, OpenWebRX+ is configured to use a combined band plan that 
+mostly applies to all three regions of the ITU world. If you would like 
+to use a region-specific band plan instead, go to <I>"Settings | General
+| Receiver Information | Receiver Band Plan"</I> and select your region 
+there. If you are still unhappy with the band plan or locations of the 
+green bookmarks, you can change the default (combined) band plan by 
+editing the following file:
+</P>
+<PRE CLASS="Shell">sudo nano /etc/openwebrx/bands.json</PRE>
+<P>
+There are also region-specific band plan files in the same folder. Prior 
+to editing a file, make sure you <B>create a backup copy</B>, in case 
+something goes wrong. After editing and saving a band plan file, restart 
+OpenWebRX as follows:
+</P>
+<PRE CLASS="Shell">sudo systemctl restart openwebrx</PRE>
+
 <HR>
-<I>&copy;2023-2024 <A HREF="https://fms.komkon.org/">Marat Fayzullin</A>
+<I>&copy;2023-2025 <A HREF="https://fms.komkon.org/">Marat Fayzullin</A>
 </BODY>
 </HTML>
