@@ -2944,7 +2944,7 @@ To receive satellite weather maps, OpenWebRX+ integrates with the
 satellite decoder. Unfortunately, since SatDump is not a real-time tool, 
 the online decoding is not possible. Hence, the users of your receiver 
 will not be able to make use of SatDump and that is why <B>OpenWebRX+ 
-satellite data support is disabled by default</B>.
+satellite data support is only available for backup decoding</B>.
 </P>
 <P>
 If you are running a private OpenWebRX+ server and would like to use it 
@@ -2964,28 +2964,15 @@ amount of time.
 </P>
 
 <LI><P>
-<B>Enable SatDump integration</B> in the following OpenWebRX+ file:
-<PRE>
-/usr/lib/python3/dist-packages/owrx/modes.py
-</PRE>
-Search for the <I>"SatDump stuff"</I> and uncomment all the following 
-lines. After saving the file, restart the OpenWebRX+ service. If you 
-have done everything right, the <I>"NOAA APT"</I> and <I>"METEOR 
-LRPT"</I> options will appear on the list of digital modes.
+<B>Enable background decoding</B> for selected satellites by checking
+them in <I>"Settings | Background Decoding"</I>.
 </P>
 
 <LI><P>
-<B>Tune to a satellite frequency</B>, select the appropriate digital 
-mode, and wait for the satellite signal to show up. You may have to keep 
-adjusting the frequency to account for the Doppler shift. There is even 
-a <A HREF="#HOW-PLUGINS">JavaScript plugin</A> that will do it for you.
-</P>
-
-<LI><P>
-<B>Once the satellite goes out of sight</B> and its signal disappears, 
-switch to an analog mode or simply close the web page. This will stop 
-the SatDump decoding process. Please note that the NOAA decoder will 
-keep recording data even when there is no satellite signal present.
+<B>Enable running background services</B> for a chosen SDR device via 
+<I>"Settings | SDR Devices and Profiles | &lt;Device&gt;"</I>, add a
+schedule to this device, and create schedule entries for the satellites
+you would like to receive and decode.
 </P>
 
 <LI><P>
