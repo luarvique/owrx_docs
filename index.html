@@ -293,6 +293,7 @@ occurs in a Telegram chat.
   <LI><A HREF="#HOW-LIMITS">Limiting Receiver Use</A>
   <LI><A HREF="#HOW-USERS">Monitoring Receiver Use</A>
   <LI><A HREF="#HOW-MQTT">Advanced MQTT Reporting</A>
+  <LI><A HREF="#HOW-MQTT-RECEIVE">Receiving Data Over MQTT</A>
   <LI><A HREF="#HOW-PLUGINS">JavaScript Plugins</A>
   <LI><A HREF="#HOW-RIGCONTROL">External Transceiver Rig Control</A>
   <LI><A HREF="#HOW-SATDUMP">Receiving Satellite Data</A>
@@ -2771,12 +2772,14 @@ Frequency where the data has been received, in hertz.
 Reception time, in milliseconds since the Unix epoch.
 </UL>
 
-<H4>Reporting Server Startup and Shutdown</H4>
+<H4>Reporting Server Events</H4>
 <P>
 In addition to reporting received data, OpenWebRX+ uses MQTT to report 
-SDR device changes and other internal events. For example, when an 
-OpenWebRX+ server starts up or shuts down, it sends the following event 
-under the <I>"openwebrx/RX"</I> topic:
+SDR device changes and other internal events. In order to use this 
+feature, <B>you have to enable</B> the <I>"Report server startup and SDR 
+profile changes"</I> option in <I>"Settings | Spotting and Reporting | 
+MQTT Settings"</I>. When an OpenWebRX+ server starts up or shuts down, 
+it sends the following event under the <I>"openwebrx/RX"</I> topic:
 </P>
 <PRE>
 {
@@ -2787,15 +2790,10 @@ under the <I>"openwebrx/RX"</I> topic:
 }
 </PRE>
 <P>
-The <I>"state"</I> parameter can be either <I>"ServerStarted"</I> or
-<I>"ServerStopped"</I>.
-</P>
-
-<H4>Reporting SDR Device Changes</H4>
-<P>
-OpenWebRX+ reports SDR device changes under the <I>"openwebrx/RX"</I> 
-topic that can be used by various automation scripts. Thus, an SDR 
-profile change will be reported as follows:
+The <I>"state"</I> parameter above can be either <I>"ServerStarted"</I> 
+or <I>"ServerStopped"</I>. OpenWebRX+ also reports SDR device changes 
+that can be used by various automation scripts. Thus, an SDR profile 
+change will be reported as follows:
 </P>
 <PRE>
 {
@@ -2845,8 +2843,10 @@ change, but carries SDR state instead of profile information.
 <H4>Reporting User Activity</H4>
 <P>
 OpenWebRX+ reports user activities under the <I>"openwebrx/CLIENT"</I> 
-topic. Thus, a user connecting or disconnecting from the server will be 
-reported as follows:
+topic. In order to use this feature, <B>you have to enable</B> the 
+<I>"Report clients connecting to the server"</I> option in <I>"Settings 
+| Spotting and Reporting | MQTT Settings"</I>. A user connecting or 
+disconnecting from the server will then be reported as follows:
 </P>
 <PRE>
 {
@@ -2873,6 +2873,69 @@ similarly reported under the <I>"openwebrx/CLIENT"</I> topic:
   "banned":    false
 }
 </PRE>
+
+<A NAME="HOW-MQTT-RECEIVE"><H3>Receiving Data Over MQTT</H3></A>
+<P>
+The MQTT broker connection can also be used to <B>receive data sent by 
+other OpenWebRX+ servers</B>. To set up this feature, follow these 
+steps:
+</P>
+<OL>
+<LI><P>
+Configure each of your OpenWebRX+ servers to connect to the same, 
+<B>private</B> MQTT broker. The privacy is important here since
+some of the exchanged data, such as chat messages, may not be
+public.
+</P>
+<LI><P>
+Make sure that each of your OpenWebRX+ servers uses a different MQTT 
+topic consisting of just <B>one or two</B> elements, such as 
+<I>"openwebrx/server1"</I> or just <I>"server1"</I>.
+</P>
+<LI><P>
+If you are planning to relay chat messages via MQTT, make sure to enable 
+the <I>"Report clients connecting to the server"</I> option at each 
+connected OpenWebRX+ server.
+</P>
+<LI><P>
+If you are planning to share received data, such as FT8 spots or APRS 
+reports, make sure to set up the <A HREF="#HOW-BACKGROUND">background 
+decoding</A> and a <A HREF="#HOW-SCHEDULED">schedule</A> at each 
+OpenWebRX+ server responsible for receiving the actual data from the 
+air.
+</P>
+</OL>
+<P>
+Following options are available in the <I>"Settings | Spotting and 
+Reporting | MQTT Settings"</I>:
+</P>
+<UL>
+<LI><P><B><I>Receive chat messages</I></B><BR>
+With this option enabled, OpenWebRX+ will show chat messages entered by 
+users at other OpenWebRX+ servers connected to the same MQTT broker.
+</P>
+<LI><P><B><I>Receive aircraft data</I></B><BR>
+Enabling this option makes OpenWebRX+ show ADSB, ACARS, VDL2, HFDL, and 
+UAT data received by other connected OpenWebRX+ servers. This data will 
+show up at the map, as if received from the air.
+</P>
+<LI><P><B><I>Receive marine data</I></B><BR>
+This option lets OpenWebRX+ show AIS position reports received by other 
+connected OpenWebRX+ servers. These ship positions will be displayed at 
+the map, as if they were received locally.
+</P>
+<LI><P><B><I>Receive APRS reports</I></B><BR>
+With this option enabled, OpenWebRX+ will show APRS position reports 
+received by other connected OpenWebRX+ servers. These APRS positions 
+will be displayed at the map, as if they were received locally.
+</P>
+<LI><P><B><I>Receive WSJT decodes</I></B><BR>
+When receiving WSJT decodes from MQTT, the map will show FT8, FT4, and 
+other WSJT spots reported by other connected OpenWebRX+ servers. These 
+non-local spots will be grayed out to differentiate them from locally 
+received spots.
+</P>
+</UL>
 
 <A NAME="HOW-PLUGINS"><H3>JavaScript Plugins</H3></A>
 <P>
