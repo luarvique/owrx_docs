@@ -12,7 +12,7 @@ pushd /tmp
 echo "+ Build MBELIB..."
 git clone https://github.com/szechyjs/mbelib.git
 cd mbelib
-dpkg-buildpackage
+dpkg-buildpackage -uc -us
 cd ..
 rm -rf mbelib
 dpkg -i libmbe1_1.3.0_*.deb libmbe-dev_1.3.0_*.deb
@@ -22,7 +22,7 @@ git clone https://github.com/knatterfunker/codecserver-softmbe.git
 cd codecserver-softmbe
 # ignore missing library linking error in dpkg-buildpackage command
 sed -i 's/dh \$@/dh \$@ --dpkg-shlibdeps-params=--ignore-missing-info/' debian/rules
-dpkg-buildpackage
+dpkg-buildpackage -uc -us
 cd ..
 rm -rf codecserver-softmbe
 
