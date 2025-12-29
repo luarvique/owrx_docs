@@ -2726,15 +2726,21 @@ immediately after setting the receiver location</B>.
 <A NAME="HOW-CONFIG-WIFI"><H3>Configuring WiFi</H3></A>
 <P>
 For mobile installations, OpenWebRX+ contains rudimentary tools to 
-configure WiFi connections, as well as establish a self-hosted access 
-point. This functionality is available via <I>"Settings | WiFi 
-Setup"</I>. You can add up to four WiFi connections, in addition to 
-already existing connections. If none of the WiFi connections go up 
-after a while, OpenWebRX+ will establish a WiFi access point with the 
-address of <I>192.168.10.1</I>.
+<B>configure up to four WiFi connections</B>, in addition to the already 
+existing connections. This functionality is available via <I>"Settings | 
+WiFi Setup"</I>.
 </P>
 <P>
-In order for the above WiFi setup to work, you will need to add 
+If, after a while, none of the WiFi connections become active, 
+OpenWebRX+ will establish a <B>self-hosted WiFi access point</B> with 
+the address of <I>192.168.10.1</I>. The name and the password of this 
+access point are configured via <I>"Settings | WiFi Setup"</I>. If you 
+move your OpenWebRX+ computer a lot, it is suggested to keep the access 
+point option enabled all the time, so that you never lose access to the 
+radio.
+</P>
+<P>
+<B>In order for the WiFi setup to work</B>, you will need to add 
 OpenWebRX+ to the <I>"netdev"</I> user group as follows:
 </P>
 <PRE CLASS="Shell">sudo usermod -a -G netdev openwebrx</PRE>
