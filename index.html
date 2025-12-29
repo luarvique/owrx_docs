@@ -292,7 +292,7 @@ occurs in a Telegram chat.
   <LI><A HREF="#HOW-CONFIG-MAP">Configuring Map</A>
   <LI><A HREF="#HOW-CONFIG-SHORTWAVE">Configuring Shortwave Schedules</A>
   <LI><A HREF="#HOW-CONFIG-REPEATERS">Configuring Repeaters</A>
-  <LI><A HREF="#HOW-CONFIG-WIFI">Configuring WiFi Access</A>
+  <LI><A HREF="#HOW-CONFIG-WIFI">Configuring WiFi</A>
   <LI><A HREF="#HOW-LIMITS">Limiting Receiver Use</A>
   <LI><A HREF="#HOW-USERS">Monitoring Receiver Use</A>
   <LI><A HREF="#HOW-MQTT">Advanced MQTT Reporting</A>
@@ -2723,15 +2723,15 @@ once a day, the <B>up-to-date repeater information may not be available
 immediately after setting the receiver location</B>.
 </P>
 
-<A NAME="HOW-CONFIG-WIFI"><H3>Configuring WiFi Access</H3></A>
+<A NAME="HOW-CONFIG-WIFI"><H3>Configuring WiFi</H3></A>
 <P>
 For mobile installations, OpenWebRX+ contains rudimentary tools to 
-configure WiFi connections and establish a self-hosted WiFi access 
+configure WiFi connections, as well as establish a self-hosted access 
 point. This functionality is available via <I>"Settings | WiFi 
 Setup"</I>. You can add up to four WiFi connections, in addition to 
-existing WiFi connections in Linux. If none of the existing WiFi 
-connections go up after a while, OpenWebRX+ will establish a WiFi
-access point with the address of <I>192.168.10.1</I>.
+already existing connections. If none of the WiFi connections go up 
+after a while, OpenWebRX+ will establish a WiFi access point with the 
+address of <I>192.168.10.1</I>.
 </P>
 <P>
 In order for the above WiFi setup to work, you will need to add 
@@ -2740,7 +2740,7 @@ OpenWebRX+ to the <I>"netdev"</I> user group as follows:
 <PRE CLASS="Shell">sudo usermod -a -G netdev openwebrx</PRE>
 <P>
 If the above command does not make OpenWebRX+ WiFi setup work, you may 
-also need to edit the following file:
+also need to edit the PolKit configuration file:
 </P>
 <PRE CLASS="Shell">
 sudo nano /etc/polkit-1/localauthority/50-local.d/org.freedesktop.NetworkManager.pkla
