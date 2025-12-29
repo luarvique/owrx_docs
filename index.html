@@ -268,6 +268,8 @@ occurs in a Telegram chat.
   <LI><A HREF="#INSTALL-UBUNTU-24">Installing on Ubuntu 24.04</A>
   <LI><A HREF="#INSTALL-BULLSEYE">Installing on Debian Bullseye</A>
   <LI><A HREF="#INSTALL-BOOKWORM">Installing on Debian Bookworm</A>
+  <LI><A HREF="#INSTALL-TRIXIE">Installing on Debian Trixie</A>
+  <LI><A HREF="#INSTALL-WINDOWS-WSL2">Installing on Windows WSL2</A>
   <LI><A HREF="#INSTALL-PACKAGES">Installing from Packages</A>
   <LI><A HREF="#INSTALL-RASPBERRY">Using Raspberry Pi SD Images</A>
   <LI><A HREF="#INSTALL-DOCKER">Using Docker Images</A>
@@ -1551,6 +1553,8 @@ OpenWebRX+. There are prebuilt OpenWebRX+ packages for
 <A HREF="#INSTALL-UBUNTU-24">Ubuntu 24.04</A>,
 <A HREF="#INSTALL-BULLSEYE">Debian Bullseye</A>, and
 <A HREF="#INSTALL-BOOKWORM">Debian Bookworm</A>.
+<A HREF="#INSTALL-TRIXIE">Debian Trixie</A>.
+<A HREF="#INSTALL-WINDOWS-WSL2">Windows WSL2</A>.
 There are also pre-built
 <A HREF="#INSTALL-RASPBERRY">SD card images for Raspberry Pi</A>
 users, as well as
@@ -1622,6 +1626,77 @@ Once the repository is added,
 <A HREF="#INSTALL-PACKAGES">install OpenWebRX+ from packages</A>.
 </P>
 
+<A NAME="INSTALL-TRIXIE"><H3>Installing on Debian Trixie</H3></A>
+<P>
+Start by adding the OpenWebRX+ repository, entering your Linux user 
+password when asked:
+</P>
+<PRE CLASS="Shell">
+curl -s https://luarvique.github.io/ppa/openwebrx-plus.gpg | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/openwebrx-plus.gpg
+sudo tee /etc/apt/sources.list.d/openwebrx-plus.list <<<"deb [signed-by=/etc/apt/trusted.gpg.d/openwebrx-plus.gpg] https://luarvique.github.io/ppa/trixie ./"
+</PRE>
+<P>
+Once the repository is added,
+<A HREF="#INSTALL-PACKAGES">install OpenWebRX+ from packages</A>.
+</P>
+
+<A NAME="INSTALL-WINDOWS-WSL2"><H3>Installing on Windows WSL2 (Works for Docker images too)</H3></A>
+<P>
+  OpenWebRX+ can run under Windows using WSL2 and USB-IP. USB-IP is needed to pass the SDR device from Windows to WSL2.
+</P>
+<P>
+  First install WSL2 by running PowerShell as Administrator and typing:
+</P>
+<PRE CLASS="Shell">
+wsl --install
+</PRE>
+<P>
+  After the installation is complete, <b><u>restart your computer</u></b>. Start PowerShell
+  again and set WSL2 as your default version, find Ubuntu-24 distribution and install it by typing:
+</P>
+<PRE CLASS="Shell">
+wsl --set-default-version 2
+wsl --list --online
+wsl --install -d Ubuntu-24.04
+</PRE>
+<P>
+  <small>NOTE: Next time you need to start your Ubuntu, just type <code>wsl</code> in PowerShell.</small>
+</P>
+<P>
+  Now, start another PowerShell window, install USB-IP by typing:
+</P>
+<PRE CLASS="Shell">
+  winget install --source winget --id dorssel.usbipd-win
+</PRE>
+<P>
+  Find the BUSID of your SDR device by typing:
+</P>
+<PRE CLASS="Shell">
+  usbipd list
+</PRE>
+<P>
+  Bind and attach your SDR device to WSL2 by typing (replace &lt;BUSID&gt; with
+  the actual BUSID of your SDR device). You need to have Ubuntu running (on the other PowerShell) for this to work:
+</P>
+<PRE CLASS="Shell">
+  usbipd bind --busid &lt;BUSID&gt;
+  usbipd attach --busid &lt;BUSID&gt;
+</PRE>
+<P>
+  If everything went fine, you should see your SDR device inside WSL2 Ubuntu by typing:
+</P>
+<PRE CLASS="Shell">
+  sudo apt install usbutils
+  lsusb
+</PRE>
+<P>
+  Now follow the instructions for <A HREF="#INSTALL-UBUNTU-24">Ubuntu 24.04</A>
+  to install OpenWebRX+ inside WSL2 Ubuntu.
+  <BR/>
+  Or you can also install <a href="https://docs.docker.com/desktop/features/wsl/">Docker Desktop</a>
+  and use the <A HREF="#INSTALL-DOCKER">OpenWebRX+ Docker images</A> in Windows WSL2.
+</P>
+
 <A NAME="INSTALL-PACKAGES"><H3>Installing from Packages</H3></A>
 <P>
 Once you have all required package repositories added, install 
@@ -1686,9 +1761,8 @@ sudo install-softmbe.sh
 
 <A NAME="INSTALL-DOCKER"><H3>Using Docker Images</H3></A>
 <P CLASS="Admin">
-<B>IMPORTANT:</B> Docker images will not work on Windows OS. Windows 
-does not allow Docker access to USB devices. You will have to run Docker 
-on Linux.
+<B>Note:</B> To use Docker images in Windows, follow the instructions for
+<A HREF="#INSTALL-WINDOWS-WSL2">Windows WSL2</A> first.
 </P>
 <P>
 Pre-built Docker images contain clean OpenWebRX+ installation with all 
