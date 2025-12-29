@@ -269,7 +269,7 @@ occurs in a Telegram chat.
   <LI><A HREF="#INSTALL-BULLSEYE">Installing on Debian Bullseye</A>
   <LI><A HREF="#INSTALL-BOOKWORM">Installing on Debian Bookworm</A>
   <LI><A HREF="#INSTALL-TRIXIE">Installing on Debian Trixie</A>
-  <LI><A HREF="#INSTALL-WINDOWS-WSL2">Installing on Windows WSL2</A>
+  <LI><A HREF="#INSTALL-WINDOWS-WSL2">Installing on Windows (WSL2)</A>
   <LI><A HREF="#INSTALL-PACKAGES">Installing from Packages</A>
   <LI><A HREF="#INSTALL-RASPBERRY">Using Raspberry Pi SD Images</A>
   <LI><A HREF="#INSTALL-DOCKER">Using Docker Images</A>
@@ -1641,10 +1641,10 @@ Once the repository is added,
 <A HREF="#INSTALL-PACKAGES">install OpenWebRX+ from packages</A>.
 </P>
 
-<A NAME="INSTALL-WINDOWS-WSL2"><H3>Installing on Windows WSL2</H3></A>
+<A NAME="INSTALL-WINDOWS-WSL2"><H3>Installing on Windows (WSL2)</H3></A>
 <P>
 OpenWebRX+ can run under Windows using WSL2 and USB-IP. USB-IP is needed 
-to pass the SDR device from Windows to WSL2. First install WSL2 by running
+to pass the SDR device from Windows to WSL2. First, install WSL2 by running
 PowerShell as Administrator and typing:
 </P>
 <PRE CLASS="Shell">
@@ -1661,8 +1661,8 @@ wsl --list --online
 wsl --install -d Ubuntu-24.04
 </PRE>
 <P>
-Next time you need to start WSL2, just type <CODE>wsl</CODE> in PowerShell.
-Now, open another PwerShell window and install USB-IP by typing:
+Next time you need to start WSL2, just type <I>"wsl"</I> in PowerShell.
+Now, open <B>another</B> PowerShell window and install USB-IP by typing:
 </P>
 <PRE CLASS="Shell">
 winget install --source winget --id dorssel.usbipd-win
@@ -1674,9 +1674,9 @@ Find the BUSID of your SDR device by typing:
 usbipd list
 </PRE>
 <P>
-Bind and attach your SDR device to WSL2 by typing the following lines,
-replacing &lt;BUSID&gt; with the actual BUSID of your SDR device. You
-will need to have Ubuntu running in the other PowerShell for these
+Bind and attach your SDR device to WSL2 by typing the following lines
+and replacing &lt;BUSID&gt; with the actual BUSID of your SDR device.
+You will need to have WSL2 running in the other PowerShell for these
 commands to work:
 </P>
 <PRE CLASS="Shell">
