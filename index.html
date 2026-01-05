@@ -269,11 +269,11 @@ occurs in a Telegram chat.
   <LI><A HREF="#INSTALL-BULLSEYE">Installing on Debian Bullseye</A>
   <LI><A HREF="#INSTALL-BOOKWORM">Installing on Debian Bookworm</A>
   <LI><A HREF="#INSTALL-TRIXIE">Installing on Debian Trixie</A>
-  <LI><A HREF="#INSTALL-WINDOWS-WSL2">Installing on Windows (WSL2)</A>
   <LI><A HREF="#INSTALL-PACKAGES">Installing from Packages</A>
   <LI><A HREF="#INSTALL-RASPBERRY">Using Raspberry Pi SD Images</A>
-  <LI><A HREF="#INSTALL-DOCKER">Using Docker Images</A>
   <LI><A HREF="#INSTALL-SOURCES">Building OpenWebRX+ from Sources</A>
+  <LI><A HREF="#INSTALL-WINDOWS-WSL2">Installing on Windows (WSL2)</A>
+  <LI><A HREF="#INSTALL-DOCKER">Using Docker Images</A>
 </UL>
 <LI><A HREF="#HardwareGuide"><B>Hardware Setup</B></A>
 <UL>
@@ -1555,15 +1555,16 @@ OpenWebRX+. There are prebuilt OpenWebRX+ packages for
 <A HREF="#INSTALL-BULLSEYE">Debian Bullseye</A>,
 <A HREF="#INSTALL-BOOKWORM">Debian Bookworm</A>, and
 <A HREF="#INSTALL-TRIXIE">Debian Trixie</A>.
-Windows users can try installing OpenWebRX+ within
-<A HREF="#INSTALL-WINDOWS-WSL2">Windows WSL2</A>
-environment. There are also pre-built
+There are also pre-built
 <A HREF="#INSTALL-RASPBERRY">SD card images for Raspberry Pi</A>
 users, as well as
 <A HREF="#INSTALL-DOCKER">Docker images</A>.
 If you are running a different version of Linux and have sufficient 
 experience, you can try
 <A HREF="#INSTALL-SOURCES">compiling OpenWebRX+ from sources</A>.
+Windows users can try installing OpenWebRX+ within
+<A HREF="#INSTALL-WINDOWS-WSL2">Windows WSL2</A>
+environment.
 </P>
 
 <A NAME="INSTALL-UBUNTU-22"><H3>Installing on Ubuntu 22.04</H3></A>
@@ -1642,62 +1643,6 @@ Once the repository is added,
 <A HREF="#INSTALL-PACKAGES">install OpenWebRX+ from packages</A>.
 </P>
 
-<A NAME="INSTALL-WINDOWS-WSL2"><H3>Installing on Windows (WSL2)</H3></A>
-<P>
-OpenWebRX+ can run under Windows using WSL2 and USB-IP. USB-IP is needed 
-to pass the SDR device from Windows to WSL2. First, install WSL2 by running
-PowerShell as Administrator and typing:
-</P>
-<PRE CLASS="Shell">
-wsl --install
-</PRE>
-<P>
-After the installation is complete, <B>restart your computer</B>. Start 
-PowerShell again, set WSL2 as your default version, then find Ubuntu 
-24.04 distribution and install it by typing:
-</P>
-<PRE CLASS="Shell">
-wsl --set-default-version 2
-wsl --list --online
-wsl --install -d Ubuntu-24.04
-</PRE>
-<P>
-Next time you need to start WSL2, just type <I>"wsl"</I> in PowerShell.
-Now, open <B>another</B> PowerShell window and install USB-IP by typing:
-</P>
-<PRE CLASS="Shell">
-winget install --source winget --id dorssel.usbipd-win
-</PRE>
-<P>
-Find the BUSID of your SDR device by typing:
-</P>
-<PRE CLASS="Shell">
-usbipd list
-</PRE>
-<P>
-Bind and attach your SDR device to WSL2 by typing the following lines
-and replacing &lt;BUSID&gt; with the actual BUSID of your SDR device.
-You will need to have WSL2 running in the other PowerShell for these
-commands to work:
-</P>
-<PRE CLASS="Shell">
-usbipd bind --busid &lt;BUSID&gt;
-usbipd attach --busid &lt;BUSID&gt;
-</PRE>
-<P>
-If everything goes fine, you should see your SDR device inside WSL2 by typing:
-</P>
-<PRE CLASS="Shell">
-sudo apt install usbutils
-lsusb
-</PRE>
-<P>
-Now follow the instructions for <A HREF="#INSTALL-UBUNTU-24">Ubuntu 24.04</A>
-to install OpenWebRX+ inside WSL2. You can also install
-<A HREF="https://docs.docker.com/desktop/features/wsl/">Docker Desktop</A>
-and use the <A HREF="#INSTALL-DOCKER">OpenWebRX+ Docker images</A> in WSL2.
-</P>
-
 <A NAME="INSTALL-PACKAGES"><H3>Installing from Packages</H3></A>
 <P>
 Once you have all required package repositories added, install 
@@ -1759,6 +1704,91 @@ installing the image and type:
 <PRE CLASS="Shell">
 sudo install-softmbe.sh
 </PRE>
+
+<A NAME="INSTALL-SOURCES"><H3>Compiling OpenWebRX+ from Sources</H3></A>
+<P>
+<B>Please, do not attempt building OpenWebRX+ from sources, unless you 
+know exactly what you are doing!</B> If you feel confident enough 
+though, and have a Debian-like Linux, start by cloning OpenWebRX+ 
+repository and running the <I>"buildall.sh"</I> script as follows:
+</P>
+<PRE CLASS="Shell">
+git clone https://github.com/luarvique/openwebrx.git
+cd openwebrx
+./buildall.sh
+</PRE>
+<P>
+The script will attempt to fetch and build all OpenWebRX+ dependencies 
+prior to building OpenWebRX+ itself. It will also build a bunch of 
+optional packages. The build process uses the <I>"owrx-build"</I> folder 
+to store intermediate files. The final <I>.deb</I> packages will be 
+deposited into the <I>"owrx-output"</I> folder.
+</P>
+<P>
+<B>If the build breaks, it is up to you to find and fix the cause.</B> 
+It is expected that you know how to find and rectify build issues. Once 
+the build successfully finishes, you can install the freshly built 
+packages as follows:
+</P>
+<PRE CLASS="Shell">
+sudo dpkg -i ./owrx-output/*.deb
+</PRE>
+
+<A NAME="INSTALL-WINDOWS-WSL2"><H3>Installing on Windows (WSL2)</H3></A>
+<P>
+OpenWebRX+ can run under Windows using WSL2 and USB-IP. USB-IP is needed 
+to pass the SDR device from Windows to WSL2. First, install WSL2 by running
+PowerShell as Administrator and typing:
+</P>
+<PRE CLASS="Shell">
+wsl --install
+</PRE>
+<P>
+After the installation is complete, <B>restart your computer</B>. Start 
+PowerShell again, set WSL2 as your default version, then find Ubuntu 
+24.04 distribution and install it by typing:
+</P>
+<PRE CLASS="Shell">
+wsl --set-default-version 2
+wsl --list --online
+wsl --install -d Ubuntu-24.04
+</PRE>
+<P>
+Next time you need to start WSL2, just type <I>"wsl"</I> in PowerShell.
+Now, open <B>another</B> PowerShell window and install USB-IP by typing:
+</P>
+<PRE CLASS="Shell">
+winget install --source winget --id dorssel.usbipd-win
+</PRE>
+<P>
+Find the BUSID of your SDR device by typing:
+</P>
+<PRE CLASS="Shell">
+usbipd list
+</PRE>
+<P>
+Bind and attach your SDR device to WSL2 by typing the following lines
+and replacing &lt;BUSID&gt; with the actual BUSID of your SDR device.
+You will need to have WSL2 running in the other PowerShell for these
+commands to work:
+</P>
+<PRE CLASS="Shell">
+usbipd bind --busid &lt;BUSID&gt;
+usbipd attach --busid &lt;BUSID&gt;
+</PRE>
+<P>
+If everything goes fine, you should see your SDR device inside WSL2 by typing:
+</P>
+<PRE CLASS="Shell">
+sudo apt install usbutils
+lsusb
+</PRE>
+<P>
+Now follow the instructions for <A HREF="#INSTALL-UBUNTU-24">Ubuntu 24.04</A>
+to install OpenWebRX+ inside WSL2. You can also install
+<A HREF="https://docs.docker.com/desktop/features/wsl/">Docker Desktop</A>
+and use the <A HREF="#INSTALL-DOCKER">OpenWebRX+ Docker images</A> in WSL2.
+</P>
 
 <A NAME="INSTALL-DOCKER"><H3>Using Docker Images</H3></A>
 <P CLASS="Admin">
@@ -1846,35 +1876,6 @@ use <I>docker-cli</I> method can be found at the
 device</B>. Docker will not present a "new" SDRPlay device to the 
 container unless that container is restarted.
 </P>
-
-<A NAME="INSTALL-SOURCES"><H3>Compiling OpenWebRX+ from Sources</H3></A>
-<P>
-<B>Please, do not attempt building OpenWebRX+ from sources, unless you 
-know exactly what you are doing!</B> If you feel confident enough 
-though, and have a Debian-like Linux, start by cloning OpenWebRX+ 
-repository and running the <I>"buildall.sh"</I> script as follows:
-</P>
-<PRE CLASS="Shell">
-git clone https://github.com/luarvique/openwebrx.git
-cd openwebrx
-./buildall.sh
-</PRE>
-<P>
-The script will attempt to fetch and build all OpenWebRX+ dependencies 
-prior to building OpenWebRX+ itself. It will also build a bunch of 
-optional packages. The build process uses the <I>"owrx-build"</I> folder 
-to store intermediate files. The final <I>.deb</I> packages will be 
-deposited into the <I>"owrx-output"</I> folder.
-</P>
-<P>
-<B>If the build breaks, it is up to you to find and fix the cause.</B> 
-It is expected that you know how to find and rectify build issues. Once 
-the build successfully finishes, you can install the freshly built 
-packages as follows:
-</P>
-<PRE CLASS="Shell">
-sudo dpkg -i ./owrx-output/*.deb
-</PRE>
 
 <A NAME="HardwareGuide"><H2>Hardware Setup</H2></A>
 <P>
