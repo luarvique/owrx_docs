@@ -448,13 +448,16 @@ considerate when you see somebody else using the server.
 </P>
 
 <LI><P>
-This is the list of all available <B>audio modulation modes</B>, with 
-the current mode highlighted in yellow. Select a new mode by clicking 
-corresponding button, but keep in mind that not all modes can be 
-applicable. It helps to know what each modulation looks like on the 
-waterfall. Consult the
+This is the list of all available <B>audio modulation modes</B>. Select 
+the new mode by clicking the corresponding button, but keep in mind that 
+not all modes can be applicable. It helps to know what each modulation 
+looks like on the waterfall. Consult the
 <A HREF="https://www.sigidwiki.com/wiki/Signal_Identification_Guide">Signal Identification Guide</A>
 if unsure.
+</P>
+
+<LI><P>
+This is the <B>current audio modulation mode</B>, highlighted in yellow.
 </P>
 
 <LI><P>
@@ -538,6 +541,12 @@ default theme.
 </P>
 
 <LI><P>
+This drop-down list lets you choose one of the <B>waterfall color 
+themes</B>. Clicking the adjacent button resets waterfall to the 
+default theme.
+</P>
+
+<LI><P>
 This slider controls the <B>user interface opacity</B>, making panels 
 more or less visible on top of the waterfall. Click the adjacent button 
 to reset user interface to the full opacity.
@@ -556,6 +565,12 @@ operates in UTC, so this clock is shown for easier reference.
 </P>
 
 <LI><P>
+This button toggles the <B>live spectrum display</B> above the 
+waterfall. When using it, keep in mind that the spectrum display may 
+make your web browser use a lot of processor power.
+</P>
+
+<LI><P>
 Click the <SPAN CLASS="Button">REC</SPAN> button to start <B>recording 
 audio</B> at any moment. The button will glow red, indicating ongoing 
 recording. Once you click the <SPAN CLASS="Button">REC</SPAN> button 
@@ -566,12 +581,6 @@ again, it will stop recording and save the recorded audio to a file.
 The bar at the bottom indicates the <B>current signal level</B>. It will 
 change color based on what OpenWebRX considers signal overload. There is 
 also a numeric readout, showing the exact value in decibels.
-</P>
-
-<LI><P>
-This button toggles the <B>live spectrum display</B> above the 
-waterfall. When using it, keep in mind that the spectrum display may 
-make your web browser use a lot of processor power.
 </P>
 
 </OL>
@@ -1010,14 +1019,13 @@ dahs) when decoding CW"</I> option.
 </P>
 <P>
 Finally, OpenWebRX+ can attempt <B>decoding all CW transmissions in 
-24kHz of spectrum</B>, at once, in real time, and present them to you in 
+48kHz of spectrum</B>, at once, in real time, and present them to you in 
 a table, sorted by frequency. This functionality is enabled by selecting 
-the
-<I>"CW Skimmer"</I> digital mode.
+the <I>"CW Skimmer"</I> digital mode.
 </P>
 <P CLASS="Admin">
 CW skimmer support requires installing the
-<A HREF="https://github.com/luarvique/csdr-cwskimmer">CSDR CWSkimmer</A>
+<A HREF="https://github.com/luarvique/csdr-skimmer">CSDR Skimmer</A>
 package. Please, refer to <I>"Settings | Feature Report"</I> for further
 instructions.
 </P>
@@ -1079,6 +1087,18 @@ with a zoomed secondary waterfall that may contain multiple RTTY
 signals. Once you click on an RTTY signal you are interested in, the 
 decoded text will show up below the secondary waterfall, with 
 unrecognized characters shown as underscores.
+</P>
+<P>
+OpenWebRX+ can also attempt <B>decoding all RTTY-170 transmissions in
+48kHz of spectrum</B>, at once, in real time, and present them to you in
+a table, sorted by frequency. This functionality is enabled by selecting
+the <I>"RTTY Skimmer"</I> digital mode.
+</P>
+<P CLASS="Admin">
+RTTY skimmer support requires installing the
+<A HREF="https://github.com/luarvique/csdr-skimmer">CSDR Skimmer</A>
+package. Please, refer to <I>"Settings | Feature Report"</I> for further
+instructions.
 </P>
 
 <A NAME="HOW-SSTV"><H3 CLASS="Section">Receiving SSTV Images</H3></A>
